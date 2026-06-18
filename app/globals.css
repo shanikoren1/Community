@@ -1,45 +1,38 @@
 @import "tailwindcss";
 
 @theme inline {
-  /* Dark backgrounds */
-  --color-bg-dark:        #041A2A;
-  --color-bg-card:        #0A2540;
+  /* Backgrounds — charcoal black */
+  --color-bg:            #0C0C11;
+  --color-bg-2:          #111119;
+  --color-bg-card:       #17171F;
+  --color-bg-card-2:     #1C1C26;
 
-  /* Light backgrounds */
-  --color-bg-light:       #F8F9FC;
-  --color-bg-light-2:     #EEF2FF;
-
-  /* Accent */
-  --color-accent:         #2184F9;
-  --color-accent-light:   #46CAC0;
-  --color-accent-purple:  #5925DC;
+  /* Sunset accent */
+  --color-flame:         #FF6A1A;
+  --color-amber:         #FFB347;
+  --color-orange:        #FF8A1F;
 
   /* Text */
-  --color-text-white:     #FFFFFF;
-  --color-text-muted:     #CBD5E1;
-  --color-text-dark:      #0F172A;
-  --color-text-subtle:    #64748B;
+  --color-text-white:    #FFFFFF;
+  --color-text-muted:    #9A9AA8;
+  --color-text-subtle:   #6B6B78;
 
   /* Borders */
-  --color-border-dark:    rgba(255,255,255,0.08);
-  --color-border-light:   #E2E8F0;
+  --color-border:        rgba(255,255,255,0.07);
 
   /* Fonts */
   --font-heading: var(--font-outfit);
   --font-body:    var(--font-inter);
+  --font-mono:    var(--font-mono-space);
 }
 
-* {
-  box-sizing: border-box;
-}
+* { box-sizing: border-box; }
 
-html {
-  scroll-behavior: smooth;
-}
+html { scroll-behavior: smooth; }
 
 body {
-  background-color: #041A2A;
-  color: #F8FAFC;
+  background-color: #0C0C11;
+  color: #F4F4F6;
   font-family: var(--font-inter), 'Inter', sans-serif;
   line-height: 1.7;
   -webkit-font-smoothing: antialiased;
@@ -47,26 +40,44 @@ body {
 
 h1, h2, h3, h4 {
   font-family: var(--font-outfit), 'Outfit', sans-serif;
-  line-height: 1.15;
-  letter-spacing: -0.03em;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
 }
 
-/* Reward burst animation (focus-session completion) */
+/* Sunset gradient helpers */
+.text-sunset {
+  background: linear-gradient(135deg, #FF6A1A 0%, #FFB347 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Technical mono label, e.g. "STEP 1 OF 3" */
+.mono-label {
+  font-family: var(--font-mono-space), monospace;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  font-size: 0.72rem;
+}
+
+/* Animations */
 @keyframes reward-pop {
   0%   { transform: scale(0.4); opacity: 0; }
   55%  { transform: scale(1.12); opacity: 1; }
   100% { transform: scale(1); opacity: 1; }
 }
-
 @keyframes confetti-fall {
   0%   { transform: translateY(-12px) rotate(0deg); opacity: 1; }
   100% { transform: translateY(120px) rotate(360deg); opacity: 0; }
 }
-
 @keyframes float-up {
-  0%   { transform: translateY(8px); opacity: 0; }
+  0%   { transform: translateY(10px); opacity: 0; }
   100% { transform: translateY(0); opacity: 1; }
 }
-
+@keyframes slow-zoom {
+  0%   { transform: scale(1); }
+  100% { transform: scale(1.08); }
+}
 .reward-pop { animation: reward-pop 0.6s cubic-bezier(0.22, 1, 0.36, 1) both; }
 .float-up   { animation: float-up 0.5s ease-out both; }
+.slow-zoom  { animation: slow-zoom 18s ease-in-out infinite alternate; }

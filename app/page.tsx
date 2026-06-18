@@ -2,179 +2,112 @@
 
 import { useState } from "react";
 import dynamic from "next/dynamic";
-import { Camera, Timer, Users, Sparkles, ArrowRight, Headphones, Target } from "lucide-react";
+import {
+  Camera, Timer, Users, ArrowRight, Headphones, Target,
+  Fingerprint, TrendingUp, Layers, Repeat, Flame,
+} from "lucide-react";
 import { SITE, PLAYCLUB_URL, AUDIOBOOK_URL } from "../lib/config";
 
 const JoinFlow = dynamic(() => import("../components/JoinFlow"), { ssr: false });
 
-const GRADIENT = "linear-gradient(135deg, #46CAC0 0%, #2184F9 60%, #5925DC 100%)";
+const FLAME = "linear-gradient(135deg, #FF6A1A 0%, #FFB347 100%)";
+
+const LAWS = [
+  { icon: Fingerprint, tag: "Identity", title: "You become your habits", text: "Every action is a vote for the person you want to be. Don't chase a goal — become the type of person who lives it." },
+  { icon: Layers, tag: "Systems", title: "Systems over goals", text: "You don't rise to your goals; you fall to your systems. We build the system: 2 habits, a time, a place, people." },
+  { icon: TrendingUp, tag: "1% better", title: "Tiny gains compound", text: "1% better every day is 37× better in a year. Small habits don't add up — they multiply." },
+  { icon: Repeat, tag: "The 4 laws", title: "Obvious · Attractive · Easy · Satisfying", text: "Make it obvious (calendar), attractive (community), easy (start tiny), satisfying (proof + hype). That's the engine." },
+];
 
 const LOOP = [
-  { icon: Target, title: "Show up", text: "Your calendar tells you it's time. You begin." },
-  { icon: Camera, title: "Take the photo", text: "Proof of the moment. You showed up — capture it." },
-  { icon: Timer, title: "Focus", text: "A timer runs. 20, 45, 60 minutes. Just you and the work." },
-  { icon: Users, title: "Get hyped", text: "The group sees it. The cheers come. The reward lands." },
+  { icon: Target, title: "Show up", text: "Your calendar says it's time. You begin." },
+  { icon: Camera, title: "Capture it", text: "Take the photo. Proof that you showed up." },
+  { icon: Timer, title: "Focus", text: "The timer runs — 20, 45, 60 min. Just you and the work." },
+  { icon: Users, title: "Get hyped", text: "The group sees it. The cheers land. The reward hits." },
 ];
 
 export default function Home() {
   const [showJoin, setShowJoin] = useState(false);
+  const open = () => setShowJoin(true);
 
   return (
-    <main>
-      {/* HERO */}
-      <section
-        className="relative flex min-h-screen flex-col items-center justify-center px-6 text-center overflow-hidden"
-        style={{ backgroundColor: "#041A2A" }}
-      >
-        <div
-          className="pointer-events-none absolute inset-0"
-          style={{
-            background:
-              "radial-gradient(ellipse 80% 60% at 50% 40%, rgba(33,132,249,0.15) 0%, rgba(70,202,192,0.05) 50%, transparent 75%)",
-          }}
-        />
+    <main style={{ backgroundColor: "#0C0C11" }}>
+      {/* NAV */}
+      <nav className="fixed top-0 inset-x-0 z-40 px-5 py-3.5 flex items-center justify-between"
+        style={{ backgroundColor: "rgba(12,12,17,0.72)", backdropFilter: "blur(12px)", borderBottom: "1px solid rgba(255,255,255,0.06)" }}>
+        <div className="flex items-center gap-2.5">
+          <img src="/logo.png" alt="Become" width={34} height={34} className="rounded-lg" />
+          <span className="font-extrabold text-white text-lg" style={{ fontFamily: "var(--font-outfit)" }}>Become</span>
+        </div>
+        <button onClick={open}
+          className="px-4 py-2 rounded-lg text-sm font-bold text-black transition-all hover:-translate-y-0.5"
+          style={{ background: FLAME, fontFamily: "var(--font-inter)" }}>
+          Join
+        </button>
+      </nav>
 
-        <div className="relative z-10 max-w-4xl mx-auto">
-          <span
-            className="inline-block mb-10 px-4 py-1.5 text-xs font-semibold tracking-[0.2em] uppercase rounded-full"
-            style={{
-              border: "1px solid rgba(70,202,192,0.4)",
-              color: "#46CAC0",
-              backgroundColor: "rgba(70,202,192,0.06)",
-              fontFamily: "var(--font-inter)",
-            }}
-          >
-            {SITE.parentBrand} Community · Atomic Habits
+      {/* HERO */}
+      <section className="relative flex min-h-screen flex-col items-center justify-center px-6 text-center overflow-hidden">
+        <div className="absolute inset-0 slow-zoom" style={{
+          backgroundImage: "url('/mountain-hero.png')", backgroundSize: "cover", backgroundPosition: "center",
+        }} />
+        <div className="absolute inset-0" style={{
+          background: "linear-gradient(180deg, rgba(12,12,17,0.55) 0%, rgba(12,12,17,0.35) 45%, rgba(12,12,17,0.95) 100%)",
+        }} />
+
+        <div className="relative z-10 max-w-3xl mx-auto">
+          <span className="mono-label inline-block mb-6 px-3 py-1 rounded-full"
+            style={{ border: "1px solid rgba(255,179,71,0.4)", color: "#FFB347", backgroundColor: "rgba(255,106,26,0.08)" }}>
+            {SITE.parentBrand} · Atomic Habits
           </span>
 
-          <h1
-            className="font-black text-white mb-8"
-            style={{
-              fontFamily: "var(--font-outfit)",
-              fontSize: "clamp(64px, 11vw, 120px)",
-              lineHeight: 0.98,
-              letterSpacing: "-0.04em",
-            }}
-          >
-            {SITE.name}.
+          <h1 className="font-black text-white mb-5" style={{
+            fontFamily: "var(--font-outfit)", fontSize: "clamp(52px, 12vw, 104px)", lineHeight: 0.95, letterSpacing: "-0.04em",
+            textShadow: "0 4px 40px rgba(0,0,0,0.5)",
+          }}>
+            The best<br />time is now.
           </h1>
 
-          <p
-            className="font-black uppercase tracking-tight mb-8"
-            style={{
-              fontFamily: "var(--font-outfit)",
-              fontSize: "clamp(22px, 5vw, 52px)",
-              background: GRADIENT,
-              WebkitBackgroundClip: "text",
-              WebkitTextFillColor: "transparent",
-              backgroundClip: "text",
-              lineHeight: 1.1,
-            }}
-          >
-            The best time is now.
+          <p className="text-lg md:text-xl mx-auto mb-9" style={{ color: "#D4D4DC", fontFamily: "var(--font-inter)", maxWidth: 520, textShadow: "0 2px 20px rgba(0,0,0,0.6)" }}>
+            You are the architect of your own transformation. Choose who you become — and show up for it, every day, with people who get it.
           </p>
 
-          <div className="flex flex-col items-center gap-2 mb-4">
-            <p className="text-xl md:text-2xl" style={{ color: "#CBD5E1", fontFamily: "var(--font-inter)", fontWeight: 400 }}>
-              Be a builder of your own life.
-            </p>
-            <p className="text-base md:text-lg max-w-xl" style={{ color: "#64748B", fontFamily: "var(--font-inter)" }}>
-              You don&apos;t set goals. You become the person who lives them — one habit, one day, one photo at a time.
-              Together.
-            </p>
-          </div>
-
-          <div className="mt-10">
-            <button
-              onClick={() => setShowJoin(true)}
-              className="group inline-flex items-center gap-3 px-9 py-4 font-bold text-white rounded-full transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl"
-              style={{
-                background: GRADIENT,
-                fontFamily: "var(--font-inter)",
-                fontSize: "1.05rem",
-                letterSpacing: "-0.01em",
-                boxShadow: "0 6px 30px rgba(70,202,192,0.35)",
-              }}
-            >
-              <Sparkles size={18} />
-              Start my journey
-              <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" />
-            </button>
-            <p className="mt-3 text-xs" style={{ color: "rgba(255,255,255,0.3)", fontFamily: "var(--font-inter)" }}>
-              Free · Pick 2 goals · Choose who you become
-            </p>
-          </div>
-        </div>
-
-        <div className="absolute bottom-10 left-1/2 -translate-x-1/2">
-          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" style={{ color: "#46CAC0" }}>
-            <path d="M10 4v12M4 10l6 6 6-6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-          </svg>
+          <button onClick={open}
+            className="group inline-flex items-center gap-2.5 px-8 py-4 rounded-xl font-bold text-black transition-all duration-300 hover:-translate-y-1"
+            style={{ background: FLAME, fontFamily: "var(--font-inter)", fontSize: "1.05rem", boxShadow: "0 10px 40px rgba(255,106,26,0.4)" }}>
+            <Flame size={19} /> Begin transformation
+            <ArrowRight size={17} className="transition-transform group-hover:translate-x-1" />
+          </button>
+          <p className="mono-label mt-4" style={{ color: "rgba(255,255,255,0.4)" }}>Free · Pick 2 goals · 3-week sprint</p>
         </div>
       </section>
 
-      {/* IDENTITY MANIFESTO */}
-      <section className="py-28 px-6" style={{ backgroundColor: "#F8F9FC" }}>
-        <div className="max-w-2xl mx-auto text-center">
-          <p className="mb-5 text-xs font-semibold tracking-[0.18em] uppercase" style={{ color: "#2184F9", fontFamily: "var(--font-inter)" }}>
-            The idea
-          </p>
-          <h2
-            className="font-black mb-6"
-            style={{ fontFamily: "var(--font-outfit)", fontSize: "clamp(28px, 5vw, 52px)", lineHeight: 1.1, color: "#0F172A", letterSpacing: "-0.03em" }}
-          >
-            Every action is a vote
-            <br />
-            for who you become.
-          </h2>
-          <p className="text-lg leading-relaxed mb-4" style={{ color: "#475569", fontFamily: "var(--font-inter)" }}>
-            It&apos;s so easy to do nothing. It&apos;s just as easy to build a business, get strong, learn, and grow —
-            the same easy. The difference is <strong>identity</strong>. Not &ldquo;I want to read more,&rdquo; but
-            &ldquo;I am a reader.&rdquo; Not &ldquo;I&apos;m trying to work out,&rdquo; but &ldquo;I am someone who
-            trains.&rdquo;
-          </p>
-          <p className="text-lg leading-relaxed" style={{ color: "#475569", fontFamily: "var(--font-inter)" }}>
-            {SITE.name} is the community that turns your habits into your identity — and surrounds you with people who
-            are doing the exact same thing.
-          </p>
-        </div>
-      </section>
+      {/* ATOMIC HABITS — 90 SECONDS */}
+      <section className="py-24 px-6" style={{ backgroundColor: "#0C0C11" }}>
+        <div className="max-w-5xl mx-auto">
+          <div className="text-center mb-14">
+            <p className="mono-label mb-3" style={{ color: "#FF8A1F" }}>The method · proven</p>
+            <h2 className="font-black text-white mb-4" style={{ fontFamily: "var(--font-outfit)", fontSize: "clamp(30px, 6vw, 56px)", letterSpacing: "-0.03em" }}>
+              Atomic Habits, in 90 seconds.
+            </h2>
+            <p className="text-lg mx-auto" style={{ color: "#9A9AA8", fontFamily: "var(--font-inter)", maxWidth: 560 }}>
+              {SITE.name} runs on the most trusted habit science there is — James Clear&apos;s <em>Atomic Habits</em>. Here&apos;s the whole idea.
+            </p>
+          </div>
 
-      {/* THE LOOP */}
-      <section className="py-28 px-6" style={{ backgroundColor: "#041A2A" }}>
-        <div className="max-w-4xl mx-auto">
-          <p className="mb-3 text-xs font-semibold tracking-[0.18em] uppercase text-center" style={{ color: "#46CAC0", fontFamily: "var(--font-inter)" }}>
-            The daily loop
-          </p>
-          <h2
-            className="font-black text-white text-center mb-14"
-            style={{ fontFamily: "var(--font-outfit)", fontSize: "clamp(28px, 5vw, 48px)", letterSpacing: "-0.03em" }}
-          >
-            How a habit becomes you.
-          </h2>
           <div className="grid sm:grid-cols-2 gap-4">
-            {LOOP.map((s, i) => {
-              const Icon = s.icon;
+            {LAWS.map((l) => {
+              const Icon = l.icon;
               return (
-                <div
-                  key={s.title}
-                  className="relative rounded-2xl p-6"
-                  style={{ background: "#0A2540", border: "1px solid rgba(255,255,255,0.08)" }}
-                >
+                <div key={l.tag} className="rounded-2xl p-6" style={{ background: "#15151D", border: "1px solid rgba(255,255,255,0.07)" }}>
                   <div className="flex items-center gap-3 mb-3">
-                    <div className="w-11 h-11 rounded-xl flex items-center justify-center" style={{ background: GRADIENT }}>
-                      <Icon size={20} color="#fff" />
+                    <div className="w-11 h-11 rounded-xl flex items-center justify-center" style={{ background: FLAME }}>
+                      <Icon size={20} color="#0C0C11" />
                     </div>
-                    <span className="text-xs font-bold tracking-widest uppercase" style={{ color: "#46CAC0", fontFamily: "var(--font-inter)" }}>
-                      Step {i + 1}
-                    </span>
+                    <span className="mono-label" style={{ color: "#FF8A1F" }}>{l.tag}</span>
                   </div>
-                  <h3 className="font-bold text-white mb-1.5" style={{ fontFamily: "var(--font-outfit)", fontSize: "20px" }}>
-                    {s.title}
-                  </h3>
-                  <p className="text-base leading-relaxed" style={{ color: "#94A3B8", fontFamily: "var(--font-inter)" }}>
-                    {s.text}
-                  </p>
+                  <h3 className="font-bold text-white mb-2" style={{ fontFamily: "var(--font-outfit)", fontSize: 20 }}>{l.title}</h3>
+                  <p className="text-base leading-relaxed" style={{ color: "#9A9AA8", fontFamily: "var(--font-inter)" }}>{l.text}</p>
                 </div>
               );
             })}
@@ -182,53 +115,105 @@ export default function Home() {
         </div>
       </section>
 
-      {/* AUDIOBOOK */}
-      <section className="py-24 px-6" style={{ backgroundColor: "#EEF2FF" }}>
-        <div className="max-w-2xl mx-auto text-center">
-          <div className="mx-auto mb-6 w-14 h-14 rounded-2xl flex items-center justify-center" style={{ background: "linear-gradient(135deg, #5925DC, #2184F9)" }}>
-            <Headphones size={24} color="#fff" />
+      {/* THE DAILY LOOP */}
+      <section className="py-24 px-6" style={{ backgroundColor: "#111119" }}>
+        <div className="max-w-5xl mx-auto">
+          <div className="text-center mb-14">
+            <p className="mono-label mb-3" style={{ color: "#FF8A1F" }}>The daily loop</p>
+            <h2 className="font-black text-white" style={{ fontFamily: "var(--font-outfit)", fontSize: "clamp(28px, 5vw, 48px)", letterSpacing: "-0.03em" }}>
+              How a habit becomes you.
+            </h2>
           </div>
-          <h2 className="font-black mb-4" style={{ fontFamily: "var(--font-outfit)", fontSize: "clamp(26px, 4vw, 40px)", color: "#0F172A", letterSpacing: "-0.03em" }}>
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+            {LOOP.map((s, i) => {
+              const Icon = s.icon;
+              return (
+                <div key={s.title} className="rounded-2xl p-5" style={{ background: "#17171F", border: "1px solid rgba(255,255,255,0.07)" }}>
+                  <div className="w-11 h-11 rounded-xl flex items-center justify-center mb-4" style={{ background: "rgba(255,106,26,0.12)", border: "1px solid rgba(255,138,31,0.25)" }}>
+                    <Icon size={20} color="#FF8A1F" />
+                  </div>
+                  <span className="mono-label block mb-1.5" style={{ color: "#6B6B78" }}>Step {i + 1}</span>
+                  <h3 className="font-bold text-white mb-1.5" style={{ fontFamily: "var(--font-outfit)", fontSize: 18 }}>{s.title}</h3>
+                  <p className="text-sm leading-relaxed" style={{ color: "#9A9AA8", fontFamily: "var(--font-inter)" }}>{s.text}</p>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      {/* THE JOURNEY PREVIEW (streak feel) */}
+      <section className="py-24 px-6" style={{ backgroundColor: "#0C0C11" }}>
+        <div className="max-w-3xl mx-auto rounded-3xl overflow-hidden" style={{ border: "1px solid rgba(255,255,255,0.07)" }}>
+          <div className="relative px-7 pt-8 pb-7" style={{ backgroundImage: "linear-gradient(180deg, rgba(12,12,17,0.5), #15151D), url('/mountain-hero.png')", backgroundSize: "cover", backgroundPosition: "center" }}>
+            <span className="mono-label" style={{ color: "#FFB347" }}>Your journey</span>
+            <h2 className="font-black text-white mt-2" style={{ fontFamily: "var(--font-outfit)", fontSize: "clamp(26px, 5vw, 40px)" }}>
+              Watch yourself climb.
+            </h2>
+          </div>
+          <div className="px-7 py-7" style={{ background: "#15151D" }}>
+            <div className="flex items-center justify-between mb-5">
+              <div>
+                <span className="mono-label block mb-1" style={{ color: "#6B6B78" }}>Current streak</span>
+                <span className="font-black text-white" style={{ fontFamily: "var(--font-outfit)", fontSize: 32 }}>
+                  <Flame size={26} className="inline mr-1.5" color="#FF8A1F" />23 days
+                </span>
+              </div>
+              <div className="text-right">
+                <span className="mono-label block mb-1" style={{ color: "#6B6B78" }}>This week</span>
+                <span className="text-sunset font-black" style={{ fontFamily: "var(--font-outfit)", fontSize: 32 }}>82%</span>
+              </div>
+            </div>
+            {/* mini bar chart */}
+            <div className="flex items-end gap-2 h-24">
+              {[40, 65, 50, 90, 70, 100, 60].map((h, i) => (
+                <div key={i} className="flex-1 rounded-t-md" style={{ height: `${h}%`, background: i === 5 ? FLAME : "rgba(255,255,255,0.08)" }} />
+              ))}
+            </div>
+            <p className="text-sm mt-5" style={{ color: "#9A9AA8", fontFamily: "var(--font-inter)" }}>
+              Every photo, every focus session, every cheer — it stacks. The mountain gets smaller as you get bigger.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* AUDIOBOOK */}
+      <section className="py-24 px-6" style={{ backgroundColor: "#111119" }}>
+        <div className="max-w-2xl mx-auto text-center">
+          <div className="mx-auto mb-6 w-14 h-14 rounded-2xl flex items-center justify-center" style={{ background: FLAME }}>
+            <Headphones size={24} color="#0C0C11" />
+          </div>
+          <h2 className="font-black text-white mb-4" style={{ fontFamily: "var(--font-outfit)", fontSize: "clamp(26px, 4vw, 40px)", letterSpacing: "-0.03em" }}>
             Read the playbook with us.
           </h2>
-          <p className="text-lg leading-relaxed mb-8 mx-auto" style={{ color: "#475569", fontFamily: "var(--font-inter)", maxWidth: 460 }}>
-            Our whole community is built on <em>Atomic Habits</em> by James Clear. Listen along — it&apos;s our shared
-            language.
+          <p className="text-lg leading-relaxed mb-8 mx-auto" style={{ color: "#9A9AA8", fontFamily: "var(--font-inter)", maxWidth: 460 }}>
+            Our whole community speaks one language: <em>Atomic Habits</em> by James Clear. Listen along.
           </p>
-          <a
-            href={AUDIOBOOK_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-7 py-3.5 font-semibold rounded-full transition-all hover:-translate-y-0.5 hover:shadow-lg"
-            style={{ border: "2px solid #5925DC", color: "#5925DC", fontFamily: "var(--font-inter)", background: "transparent" }}
-          >
+          <a href={AUDIOBOOK_URL} target="_blank" rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 px-7 py-3.5 font-semibold rounded-xl transition-all hover:-translate-y-0.5"
+            style={{ border: "1.5px solid rgba(255,138,31,0.5)", color: "#FF8A1F", fontFamily: "var(--font-inter)" }}>
             <Headphones size={16} /> Listen on Spotify
           </a>
         </div>
       </section>
 
-      {/* CTA */}
-      <section className="py-24 px-6 text-center" style={{ backgroundColor: "#041A2A" }}>
+      {/* FINAL CTA */}
+      <section className="py-28 px-6 text-center" style={{ backgroundColor: "#0C0C11" }}>
         <div className="max-w-md mx-auto">
-          <h2
-            className="font-black text-white mb-4"
-            style={{ fontFamily: "var(--font-outfit)", fontSize: "clamp(28px, 4vw, 48px)", letterSpacing: "-0.03em" }}
-          >
-            The best time is now.
+          <h2 className="font-black text-white mb-4" style={{ fontFamily: "var(--font-outfit)", fontSize: "clamp(30px, 6vw, 52px)", letterSpacing: "-0.03em" }}>
+            Be a builder of<br />your own life.
           </h2>
-          <p className="mb-8 text-base" style={{ color: "#64748B", fontFamily: "var(--font-inter)" }}>
+          <p className="mb-8 text-base" style={{ color: "#9A9AA8", fontFamily: "var(--font-inter)" }}>
             Pick your two goals. Put them in your calendar. Show up with your people.
           </p>
-          <button
-            onClick={() => setShowJoin(true)}
-            className="group inline-flex items-center gap-2 px-8 py-4 font-semibold text-white rounded-full transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl"
-            style={{ background: GRADIENT, fontSize: "1rem", fontFamily: "var(--font-inter)", boxShadow: "0 6px 30px rgba(70,202,192,0.35)" }}
-          >
-            Start my journey
-            <ArrowRight size={15} className="transition-transform group-hover:translate-x-1" />
+          <button onClick={open}
+            className="group inline-flex items-center gap-2 px-8 py-4 rounded-xl font-bold text-black transition-all duration-300 hover:-translate-y-1"
+            style={{ background: FLAME, fontSize: "1.05rem", fontFamily: "var(--font-inter)", boxShadow: "0 10px 40px rgba(255,106,26,0.4)" }}>
+            <Flame size={18} /> Begin transformation
+            <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" />
           </button>
-          <p className="mt-7 text-sm">
-            <a href={PLAYCLUB_URL} target="_blank" rel="noopener noreferrer" className="transition-opacity hover:opacity-70" style={{ color: "#46CAC0", fontFamily: "var(--font-inter)" }}>
+          <p className="mt-6 text-sm">
+            <a href={PLAYCLUB_URL} target="_blank" rel="noopener noreferrer" className="transition-opacity hover:opacity-70" style={{ color: "#FFB347", fontFamily: "var(--font-inter)" }}>
               Already in? Open the group chat →
             </a>
           </p>
@@ -236,9 +221,13 @@ export default function Home() {
       </section>
 
       {/* FOOTER */}
-      <footer className="py-6 px-6 text-center" style={{ backgroundColor: "#041A2A", borderTop: "1px solid rgba(255,255,255,0.05)" }}>
-        <p className="text-sm" style={{ color: "#334155", fontFamily: "var(--font-inter)" }}>
-          {SITE.name} · a {SITE.parentBrand} community · 2026
+      <footer className="py-10 px-6 text-center" style={{ backgroundColor: "#0C0C11", borderTop: "1px solid rgba(255,255,255,0.06)" }}>
+        <p className="text-sunset font-black text-2xl mb-3" style={{ fontFamily: "var(--font-outfit)" }}>{SITE.name}</p>
+        <div className="flex items-center justify-center gap-6 mb-4 text-sm" style={{ color: "#9A9AA8", fontFamily: "var(--font-inter)" }}>
+          <span>Privacy</span><span>Terms</span><span>Support</span>
+        </div>
+        <p className="text-xs" style={{ color: "#4B4B57", fontFamily: "var(--font-inter)" }}>
+          © 2026 {SITE.name}. {SITE.tagline} · a {SITE.parentBrand} community
         </p>
       </footer>
 
