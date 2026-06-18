@@ -4,6 +4,7 @@ interface JoinPayload {
   firstName: string;
   email: string;
   identity: string;
+  why: string;
   longTerm: string[];
   focus: {
     title: string;
@@ -30,6 +31,7 @@ export async function POST(request: Request) {
       firstName: data.firstName,
       email: data.email,
       identity: data.identity,
+      why: data.why || "",
       longTerm: data.longTerm.join(", "),
       focus1: data.focus[0]
         ? `${data.focus[0].title} · ${data.focus[0].minutes}min · ${data.focus[0].days.join("/")} @ ${data.focus[0].time}`
@@ -64,6 +66,7 @@ export async function POST(request: Request) {
           _subject: `New Builder: ${data.firstName}`,
           Name: data.firstName,
           Identity: data.identity,
+          Why: data.why || "",
           "Long-term goals": row.longTerm,
           "Focus goal 1": row.focus1,
           "Focus goal 2": row.focus2,

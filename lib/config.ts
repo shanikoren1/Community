@@ -13,9 +13,15 @@ export const SITE = {
 };
 
 /**
- * PlayClub group chat — the social-support engine.
- * This is the community's dedicated invite link.
+ * The three "get in" actions after the survey.
+ *
+ * WHATSAPP_URL: the community WhatsApp group invite link.
+ *   TODO(Shani): paste your WhatsApp group link (looks like https://chat.whatsapp.com/XXXX).
+ *   Until set, the WhatsApp action is hidden so nothing links to a dead URL.
+ *
+ * PLAYCLUB_URL: the dedicated PlayClub group invite.
  */
+export const WHATSAPP_URL = "";
 export const PLAYCLUB_URL = "https://www.playclub.ai/join/become?code=FC9A8D";
 
 /**

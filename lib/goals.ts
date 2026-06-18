@@ -11,6 +11,11 @@ import {
   Flame,
   PenLine,
   Sparkles,
+  Apple,
+  Droplet,
+  Moon,
+  NotebookPen,
+  PiggyBank,
   type LucideIcon,
 } from "lucide-react";
 
@@ -40,6 +45,11 @@ export const GOAL_OPTIONS: GoalOption[] = [
   { id: "sauna", label: "Sauna", identity: "recovers on purpose", icon: Flame },
   { id: "writing", label: "Writing", identity: "writes their thoughts", icon: PenLine },
   { id: "ai", label: "Create with AI", identity: "builds with AI", icon: Sparkles },
+  { id: "eat", label: "Eat healthy", identity: "fuels their body well", icon: Apple },
+  { id: "water", label: "Drink water", identity: "stays hydrated", icon: Droplet },
+  { id: "sleep", label: "Better sleep", identity: "protects their sleep", icon: Moon },
+  { id: "journal", label: "Journaling", identity: "reflects every day", icon: NotebookPen },
+  { id: "savings", label: "Save money", identity: "is smart with money", icon: PiggyBank },
 ];
 
 export function goalById(id: string): GoalOption | undefined {
