@@ -1,15 +1,15 @@
 # Sharing paragraph — Become
 
 ## Short version (WhatsApp / story)
-I'm starting something I'm really excited about. It's called **Become** — a small community for people who want to actually build the life they keep talking about. It's built on *Atomic Habits*: you pick two goals, make them part of who you are, and we show up for them together — every day, cheering each other on. The best time is now. Want in? 👉 https://www.playclub.ai/join/become?code=FC9A8D
+I'm starting something I'm really excited about. It's called Become, a small community for people who actually want to build the life they keep talking about. It's based on the book Atomic Habits. You pick two habits, make them part of who you are, and we show up for them together every day and cheer each other on. The best time is now. Want in? 👉 https://www.playclub.ai/join/become?code=FC9A8D
 
 ## Longer version (LinkedIn / email)
-For a while I've believed the same truth that *Atomic Habits* teaches: you don't rise to the level of your goals, you fall to the level of your systems — and the fastest way to change is to change who you believe you are.
+For a while now I've believed something the book Atomic Habits says really well: you don't rise to the level of your goals, you fall to the level of your systems. And the fastest way to change is to change who you believe you are.
 
-So I built **Become** — a community for people who want to stop "trying" and start *being*. You choose two habits to focus on for three weeks, put them in your calendar, and every time you show up you capture the moment and share it. The group hypes you up. The habit becomes your identity. The best time to start was years ago. The second best time is now.
+So I built Become. It's a community for people who want to stop "trying" and just start being. You choose two habits to focus on for three weeks, put them in your calendar, and every time you show up you snap a photo and share it. The group hypes you up. The habit becomes part of you. The best time to start was years ago. The second best time is right now.
 
-If you want to build yourself alongside people doing the same, come in 👇
+If you want to grow next to people who are doing the same, come join us 👇
 https://www.playclub.ai/join/become?code=FC9A8D
 
 ---
-_Note: once community.hastandart.com is live, swap the PlayClub link for the website link as the main share URL (the site then funnels people into the chat)._
+Note: once community.hastandart.com is live, share that link instead. The website walks people through the survey and then sends them into the chat.

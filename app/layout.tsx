@@ -22,9 +22,9 @@ const spaceMono = Space_Mono({
 });
 
 export const metadata: Metadata = {
-  title: `${SITE.name} — ${SITE.tagline}`,
+  title: `${SITE.name}. ${SITE.tagline}`,
   description:
-    "Become the person who lives your goals. A community built on Atomic Habits: choose your identity, pick two habits, and show up every day — together.",
+    "Become the person who lives your goals. A community built on Atomic Habits: choose your identity, pick two habits, and show up every day, together.",
 };
 
 export default function RootLayout({

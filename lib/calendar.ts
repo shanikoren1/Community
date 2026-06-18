@@ -72,7 +72,7 @@ export function googleCalendarUrl(goal: FocusGoal, base = new Date()): string {
   const end = new Date(start.getTime() + goal.minutes * 60000);
   const params = new URLSearchParams({
     action: "TEMPLATE",
-    text: `${goalTitle(goal)} — ${SITE.name}`,
+    text: `${goalTitle(goal)} · ${SITE.name}`,
     dates: `${formatLocal(start)}/${formatLocal(end)}`,
     recur: `RRULE:${rrule(goal)}`,
     details: describe(goal),
@@ -97,7 +97,7 @@ export function icsContent(goal: FocusGoal, base = new Date()): string {
     `DTSTART:${formatLocal(start)}`,
     `DTEND:${formatLocal(end)}`,
     `RRULE:${rrule(goal)}`,
-    `SUMMARY:${esc(`${goalTitle(goal)} — ${SITE.name}`)}`,
+    `SUMMARY:${esc(`${goalTitle(goal)} · ${SITE.name}`)}`,
     `DESCRIPTION:${esc(describe(goal))}`,
     "END:VEVENT",
     "END:VCALENDAR",

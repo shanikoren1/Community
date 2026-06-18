@@ -129,7 +129,7 @@ function RewardScreen({ goalLabel, minutes, onAgain }: { goalLabel: string; minu
         {minutes} focused minutes on <strong style={{ color: "#FF8A1F" }}>{goalLabel}</strong>.
       </p>
       <p className="text-base mb-8 max-w-sm" style={{ color: "#9A9AA8", fontFamily: "var(--font-inter)" }}>
-        Another vote for who you&apos;re becoming. Now share it — let your people cheer you on.
+        Another vote for who you&apos;re becoming. Now share it so your people can cheer you on.
       </p>
 
       <a href={PLAYCLUB_URL} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 px-8 py-4 rounded-xl font-bold text-black transition-all hover:-translate-y-0.5 mb-3"

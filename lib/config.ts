@@ -19,10 +19,10 @@ export const SITE = {
 export const PLAYCLUB_URL = "https://www.playclub.ai/join/become?code=FC9A8D";
 
 /**
- * Atomic Habits audiobook (Spotify) — for members to listen.
+ * Atomic Habits on Spotify. Podcast (the show) comes first, audiobook second.
  */
-export const AUDIOBOOK_URL =
-  "https://open.spotify.com/episode/2FNSkBN1muPkO88xtXN1Sm";
+export const PODCAST_URL = "https://open.spotify.com/show/1IoRb7aM7p7tKObpxpf6TO";
+export const AUDIOBOOK_URL = "https://open.spotify.com/episode/2FNSkBN1muPkO88xtXN1Sm";
 
 /**
  * Where join + check-in data is stored.
