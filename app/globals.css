@@ -1,0 +1,72 @@
+@import "tailwindcss";
+
+@theme inline {
+  /* Dark backgrounds */
+  --color-bg-dark:        #041A2A;
+  --color-bg-card:        #0A2540;
+
+  /* Light backgrounds */
+  --color-bg-light:       #F8F9FC;
+  --color-bg-light-2:     #EEF2FF;
+
+  /* Accent */
+  --color-accent:         #2184F9;
+  --color-accent-light:   #46CAC0;
+  --color-accent-purple:  #5925DC;
+
+  /* Text */
+  --color-text-white:     #FFFFFF;
+  --color-text-muted:     #CBD5E1;
+  --color-text-dark:      #0F172A;
+  --color-text-subtle:    #64748B;
+
+  /* Borders */
+  --color-border-dark:    rgba(255,255,255,0.08);
+  --color-border-light:   #E2E8F0;
+
+  /* Fonts */
+  --font-heading: var(--font-outfit);
+  --font-body:    var(--font-inter);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: #041A2A;
+  color: #F8FAFC;
+  font-family: var(--font-inter), 'Inter', sans-serif;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-outfit), 'Outfit', sans-serif;
+  line-height: 1.15;
+  letter-spacing: -0.03em;
+}
+
+/* Reward burst animation (focus-session completion) */
+@keyframes reward-pop {
+  0%   { transform: scale(0.4); opacity: 0; }
+  55%  { transform: scale(1.12); opacity: 1; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+@keyframes confetti-fall {
+  0%   { transform: translateY(-12px) rotate(0deg); opacity: 1; }
+  100% { transform: translateY(120px) rotate(360deg); opacity: 0; }
+}
+
+@keyframes float-up {
+  0%   { transform: translateY(8px); opacity: 0; }
+  100% { transform: translateY(0); opacity: 1; }
+}
+
+.reward-pop { animation: reward-pop 0.6s cubic-bezier(0.22, 1, 0.36, 1) both; }
+.float-up   { animation: float-up 0.5s ease-out both; }
