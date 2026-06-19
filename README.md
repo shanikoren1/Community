@@ -30,7 +30,7 @@ The daily loop:
 3. **Three actions to get in:**
    - Add your habits to your calendar (Google and Apple).
    - Join the WhatsApp group.
-   - Join the group on PlayClub.
+   - Join the group on Playclub.
 4. Each day, run a focus session at `/checkin` and share your photo proof in the chat.
 
 ## The Atomic Habits idea behind it
@@ -87,7 +87,7 @@ public/
 
 ## Configuration
 
-Everything you might change lives in [`lib/config.ts`](lib/config.ts): community name, the WhatsApp and PlayClub links, the podcast and audiobook links, and where signups are stored. See [`COMMUNITY_SETUP.md`](COMMUNITY_SETUP.md) for the launch checklist, including the optional Google Sheet for signups.
+Everything you might change lives in [`lib/config.ts`](lib/config.ts): community name, the WhatsApp and Playclub links, the podcast and audiobook links, and where signups are stored. See [`COMMUNITY_SETUP.md`](COMMUNITY_SETUP.md) for the launch checklist, including the optional Google Sheet for signups.
 
 ## Roadmap
 

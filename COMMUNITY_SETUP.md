@@ -5,7 +5,7 @@ The website is built. To make it fully live, do these steps. Each is small.
 
 ---
 
-## 1. PlayClub group chat link  (2 min)
+## 1. Playclub group chat link  (2 min)
 
 Open `lib/config.ts` and replace the `PLAYCLUB_URL` value with the real entry link
 to the community group chat.
@@ -15,7 +15,7 @@ export const PLAYCLUB_URL = "https://www.playclub.ai/<your-community-entry>";
 ```
 
 **עברית:** זה הקישור לצ'אט הקבוצתי. כל הכפתורים "Join the group chat" / "Post my photo"
-מובילים לשם. תחליפי את הכתובת הזמנית בקישור האמיתי של הקהילה ב-PlayClub.
+מובילים לשם. תחליפי את הכתובת הזמנית בקישור האמיתי של הקהילה ב-Playclub.
 
 ---
 
@@ -97,7 +97,7 @@ Then deploy on Vercel (same account as hastandart.com):
 
 ## Done = live
 
-- [ ] PlayClub URL set
+- [ ] Playclub URL set
 - [ ] Apps Script deployed + `SHEETS_WEBHOOK_URL` set
 - [ ] `npm run build` passes
 - [ ] Deployed to Vercel

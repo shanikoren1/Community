@@ -33,25 +33,27 @@ export interface GoalOption {
  * to EXACTLY 2 short-term focus goals for the 3-week sprint.
  * Order/labels match Shani's brief.
  */
+// Ordered most-common-first. This order is meant to be tuned over time from real
+// signup data (see the continuous-improvement note in CLAUDE.md / project memory).
 export const GOAL_OPTIONS: GoalOption[] = [
+  { id: "workout", label: "Work out", identity: "trains their body", icon: Dumbbell },
+  { id: "gym", label: "Gym", identity: "shows up at the gym", icon: Activity },
+  { id: "running", label: "Running", identity: "runs", icon: Zap },
+  { id: "walking", label: "Walking", identity: "walks daily", icon: Footprints },
+  { id: "reading", label: "Read books", identity: "reads every day", icon: BookOpen },
+  { id: "meditate", label: "Meditate", identity: "sits with a calm mind", icon: Brain },
+  { id: "water", label: "Drink water", identity: "stays hydrated", icon: Droplet },
+  { id: "eat", label: "Eat healthy", identity: "fuels their body well", icon: Apple },
+  { id: "sleep", label: "Better sleep", identity: "protects their sleep", icon: Moon },
+  { id: "yoga", label: "Yoga", identity: "moves with intention", icon: HeartPulse },
+  { id: "journal", label: "Journaling", identity: "reflects every day", icon: NotebookPen },
+  { id: "writing", label: "Writing", identity: "writes their thoughts", icon: PenLine },
+  { id: "podcast", label: "Listen to podcasts", identity: "keeps learning", icon: Headphones },
+  { id: "savings", label: "Save money", identity: "is smart with money", icon: PiggyBank },
   { id: "language", label: "Learn a language", identity: "speaks a new language", icon: Languages },
   { id: "instrument", label: "Play an instrument", identity: "makes music", icon: Music },
-  { id: "workout", label: "Work out", identity: "trains their body", icon: Dumbbell },
-  { id: "running", label: "Running", identity: "runs", icon: Zap },
-  { id: "yoga", label: "Yoga", identity: "moves with intention", icon: HeartPulse },
-  { id: "gym", label: "Gym", identity: "shows up at the gym", icon: Activity },
-  { id: "meditate", label: "Meditate", identity: "sits with a calm mind", icon: Brain },
-  { id: "reading", label: "Read books", identity: "reads every day", icon: BookOpen },
-  { id: "walking", label: "Walking", identity: "walks daily", icon: Footprints },
-  { id: "podcast", label: "Listen to podcasts", identity: "keeps learning", icon: Headphones },
-  { id: "sauna", label: "Sauna", identity: "recovers on purpose", icon: Flame },
-  { id: "writing", label: "Writing", identity: "writes their thoughts", icon: PenLine },
   { id: "ai", label: "Create with AI", identity: "builds with AI", icon: Sparkles },
-  { id: "eat", label: "Eat healthy", identity: "fuels their body well", icon: Apple },
-  { id: "water", label: "Drink water", identity: "stays hydrated", icon: Droplet },
-  { id: "sleep", label: "Better sleep", identity: "protects their sleep", icon: Moon },
-  { id: "journal", label: "Journaling", identity: "reflects every day", icon: NotebookPen },
-  { id: "savings", label: "Save money", identity: "is smart with money", icon: PiggyBank },
+  { id: "sauna", label: "Sauna", identity: "recovers on purpose", icon: Flame },
 ];
 
 export function goalById(id: string): GoalOption | undefined {

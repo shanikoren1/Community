@@ -21,9 +21,9 @@ const LAWS = [
 
 const LOOP = [
   { icon: Target, title: "Show up", text: "Your calendar says it's time, so you start." },
-  { icon: Camera, title: "Take a photo", text: "One picture. That's your proof you showed up." },
+  { icon: Camera, title: "Prepare your space", text: "Get everything you need in front of you, so there are no excuses left." },
   { icon: Timer, title: "Focus", text: "Start the timer. 20, 45 or 60 minutes of just you and the work." },
-  { icon: Users, title: "Get cheered on", text: "Share it with the group. The cheers come right back." },
+  { icon: Users, title: "Get cheered on", text: "Share your win with the group and feel the cheers come right back." },
 ];
 
 export default function Home() {
@@ -54,7 +54,7 @@ export default function Home() {
         <div className="relative z-10 max-w-3xl mx-auto">
           <span className="mono-label inline-block mb-6 px-3 py-1 rounded-full"
             style={{ border: "1px solid rgba(255,179,71,0.4)", color: "#FFB347", backgroundColor: "rgba(255,106,26,0.08)" }}>
-            {SITE.parentBrand} community
+            By Shani Koren · {SITE.parentBrand}
           </span>
 
           <h1 className="font-black text-white mb-5" style={{
@@ -137,6 +137,29 @@ export default function Home() {
               );
             })}
           </div>
+        </div>
+      </section>
+
+      {/* PLAYCLUB */}
+      <section className="py-24 px-6" style={{ backgroundColor: "#0C0C11" }}>
+        <div className="max-w-3xl mx-auto rounded-3xl p-8 sm:p-10 text-center" style={{ background: "#15151D", border: "1px solid rgba(255,138,31,0.3)", boxShadow: "0 0 60px rgba(255,106,26,0.12)" }}>
+          <div className="mx-auto mb-6 w-14 h-14 rounded-2xl flex items-center justify-center" style={{ background: FLAME }}>
+            <Users size={24} color="#0C0C11" />
+          </div>
+          <p className="mono-label mb-3" style={{ color: "#FF8A1F" }}>Where the community lives</p>
+          <h2 className="font-black text-white mb-4" style={{ fontFamily: "var(--font-outfit)", fontSize: "clamp(26px, 5vw, 44px)", letterSpacing: "-0.03em" }}>
+            We do this together on Playclub.
+          </h2>
+          <p className="text-lg leading-relaxed mb-8 mx-auto" style={{ color: "#9A9AA8", fontFamily: "var(--font-inter)", maxWidth: 540 }}>
+            Playclub is the app where Become actually happens. It is where you share your daily wins, post your progress, and cheer each other on. The habits are yours, but you do not build them alone. When the hard days come, and they will, your group is right there to pull you forward. That is the whole secret: people keep going when people are watching and rooting for them. Your group is already inside, waiting for you. Joining it is your first real step.
+          </p>
+          <a href={PLAYCLUB_URL} target="_blank" rel="noopener noreferrer"
+            className="inline-flex items-center gap-2.5 px-9 py-4 rounded-xl font-bold text-black transition-all duration-300 hover:-translate-y-1"
+            style={{ background: FLAME, fontFamily: "var(--font-inter)", fontSize: "1.05rem", boxShadow: "0 10px 40px rgba(255,106,26,0.45)" }}>
+            <Users size={19} /> Join the Become group on Playclub
+            <ArrowRight size={17} />
+          </a>
+          <p className="mono-label mt-4" style={{ color: "#6B6B78" }}>This is your first action. Take it now.</p>
         </div>
       </section>
 
@@ -227,7 +250,7 @@ export default function Home() {
           <span>Privacy</span><span>Terms</span><span>Support</span>
         </div>
         <p className="text-xs" style={{ color: "#4B4B57", fontFamily: "var(--font-inter)" }}>
-          2026 {SITE.name}. {SITE.tagline} A {SITE.parentBrand} community.
+          Created by Shani Koren. A {SITE.parentBrand} community. 2026.
         </p>
       </footer>
 

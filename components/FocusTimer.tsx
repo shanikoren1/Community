@@ -98,7 +98,7 @@ export default function FocusTimer({ goalLabel }: Props) {
       </div>
 
       <p className="mt-8 text-sm text-center max-w-xs" style={{ color: "#9A9AA8", fontFamily: "var(--font-inter)" }}>
-        Take your photo proof first, then focus. When the timer ends, the celebration begins.
+        Prepare everything you need in front of you, then start. When the timer ends, the celebration begins.
       </p>
     </div>
   );
@@ -134,7 +134,7 @@ function RewardScreen({ goalLabel, minutes, onAgain }: { goalLabel: string; minu
 
       <a href={PLAYCLUB_URL} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 px-8 py-4 rounded-xl font-bold text-black transition-all hover:-translate-y-0.5 mb-3"
         style={{ background: FLAME, fontFamily: "var(--font-inter)", fontSize: 16, boxShadow: "0 10px 40px rgba(255,106,26,0.4)" }}>
-        <Camera size={18} /> Post my photo to the chat
+        <Camera size={18} /> Share your win in the chat
       </a>
       <a href={PLAYCLUB_URL} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 text-sm font-semibold mb-6" style={{ color: "#FF8A1F", fontFamily: "var(--font-inter)" }}>
         <MessageCircle size={14} /> Open {SITE.name} group chat
