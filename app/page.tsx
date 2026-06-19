@@ -21,7 +21,8 @@ const LOOP = [
 
 const TRUTHS = [
   { icon: Fingerprint, tag: "Identity", title: "You become your habits", text: "Every action is a vote for the person you want to be." },
-  { icon: Layers, tag: "Systems", title: "Systems beat goals", text: "You don't rise to your goals, you fall to your systems. So we build you one: two habits, a time, and people." },
+  { icon: Layers, tag: "Systems", title: "Systems beat goals", text: "You don't rise to your goals, you fall to your systems. So we build you one: two habits, a time, a place." },
+  { icon: Users, tag: "Community", title: "You're not alone", text: "We do this together. Playclub is our platform where the community plans events, meets up, and supports each other." },
 ];
 
 export default function Home() {
@@ -34,8 +35,8 @@ export default function Home() {
       <nav className="fixed top-0 inset-x-0 z-40 px-5 py-3 flex items-center justify-between"
         style={{ backgroundColor: "rgba(12,12,17,0.72)", backdropFilter: "blur(12px)", borderBottom: "1px solid rgba(255,255,255,0.06)" }}>
         <div className="flex items-center gap-3">
-          <img src="/logo.png" alt="Become" width={48} height={48} className="rounded-xl" />
-          <span className="font-extrabold text-white text-xl" style={{ fontFamily: "var(--font-outfit)" }}>Become</span>
+          <img src="/logo.png" alt="Become" width={64} height={64} className="rounded-xl" />
+          <span className="font-extrabold text-white text-2xl" style={{ fontFamily: "var(--font-outfit)" }}>Become</span>
         </div>
         <button onClick={open}
           className="px-5 py-2 rounded-lg text-sm font-bold text-black transition-all hover:-translate-y-0.5"
@@ -76,11 +77,11 @@ export default function Home() {
       </section>
 
       {/* ONE-SENTENCE INTRO */}
-      <section className="py-20 px-6" style={{ backgroundColor: "#0C0C11" }}>
+      <section className="pt-14 pb-10 px-6" style={{ backgroundColor: "#0C0C11" }}>
         <div className="max-w-2xl mx-auto text-center">
           <p className="mono-label mb-4" style={{ color: "#FF8A1F" }}>The idea</p>
           <h2 className="font-black text-white" style={{ fontFamily: "var(--font-outfit)", fontSize: "clamp(26px, 5vw, 44px)", lineHeight: 1.15, letterSpacing: "-0.03em" }}>
-            We take the book <span className="text-sunset">Atomic Habits</span> and build a system that actually works.
+            After analyzing the book <span className="text-sunset">Atomic Habits</span>, we build a system that actually works.
           </h2>
         </div>
       </section>
@@ -110,10 +111,10 @@ export default function Home() {
         </div>
       </section>
 
-      {/* IDENTITY / SYSTEMS — shortened */}
+      {/* IDENTITY / SYSTEMS / COMMUNITY */}
       <section className="py-16 px-6" style={{ backgroundColor: "#0C0C11" }}>
-        <div className="max-w-3xl mx-auto">
-          <div className="grid sm:grid-cols-2 gap-4">
+        <div className="max-w-5xl mx-auto">
+          <div className="grid sm:grid-cols-3 gap-4">
             {TRUTHS.map((l) => {
               const Icon = l.icon;
               return (
@@ -142,7 +143,7 @@ export default function Home() {
             We do this together on Playclub.
           </h2>
           <p className="text-lg leading-relaxed mb-8 mx-auto" style={{ color: "#C4C4CC", fontFamily: "var(--font-inter)", maxWidth: 460 }}>
-            Playclub is where Become lives. You share your wins, cheer each other on, and your group pulls you forward on the hard days. They are already inside, waiting for you.
+            Playclub is where Become lives. You share your wins, cheer each other on, and your group pulls you forward.
           </p>
           <a href={PLAYCLUB_URL} target="_blank" rel="noopener noreferrer"
             className="inline-flex items-center gap-2.5 px-9 py-4 rounded-xl font-bold text-black transition-all duration-300 hover:-translate-y-1"
@@ -178,46 +179,41 @@ export default function Home() {
         </div>
       </section>
 
-      {/* JOURNEY — big, impressive finale */}
-      <section className="relative px-6 py-28 overflow-hidden" style={{ backgroundColor: "#0C0C11" }}>
-        <div className="absolute inset-0 slow-zoom" style={{ backgroundImage: "url('/mountain-hero.png')", backgroundSize: "cover", backgroundPosition: "center" }} />
-        <div className="absolute inset-0" style={{ background: "linear-gradient(180deg, rgba(12,12,17,0.75) 0%, rgba(12,12,17,0.7) 50%, rgba(12,12,17,0.92) 100%)" }} />
-
-        <div className="relative z-10 max-w-3xl mx-auto text-center">
-          <p className="mono-label mb-4" style={{ color: "#FFB347" }}>Your journey</p>
-          <h2 className="font-black text-white mb-3" style={{ fontFamily: "var(--font-outfit)", fontSize: "clamp(34px, 8vw, 72px)", lineHeight: 0.98, letterSpacing: "-0.04em", textShadow: "0 4px 40px rgba(0,0,0,0.5)" }}>
-            Watch yourself climb.
-          </h2>
-          <p className="text-lg mb-12 mx-auto" style={{ color: "#D4D4DC", fontFamily: "var(--font-inter)", maxWidth: 440 }}>
-            Every photo, every focus session, every cheer stacks up. The mountain gets smaller as you get bigger.
-          </p>
-
-          <div className="grid grid-cols-2 gap-4 max-w-xl mx-auto">
-            <div className="rounded-2xl p-7" style={{ background: "rgba(21,21,29,0.85)", border: "1px solid rgba(255,138,31,0.3)", backdropFilter: "blur(8px)" }}>
-              <Flame size={30} className="mx-auto mb-2" color="#FF8A1F" />
-              <span className="block font-black text-white" style={{ fontFamily: "var(--font-outfit)", fontSize: "clamp(40px, 9vw, 64px)", lineHeight: 1 }}>23</span>
-              <span className="mono-label" style={{ color: "#9A9AA8" }}>day streak</span>
-            </div>
-            <div className="rounded-2xl p-7" style={{ background: "rgba(21,21,29,0.85)", border: "1px solid rgba(255,138,31,0.3)", backdropFilter: "blur(8px)" }}>
-              <span className="block text-sunset font-black" style={{ fontFamily: "var(--font-outfit)", fontSize: "clamp(40px, 9vw, 64px)", lineHeight: 1 }}>82%</span>
-              <span className="mono-label" style={{ color: "#9A9AA8" }}>this week</span>
-            </div>
+      {/* JOURNEY — streak card (the version Shani preferred) */}
+      <section className="py-20 px-6" style={{ backgroundColor: "#0C0C11" }}>
+        <div className="max-w-3xl mx-auto rounded-3xl overflow-hidden" style={{ border: "1px solid rgba(255,255,255,0.07)" }}>
+          <div className="relative px-7 pt-8 pb-7" style={{ backgroundImage: "linear-gradient(180deg, rgba(12,12,17,0.5), #15151D), url('/mountain-hero.png')", backgroundSize: "cover", backgroundPosition: "center" }}>
+            <span className="mono-label" style={{ color: "#FFB347" }}>Your journey</span>
+            <h2 className="font-black text-white mt-2" style={{ fontFamily: "var(--font-outfit)", fontSize: "clamp(26px, 5vw, 40px)" }}>Watch yourself climb.</h2>
           </div>
-
-          <div className="mt-10">
-            <button onClick={open}
-              className="group inline-flex items-center gap-2.5 px-10 py-5 rounded-xl font-bold text-black transition-all duration-300 hover:-translate-y-1"
-              style={{ background: FLAME, fontFamily: "var(--font-inter)", fontSize: "1.15rem", boxShadow: "0 12px 50px rgba(255,106,26,0.55)" }}>
-              <Flame size={20} /> Begin your climb
-              <ArrowRight size={18} className="transition-transform group-hover:translate-x-1" />
-            </button>
+          <div className="px-7 py-7" style={{ background: "#15151D" }}>
+            <div className="flex items-center justify-between mb-5">
+              <div>
+                <span className="mono-label block mb-1" style={{ color: "#6B6B78" }}>Current streak</span>
+                <span className="font-black text-white" style={{ fontFamily: "var(--font-outfit)", fontSize: 32 }}>
+                  <Flame size={26} className="inline mr-1.5" color="#FF8A1F" />23 days
+                </span>
+              </div>
+              <div className="text-right">
+                <span className="mono-label block mb-1" style={{ color: "#6B6B78" }}>This week</span>
+                <span className="text-sunset font-black" style={{ fontFamily: "var(--font-outfit)", fontSize: 32 }}>82%</span>
+              </div>
+            </div>
+            <div className="flex items-end gap-2 h-24">
+              {[40, 65, 50, 90, 70, 100, 60].map((h, i) => (
+                <div key={i} className="flex-1 rounded-t-md" style={{ height: `${h}%`, background: i === 5 ? FLAME : "rgba(255,255,255,0.08)" }} />
+              ))}
+            </div>
+            <p className="text-sm mt-5" style={{ color: "#9A9AA8", fontFamily: "var(--font-inter)" }}>
+              Every focus session and every cheer stacks up. The mountain gets smaller as you get bigger.
+            </p>
           </div>
         </div>
       </section>
 
       {/* FOOTER */}
-      <footer className="py-10 px-6 text-center" style={{ backgroundColor: "#0C0C11", borderTop: "1px solid rgba(255,255,255,0.06)" }}>
-        <p className="text-sunset font-black text-2xl mb-3" style={{ fontFamily: "var(--font-outfit)" }}>{SITE.name}</p>
+      <footer className="pt-16 pb-10 px-6 text-center" style={{ backgroundColor: "#0C0C11", borderTop: "1px solid rgba(255,255,255,0.06)" }}>
+        <p className="text-sunset font-black mb-5" style={{ fontFamily: "var(--font-outfit)", fontSize: "clamp(56px, 16vw, 140px)", lineHeight: 0.9, letterSpacing: "-0.04em" }}>{SITE.name}</p>
         <div className="flex items-center justify-center gap-6 mb-4 text-sm" style={{ color: "#9A9AA8", fontFamily: "var(--font-inter)" }}>
           <span>Privacy</span><span>Terms</span><span>Support</span>
         </div>
