@@ -280,7 +280,7 @@ export default function JoinFlow({ onClose }: Props) {
               </p>
             </div>
 
-            <ActionStep n={1} title="Join the WhatsApp group" sub="Daily support and accountability with people on the same path.">
+            <ActionStep n={1} title="You become the people you surround yourself with" sub="Join the people who are pushing forward.">
               {WHATSAPP_URL ? (
                 <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer"
                   className="inline-flex items-center justify-center gap-2 w-full py-3.5 rounded-xl font-bold text-black transition-all hover:-translate-y-0.5"
@@ -294,7 +294,7 @@ export default function JoinFlow({ onClose }: Props) {
               )}
             </ActionStep>
 
-            <ActionStep n={2} title="Download playclub" sub="Get the app and join the Become group, where you share your wins and get hyped up.">
+            <ActionStep n={2} title="Download playclub" sub="Open playclub, download the app, and join the group there.">
               <a href={PLAYCLUB_URL} target="_blank" rel="noopener noreferrer"
                 className="inline-flex items-center justify-center gap-2 w-full py-3.5 rounded-xl font-bold text-black transition-all hover:-translate-y-0.5"
                 style={{ background: FLAME, fontFamily: "var(--font-inter)", fontSize: 15 }}>

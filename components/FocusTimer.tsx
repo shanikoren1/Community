@@ -134,7 +134,7 @@ function RewardScreen({ goalLabel, minutes, onAgain }: { goalLabel: string; minu
 
       <a href={WHATSAPP_URL || PLAYCLUB_URL} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 px-8 py-4 rounded-xl font-bold text-black transition-all hover:-translate-y-0.5 mb-3"
         style={{ background: FLAME, fontFamily: "var(--font-inter)", fontSize: 16, boxShadow: "0 10px 40px rgba(255,106,26,0.4)" }}>
-        <MessageCircle size={18} /> Share your win in the group
+        <MessageCircle size={18} /> Open the group
       </a>
       <a href={PLAYCLUB_URL} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 text-sm font-semibold mb-6" style={{ color: "#FF8A1F", fontFamily: "var(--font-inter)" }}>
         <Camera size={14} /> Open playclub
