@@ -21,7 +21,7 @@ export const SITE = {
  *
  * PLAYCLUB_URL: the dedicated playclub group invite.
  */
-export const WHATSAPP_URL = "https://chat.whatsapp.com/Ksu4PL1OZCB9vFou2TzqyZ";
+export const WHATSAPP_URL = "https://chat.whatsapp.com/Ksu4PL1OZCB9vFou2TzqyZ?mode=gi_t";
 export const PLAYCLUB_URL = "https://www.playclub.ai/join/become?code=FC9A8D";
 
 /**
