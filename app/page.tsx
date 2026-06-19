@@ -254,6 +254,18 @@ export default function Home() {
         </p>
       </footer>
 
+      {/* Sticky always-visible CTA (mobile) so joining is never more than one tap away */}
+      {!showJoin && (
+        <div className="fixed bottom-0 inset-x-0 z-40 p-4 sm:hidden" style={{ background: "linear-gradient(180deg, rgba(12,12,17,0) 0%, rgba(12,12,17,0.9) 40%)" }}>
+          <button onClick={open}
+            className="w-full inline-flex items-center justify-center gap-2 py-4 rounded-xl font-bold text-black"
+            style={{ background: FLAME, fontFamily: "var(--font-inter)", fontSize: "1.05rem", boxShadow: "0 8px 36px rgba(255,106,26,0.55)" }}>
+            <Flame size={19} /> Start now
+            <ArrowRight size={17} />
+          </button>
+        </div>
+      )}
+
       {showJoin && <JoinFlow onClose={() => setShowJoin(false)} />}
     </main>
   );
