@@ -16,6 +16,7 @@ import {
   Moon,
   NotebookPen,
   PiggyBank,
+  Zap,
   type LucideIcon,
 } from "lucide-react";
 
@@ -36,6 +37,7 @@ export const GOAL_OPTIONS: GoalOption[] = [
   { id: "language", label: "Learn a language", identity: "speaks a new language", icon: Languages },
   { id: "instrument", label: "Play an instrument", identity: "makes music", icon: Music },
   { id: "workout", label: "Work out", identity: "trains their body", icon: Dumbbell },
+  { id: "running", label: "Running", identity: "runs", icon: Zap },
   { id: "yoga", label: "Yoga", identity: "moves with intention", icon: HeartPulse },
   { id: "gym", label: "Gym", identity: "shows up at the gym", icon: Activity },
   { id: "meditate", label: "Meditate", identity: "sits with a calm mind", icon: Brain },
