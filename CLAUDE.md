@@ -8,7 +8,7 @@ Guidance for Claude Code when working in this repo.
 
 ## The product in one paragraph
 
-A member clicks **Join** → interactive survey: declares the identity they're becoming → picks long-term goals → narrows to **exactly 2** short-term focus goals for a **3-week sprint** → schedules each (days + time + the 2-minute-rule "tiny version") → gets one-tap **calendar invites** (Google URL + `.ics`) → joins the **Playclub group chat**. The daily loop: show up → photo proof → **focus timer** → group hype → **visual reward**. The reward + check-in lives at `/checkin`.
+A member clicks **Join** → interactive survey: declares the identity they're becoming → picks long-term goals → narrows to **exactly 2** short-term focus goals for a **3-week sprint** → schedules each (days + time + the 2-minute-rule "tiny version") → gets one-tap **calendar invites** (Google URL + `.ics`) → joins the **playclub group chat**. The daily loop: show up → photo proof → **focus timer** → group hype → **visual reward**. The reward + check-in lives at `/checkin`.
 
 ## Atomic Habits → code map
 
@@ -38,7 +38,7 @@ npm run lint
 - `app/checkin/page.tsx` — focus-timer check-in flow.
 - `components/JoinFlow.tsx` — the multi-step survey (identity → long-term → 2-goal cap → schedule → contact → calendar+chat).
 - `components/FocusTimer.tsx` — timer ring + reward screen + confetti.
-- `lib/config.ts` — **EDIT HERE**: site name/tagline, Playclub URL, audiobook URL, Sheets webhook, Formspree.
+- `lib/config.ts` — **EDIT HERE**: site name/tagline, playclub URL, audiobook URL, Sheets webhook, Formspree.
 - `lib/goals.ts` — the long-term goal menu + types.
 - `lib/calendar.ts` — Google Calendar URL + `.ics` generation (no OAuth).
 - `app/api/join/route.ts` — join → Sheets webhook + Formspree notification.

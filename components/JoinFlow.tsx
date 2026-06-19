@@ -310,11 +310,11 @@ export default function JoinFlow({ onClose }: Props) {
               )}
             </ActionStep>
 
-            <ActionStep n={3} title="Join us on Playclub" sub="This is where you share your wins and get hyped up." last>
+            <ActionStep n={3} title="Join us on playclub" sub="This is where you share your wins and get hyped up." last>
               <a href={PLAYCLUB_URL} target="_blank" rel="noopener noreferrer"
                 className="inline-flex items-center justify-center gap-2 w-full py-3.5 rounded-xl font-bold text-black transition-all hover:-translate-y-0.5"
                 style={{ background: FLAME, fontFamily: "var(--font-inter)", fontSize: 15 }}>
-                <Smartphone size={17} /> Open the Playclub group
+                <Smartphone size={17} /> Open the playclub group
               </a>
             </ActionStep>
 

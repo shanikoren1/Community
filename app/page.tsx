@@ -22,7 +22,7 @@ const LOOP = [
 const TRUTHS = [
   { icon: Fingerprint, tag: "Identity", title: "You become your habits", text: "Every action is a vote for the person you want to be." },
   { icon: Layers, tag: "Systems", title: "Systems beat goals", text: "You don't rise to your goals, you fall to your systems. So we build you one: two habits, a time, a place." },
-  { icon: Users, tag: "Community", title: "You're not alone", text: "We do this together. Playclub is our platform where the community plans events, meets up, and supports each other." },
+  { icon: Users, tag: "Community", title: "You're not alone", text: "We do this together. Our home base is playclub, where the community plans events, meets up, and supports each other." },
 ];
 
 export default function Home() {
@@ -53,7 +53,7 @@ export default function Home() {
         <div className="relative z-10 max-w-3xl mx-auto">
           <span className="mono-label inline-block mb-6 px-3 py-1 rounded-full"
             style={{ border: "1px solid rgba(255,179,71,0.4)", color: "#FFB347", backgroundColor: "rgba(255,106,26,0.08)" }}>
-            By Shani Koren · {SITE.parentBrand}
+            Shani Koren · {SITE.parentBrand}
           </span>
 
           <h1 className="font-black text-white mb-5" style={{
@@ -140,15 +140,15 @@ export default function Home() {
           </div>
           <p className="mono-label mb-3" style={{ color: "#FF8A1F" }}>Where it all happens</p>
           <h2 className="font-black text-white mb-4" style={{ fontFamily: "var(--font-outfit)", fontSize: "clamp(26px, 5vw, 44px)", letterSpacing: "-0.03em" }}>
-            We do this together on Playclub.
+            We do this together on playclub.
           </h2>
           <p className="text-lg leading-relaxed mb-8 mx-auto" style={{ color: "#C4C4CC", fontFamily: "var(--font-inter)", maxWidth: 460 }}>
-            Playclub is where Become lives. You share your wins, cheer each other on, and your group pulls you forward.
+            This is where Become lives. You share your wins, cheer each other on, and your group pulls you forward.
           </p>
           <a href={PLAYCLUB_URL} target="_blank" rel="noopener noreferrer"
             className="inline-flex items-center gap-2.5 px-9 py-4 rounded-xl font-bold text-black transition-all duration-300 hover:-translate-y-1"
             style={{ background: FLAME, fontFamily: "var(--font-inter)", fontSize: "1.05rem", boxShadow: "0 10px 40px rgba(255,106,26,0.45)" }}>
-            <Users size={19} /> Join the group on Playclub
+            <Users size={19} /> Join the group on playclub
             <ArrowRight size={17} />
           </a>
           <p className="mono-label mt-4" style={{ color: "#6B6B78" }}>Your first step. Take it now.</p>
@@ -187,24 +187,13 @@ export default function Home() {
             <h2 className="font-black text-white mt-2" style={{ fontFamily: "var(--font-outfit)", fontSize: "clamp(26px, 5vw, 40px)" }}>Watch yourself climb.</h2>
           </div>
           <div className="px-7 py-7" style={{ background: "#15151D" }}>
-            <div className="flex items-center justify-between mb-5">
-              <div>
-                <span className="mono-label block mb-1" style={{ color: "#6B6B78" }}>Current streak</span>
-                <span className="font-black text-white" style={{ fontFamily: "var(--font-outfit)", fontSize: 32 }}>
-                  <Flame size={26} className="inline mr-1.5" color="#FF8A1F" />23 days
-                </span>
-              </div>
-              <div className="text-right">
-                <span className="mono-label block mb-1" style={{ color: "#6B6B78" }}>This week</span>
-                <span className="text-sunset font-black" style={{ fontFamily: "var(--font-outfit)", fontSize: 32 }}>82%</span>
-              </div>
+            <div className="mb-2">
+              <span className="mono-label block mb-2" style={{ color: "#6B6B78" }}>Current streak</span>
+              <span className="font-black text-white inline-flex items-center" style={{ fontFamily: "var(--font-outfit)", fontSize: "clamp(40px, 11vw, 60px)", lineHeight: 1 }}>
+                <Flame size={42} className="mr-2.5" color="#FF8A1F" />23 days
+              </span>
             </div>
-            <div className="flex items-end gap-2 h-24">
-              {[40, 65, 50, 90, 70, 100, 60].map((h, i) => (
-                <div key={i} className="flex-1 rounded-t-md" style={{ height: `${h}%`, background: i === 5 ? FLAME : "rgba(255,255,255,0.08)" }} />
-              ))}
-            </div>
-            <p className="text-sm mt-5" style={{ color: "#9A9AA8", fontFamily: "var(--font-inter)" }}>
+            <p className="text-sm mt-4" style={{ color: "#9A9AA8", fontFamily: "var(--font-inter)" }}>
               Every focus session and every cheer stacks up. The mountain gets smaller as you get bigger.
             </p>
           </div>

@@ -19,7 +19,7 @@ export const SITE = {
  *   TODO(Shani): paste your WhatsApp group link (looks like https://chat.whatsapp.com/XXXX).
  *   Until set, the WhatsApp action is hidden so nothing links to a dead URL.
  *
- * PLAYCLUB_URL: the dedicated Playclub group invite.
+ * PLAYCLUB_URL: the dedicated playclub group invite.
  */
 export const WHATSAPP_URL = "https://chat.whatsapp.com/Ksu4PL1OZCB9vFou2TzqyZ";
 export const PLAYCLUB_URL = "https://www.playclub.ai/join/become?code=FC9A8D";
