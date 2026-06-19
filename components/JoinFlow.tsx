@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Check, ArrowRight, ArrowLeft, X, CalendarPlus, MessageCircle, Smartphone } from "lucide-react";
+import { Check, ArrowRight, ArrowLeft, X, CalendarPlus, MessageCircle, Smartphone, Plus, Star } from "lucide-react";
 import { GOAL_OPTIONS, WEEKDAYS, goalById, type FocusGoal, type WeekdayId } from "../lib/goals";
 import { googleCalendarUrl, downloadIcs, goalTitle } from "../lib/calendar";
 import { PLAYCLUB_URL, WHATSAPP_URL, SITE } from "../lib/config";
@@ -14,9 +14,14 @@ const FLAME_BAR = "linear-gradient(90deg, #FF6A1A 0%, #FFB347 100%)";
 type Step = "longterm" | "shortterm" | "identity" | "schedule" | "contact" | "done";
 const ORDER: Step[] = ["longterm", "shortterm", "identity", "schedule", "contact"];
 
+interface CustomGoal { id: string; label: string; }
+
 export default function JoinFlow({ onClose }: Props) {
   const [step, setStep] = useState<Step>("longterm");
   const [longTerm, setLongTerm] = useState<string[]>([]);
+  const [customGoals, setCustomGoals] = useState<CustomGoal[]>([]);
+  const [adding, setAdding] = useState(false);
+  const [draft, setDraft] = useState("");
   const [focusIds, setFocusIds] = useState<string[]>([]);
   const [focus, setFocus] = useState<FocusGoal[]>([]);
   const [identity, setIdentity] = useState("");
@@ -36,8 +41,26 @@ export default function JoinFlow({ onClose }: Props) {
     return () => window.removeEventListener("keydown", h);
   }, [onClose]);
 
+  // Resolve a goal id (built-in or custom) to a card-friendly option.
+  function optionFor(id: string): { id: string; label: string; identity: string; icon: React.ComponentType<{ size?: number; color?: string }> } {
+    const g = goalById(id);
+    if (g) return g;
+    const c = customGoals.find((x) => x.id === id);
+    return { id, label: c?.label || "My habit", identity: "chose their own path", icon: Star };
+  }
+  function labelFor(id: string): string { return optionFor(id).label; }
+
   function toggleLongTerm(id: string) {
     setLongTerm((p) => (p.includes(id) ? p.filter((x) => x !== id) : [...p, id]));
+  }
+  function addCustom() {
+    const label = draft.trim();
+    if (!label) return;
+    const id = `custom-${Date.now()}`;
+    setCustomGoals((p) => [...p, { id, label }]);
+    setLongTerm((p) => [...p, id]);
+    setDraft("");
+    setAdding(false);
   }
   function toggleFocus(id: string) {
     setFocusIds((p) => {
@@ -49,7 +72,9 @@ export default function JoinFlow({ onClose }: Props) {
   function startSchedule() {
     setFocus((prev) => focusIds.map((goalId) => {
       const existing = prev.find((f) => f.goalId === goalId);
-      return existing || { goalId, minutes: 30, days: [], time: "18:00", tiny: "" };
+      if (existing) return existing;
+      const custom = customGoals.find((c) => c.id === goalId);
+      return { goalId, customLabel: custom?.label, minutes: 30, days: [], time: "18:00", tiny: "" };
     }));
     setStep("schedule");
   }
@@ -71,7 +96,7 @@ export default function JoinFlow({ onClose }: Props) {
         method: "POST", headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           firstName, email, identity, why,
-          longTerm: longTerm.map((id) => goalById(id)?.label || id),
+          longTerm: longTerm.map((id) => labelFor(id)),
           focus: focus.map((f) => ({ title: goalTitle(f), minutes: f.minutes, days: f.days, time: f.time, tiny: f.tiny })),
         }),
       });
@@ -84,6 +109,7 @@ export default function JoinFlow({ onClose }: Props) {
 
   const stepIdx = ORDER.indexOf(step);
   const pct = step === "done" ? 100 : Math.round(((stepIdx + 1) / ORDER.length) * 100);
+  // short-term choices: long-term picks (built-in + custom) or all built-ins as fallback
   const shortList = longTerm.length ? longTerm : GOAL_OPTIONS.map((g) => g.id);
 
   return (
@@ -118,7 +144,30 @@ export default function JoinFlow({ onClose }: Props) {
             <Question title="What do you want to accomplish?" sub="These are your long-term goals. Pick everything you want in your life. No limit here, dream wide." />
             <div className="grid grid-cols-2 gap-3">
               {GOAL_OPTIONS.map((g) => <GoalCard key={g.id} g={g} active={longTerm.includes(g.id)} onClick={() => toggleLongTerm(g.id)} />)}
+              {customGoals.map((c) => <GoalCard key={c.id} g={optionFor(c.id)} active={longTerm.includes(c.id)} onClick={() => toggleLongTerm(c.id)} />)}
+              {/* Add something else */}
+              <button onClick={() => setAdding(true)}
+                className="flex flex-col items-start gap-3 p-4 rounded-2xl text-left transition-all"
+                style={{ border: "1.5px dashed rgba(255,138,31,0.5)", background: "transparent", minHeight: 92 }}>
+                <div className="w-10 h-10 rounded-xl flex items-center justify-center" style={{ background: "rgba(255,106,26,0.12)" }}>
+                  <Plus size={18} color="#FF8A1F" />
+                </div>
+                <span className="text-sm font-semibold" style={{ color: "#FF8A1F", fontFamily: "var(--font-inter)" }}>Add something else</span>
+              </button>
             </div>
+
+            {adding && (
+              <div className="flex gap-2 mt-3">
+                <input autoFocus value={draft} onChange={(e) => setDraft(e.target.value)}
+                  onKeyDown={(e) => { if (e.key === "Enter") addCustom(); }}
+                  placeholder="Write your own habit" style={inputStyle} className="flex-1 rounded-xl px-4 py-3 text-base outline-none" />
+                <button onClick={addCustom} disabled={!draft.trim()}
+                  className="px-5 rounded-xl font-bold text-black transition-all disabled:opacity-40" style={{ background: FLAME, fontFamily: "var(--font-inter)" }}>
+                  Add
+                </button>
+              </div>
+            )}
+
             <Nav onNext={() => setStep("shortterm")} nextDisabled={longTerm.length === 0} nextLabel={`Continue${longTerm.length ? ` (${longTerm.length})` : ""}`} />
           </div>
         )}
@@ -129,7 +178,7 @@ export default function JoinFlow({ onClose }: Props) {
             <Question title="Now pick your two main goals." sub="Just two, for the next three weeks. This is where your focus goes. Two is enough to change everything." />
             <div className="grid grid-cols-2 gap-3">
               {shortList.map((id) => {
-                const g = goalById(id); if (!g) return null;
+                const g = optionFor(id);
                 const active = focusIds.includes(id);
                 const dimmed = !active && focusIds.length >= 2;
                 return <GoalCard key={id} g={g} active={active} dimmed={dimmed} onClick={() => toggleFocus(id)} badge={active} />;
@@ -160,10 +209,10 @@ export default function JoinFlow({ onClose }: Props) {
             <Question title="When will you do them?" sub="Pick the days and a time for each goal. We will put it straight in your calendar." />
             <div className="flex flex-col gap-4">
               {focus.map((f, idx) => {
-                const g = goalById(f.goalId);
+                const g = optionFor(f.goalId);
                 return (
                   <div key={f.goalId} className="rounded-2xl p-5" style={{ background: "#15151D", border: "1px solid rgba(255,255,255,0.08)" }}>
-                    <p className="font-bold text-white mb-4" style={{ fontFamily: "var(--font-outfit)", fontSize: 18 }}>{g?.label}</p>
+                    <p className="font-bold text-white mb-4" style={{ fontFamily: "var(--font-outfit)", fontSize: 18 }}>{g.label}</p>
                     <label className="mono-label block mb-2" style={{ color: "#9A9AA8" }}>Which days?</label>
                     <div className="flex flex-wrap gap-1.5 mb-4">
                       {WEEKDAYS.map((d) => {
@@ -227,7 +276,6 @@ export default function JoinFlow({ onClose }: Props) {
               </p>
             </div>
 
-            {/* ACTION 1 — CALENDAR */}
             <ActionStep n={1} title="Put it in your calendar" sub="Tap to add each habit. It repeats for the next 3 weeks, so you never forget.">
               <div className="flex flex-col gap-3">
                 {focus.map((f) => (
@@ -248,7 +296,6 @@ export default function JoinFlow({ onClose }: Props) {
               </div>
             </ActionStep>
 
-            {/* ACTION 2 — WHATSAPP */}
             <ActionStep n={2} title="Join the WhatsApp group" sub="Daily support and accountability with people on the same path.">
               {WHATSAPP_URL ? (
                 <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer"
@@ -263,7 +310,6 @@ export default function JoinFlow({ onClose }: Props) {
               )}
             </ActionStep>
 
-            {/* ACTION 3 — PLAYCLUB */}
             <ActionStep n={3} title="Join us on PlayClub" sub="This is where you share your photo proof and get hyped up." last>
               <a href={PLAYCLUB_URL} target="_blank" rel="noopener noreferrer"
                 className="inline-flex items-center justify-center gap-2 w-full py-3.5 rounded-xl font-bold text-black transition-all hover:-translate-y-0.5"
