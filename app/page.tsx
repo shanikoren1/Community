@@ -32,11 +32,9 @@ export default function Home() {
   return (
     <main style={{ backgroundColor: "#0C0C11" }}>
       {/* NAV */}
-      <nav className="fixed top-0 inset-x-0 z-40 px-5 py-3 flex items-center justify-between"
+      <nav className="fixed top-0 inset-x-0 z-40 px-4 py-1.5 flex items-center justify-between"
         style={{ backgroundColor: "rgba(12,12,17,0.72)", backdropFilter: "blur(12px)", borderBottom: "1px solid rgba(255,255,255,0.06)" }}>
-        <div className="flex items-center">
-          <img src="/logo.png" alt="Become" className="h-16 w-auto rounded-xl" />
-        </div>
+        <img src="/logo.png" alt="Become" className="h-24 w-auto" />
         <button onClick={open}
           className="px-5 py-2 rounded-lg text-sm font-bold text-black transition-all hover:-translate-y-0.5"
           style={{ background: FLAME, fontFamily: "var(--font-inter)", boxShadow: "0 4px 18px rgba(255,106,26,0.35)" }}>
