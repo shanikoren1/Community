@@ -28,7 +28,18 @@
 
 * { box-sizing: border-box; }
 
-html { scroll-behavior: smooth; }
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%; /* stop iOS auto-resizing text */
+}
+
+/* iOS Safari zooms in (and the keyboard jumps) whenever a focused field is
+   under 16px. Force every form control to 16px so the viewport stays put. */
+input, textarea, select {
+  font-size: 16px;
+}
+/* keep focused fields clear of the sticky survey header when the keyboard opens */
+input, textarea, select { scroll-margin-top: 84px; }
 
 body {
   background-color: #0C0C11;

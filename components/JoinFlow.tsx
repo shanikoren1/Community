@@ -113,7 +113,7 @@ export default function JoinFlow({ onClose }: Props) {
   const shortList = longTerm.length ? longTerm : GOAL_OPTIONS.map((g) => g.id);
 
   return (
-    <div className="fixed inset-0 z-50 overflow-y-auto" style={{ backgroundColor: "#0C0C11" }}>
+    <div className="fixed inset-0 z-50 overflow-y-auto overscroll-contain" style={{ backgroundColor: "#0C0C11", WebkitOverflowScrolling: "touch" }}>
       <div className="sticky top-0 z-10 px-5 py-4 flex items-center justify-between"
         style={{ backgroundColor: "rgba(12,12,17,0.85)", backdropFilter: "blur(12px)", borderBottom: "1px solid rgba(255,255,255,0.06)" }}>
         <div className="flex items-center gap-2.5">
@@ -250,9 +250,13 @@ export default function JoinFlow({ onClose }: Props) {
           <div className="float-up">
             <Question title="You're almost in." sub="Just your name and email, so the community can welcome you by name." />
             <label className="block mb-2 text-sm font-semibold text-white" style={{ fontFamily: "var(--font-inter)" }}>First name</label>
-            <input value={firstName} onChange={(e) => setFirstName(e.target.value)} placeholder="Your name" style={inputStyle} className="w-full rounded-xl px-4 py-3.5 text-base outline-none mb-4" />
+            <input value={firstName} onChange={(e) => setFirstName(e.target.value)} placeholder="Your name"
+              autoComplete="given-name" autoCapitalize="words" autoCorrect="off" enterKeyHint="next"
+              style={inputStyle} className="w-full rounded-xl px-4 py-3.5 outline-none mb-4" />
             <label className="block mb-2 text-sm font-semibold text-white" style={{ fontFamily: "var(--font-inter)" }}>Email</label>
-            <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="you@example.com" style={inputStyle} className="w-full rounded-xl px-4 py-3.5 text-base outline-none" />
+            <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="you@example.com"
+              inputMode="email" autoComplete="email" autoCapitalize="none" autoCorrect="off" enterKeyHint="done"
+              style={inputStyle} className="w-full rounded-xl px-4 py-3.5 outline-none" />
             {error && <p className="mt-4 text-sm text-center" style={{ color: "#F87171" }}>{error}</p>}
             <button onClick={submit} disabled={loading}
               className="mt-6 w-full py-4 rounded-xl font-bold text-black transition-all hover:-translate-y-0.5 disabled:opacity-60"
@@ -328,6 +332,7 @@ const inputStyle: React.CSSProperties = {
   color: "#FFFFFF",
   fontFamily: "var(--font-inter)",
   backgroundColor: "#15151D",
+  fontSize: 16, // never below 16px, or iOS Safari zooms and the keyboard jumps
 };
 
 function Question({ title, sub }: { title: string; sub: string }) {
