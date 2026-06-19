@@ -104,6 +104,47 @@ export function icsContent(goal: FocusGoal, base = new Date()): string {
   ].join("\r\n");
 }
 
+function veventLines(goal: FocusGoal, base: Date): string[] {
+  const start = firstOccurrence(goal, base);
+  const end = new Date(start.getTime() + goal.minutes * 60000);
+  const uid = `${goal.goalId}-${formatLocal(start)}@community.hastandart.com`;
+  const esc = (s: string) => s.replace(/\\/g, "\\\\").replace(/,/g, "\\,").replace(/;/g, "\\;").replace(/\n/g, "\\n");
+  return [
+    "BEGIN:VEVENT",
+    `UID:${uid}`,
+    `DTSTART:${formatLocal(start)}`,
+    `DTEND:${formatLocal(end)}`,
+    `RRULE:${rrule(goal)}`,
+    `SUMMARY:${esc(`${goalTitle(goal)} · ${SITE.name}`)}`,
+    `DESCRIPTION:${esc(describe(goal))}`,
+    "END:VEVENT",
+  ];
+}
+
+/** One .ics file holding BOTH habits, so a member adds everything at once. */
+export function icsContentAll(goals: FocusGoal[], base = new Date()): string {
+  return [
+    "BEGIN:VCALENDAR",
+    "VERSION:2.0",
+    "PRODID:-//Hastandart Community//Become Sprint//EN",
+    "CALSCALE:GREGORIAN",
+    ...goals.flatMap((g) => veventLines(g, base)),
+    "END:VCALENDAR",
+  ].join("\r\n");
+}
+
+export function downloadIcsAll(goals: FocusGoal[], base = new Date()): void {
+  const blob = new Blob([icsContentAll(goals, base)], { type: "text/calendar;charset=utf-8" });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = "become-sprint.ics";
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
+
 /** Trigger a browser download of the .ics for a goal. */
 export function downloadIcs(goal: FocusGoal, base = new Date()): void {
   const blob = new Blob([icsContent(goal, base)], { type: "text/calendar;charset=utf-8" });

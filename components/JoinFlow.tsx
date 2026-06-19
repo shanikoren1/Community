@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import { Check, ArrowRight, ArrowLeft, X, CalendarPlus, MessageCircle, Smartphone, Plus, Star } from "lucide-react";
 import { GOAL_OPTIONS, WEEKDAYS, goalById, type FocusGoal, type WeekdayId } from "../lib/goals";
-import { googleCalendarUrl, downloadIcs, goalTitle } from "../lib/calendar";
+import { googleCalendarUrl, downloadIcsAll, goalTitle } from "../lib/calendar";
 import { PLAYCLUB_URL, WHATSAPP_URL, SITE } from "../lib/config";
 
 interface Props { onClose: () => void; }
@@ -276,27 +276,7 @@ export default function JoinFlow({ onClose }: Props) {
               </p>
             </div>
 
-            <ActionStep n={1} title="Put it in your calendar" sub="Tap to add each habit. It repeats for the next 3 weeks, so you never forget.">
-              <div className="flex flex-col gap-3">
-                {focus.map((f) => (
-                  <div key={f.goalId} className="rounded-xl p-3.5" style={{ background: "#101017", border: "1px solid rgba(255,255,255,0.06)" }}>
-                    <p className="font-bold text-white mb-2.5 text-sm" style={{ fontFamily: "var(--font-outfit)" }}>{goalTitle(f)}</p>
-                    <div className="flex flex-wrap gap-2">
-                      <a href={googleCalendarUrl(f)} target="_blank" rel="noopener noreferrer"
-                        className="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-lg text-xs font-bold text-black transition-all hover:-translate-y-0.5" style={{ background: FLAME, fontFamily: "var(--font-inter)" }}>
-                        <CalendarPlus size={14} /> Google Calendar
-                      </a>
-                      <button onClick={() => downloadIcs(f)}
-                        className="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-lg text-xs font-bold transition-all hover:-translate-y-0.5" style={{ border: "1.5px solid rgba(255,138,31,0.5)", color: "#FF8A1F", fontFamily: "var(--font-inter)" }}>
-                        <CalendarPlus size={14} /> Apple / iPhone
-                      </button>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </ActionStep>
-
-            <ActionStep n={2} title="Join the WhatsApp group" sub="Daily support and accountability with people on the same path.">
+            <ActionStep n={1} title="Join the WhatsApp group" sub="Daily support and accountability with people on the same path.">
               {WHATSAPP_URL ? (
                 <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer"
                   className="inline-flex items-center justify-center gap-2 w-full py-3.5 rounded-xl font-bold text-black transition-all hover:-translate-y-0.5"
@@ -310,12 +290,29 @@ export default function JoinFlow({ onClose }: Props) {
               )}
             </ActionStep>
 
-            <ActionStep n={3} title="Join us on playclub" sub="This is where you share your wins and get hyped up." last>
+            <ActionStep n={2} title="Download playclub" sub="Get the app and join the Become group, where you share your wins and get hyped up.">
               <a href={PLAYCLUB_URL} target="_blank" rel="noopener noreferrer"
                 className="inline-flex items-center justify-center gap-2 w-full py-3.5 rounded-xl font-bold text-black transition-all hover:-translate-y-0.5"
                 style={{ background: FLAME, fontFamily: "var(--font-inter)", fontSize: 15 }}>
-                <Smartphone size={17} /> Open the playclub group
+                <Smartphone size={17} /> Open playclub
               </a>
+            </ActionStep>
+
+            <ActionStep n={3} title="Put it in your calendar" sub="Add both your habits at once. They repeat for the next 3 weeks, so you never forget." last>
+              <button onClick={() => downloadIcsAll(focus)}
+                className="inline-flex items-center justify-center gap-2 w-full py-3.5 rounded-xl font-bold text-black transition-all hover:-translate-y-0.5"
+                style={{ background: FLAME, fontFamily: "var(--font-inter)", fontSize: 15 }}>
+                <CalendarPlus size={17} /> Add both to my calendar
+              </button>
+              <p className="text-xs mt-3 text-center" style={{ color: "#6B6B78", fontFamily: "var(--font-inter)" }}>
+                Using Google Calendar? Add{" "}
+                {focus.map((f, i) => (
+                  <span key={f.goalId}>
+                    <a href={googleCalendarUrl(f)} target="_blank" rel="noopener noreferrer" style={{ color: "#FF8A1F", textDecoration: "underline" }}>{goalTitle(f)}</a>
+                    {i === 0 ? " · " : ""}
+                  </span>
+                ))}
+              </p>
             </ActionStep>
 
             <button onClick={onClose} className="mt-8 w-full text-sm font-semibold" style={{ color: "#FF8A1F", fontFamily: "var(--font-inter)" }}>I&apos;m all set</button>
