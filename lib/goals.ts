@@ -37,9 +37,9 @@ export interface GoalOption {
 // signup data (see the continuous-improvement note in CLAUDE.md / project memory).
 export const GOAL_OPTIONS: GoalOption[] = [
   { id: "workout", label: "Work out", identity: "trains their body", icon: Dumbbell },
-  { id: "gym", label: "Gym", identity: "shows up at the gym", icon: Activity },
   { id: "running", label: "Running", identity: "runs", icon: Zap },
   { id: "walking", label: "Walking", identity: "walks daily", icon: Footprints },
+  { id: "gym", label: "Gym", identity: "shows up at the gym", icon: Activity },
   { id: "reading", label: "Read books", identity: "reads every day", icon: BookOpen },
   { id: "meditate", label: "Meditate", identity: "sits with a calm mind", icon: Brain },
   { id: "water", label: "Drink water", identity: "stays hydrated", icon: Droplet },
