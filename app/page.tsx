@@ -34,9 +34,8 @@ export default function Home() {
       {/* NAV */}
       <nav className="fixed top-0 inset-x-0 z-40 px-5 py-3 flex items-center justify-between"
         style={{ backgroundColor: "rgba(12,12,17,0.72)", backdropFilter: "blur(12px)", borderBottom: "1px solid rgba(255,255,255,0.06)" }}>
-        <div className="flex items-center gap-3">
-          <img src="/logo.png" alt="Become" width={64} height={64} className="rounded-xl" />
-          <span className="font-extrabold text-white text-2xl" style={{ fontFamily: "var(--font-outfit)" }}>Become</span>
+        <div className="flex items-center">
+          <img src="/logo.png" alt="Become" className="h-16 w-auto rounded-xl" />
         </div>
         <button onClick={open}
           className="px-5 py-2 rounded-lg text-sm font-bold text-black transition-all hover:-translate-y-0.5"
