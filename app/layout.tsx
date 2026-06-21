@@ -31,7 +31,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: `Become. ${SITE.tagline}`,
     description:
-      "A community for people who want to stop "trying" and just start being. Two habits. Three weeks. Every day, together.",
+      "A community for people who want to stop 'trying' and just start being. Two habits. Three weeks. Every day, together.",
     url: BASE_URL,
     siteName: "Become",
     images: [
@@ -48,7 +48,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: `Become. ${SITE.tagline}`,
     description:
-      "A community for people who want to stop "trying" and just start being. Two habits. Three weeks. Every day, together.",
+      "A community for people who want to stop 'trying' and just start being. Two habits. Three weeks. Every day, together.",
     images: ["/og-image.png"],
   },
 };
