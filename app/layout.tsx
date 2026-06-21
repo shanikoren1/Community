@@ -36,9 +36,9 @@ export const metadata: Metadata = {
     siteName: "Become",
     images: [
       {
-        url: "/mountain-hero.png",
-        width: 1200,
-        height: 800,
+        url: "/og-image.png",
+        width: 1376,
+        height: 768,
         alt: "Become — The best time is now.",
       },
     ],
@@ -49,7 +49,7 @@ export const metadata: Metadata = {
     title: `Become. ${SITE.tagline}`,
     description:
       "A community for people who want to stop 'trying' and just start being. Two habits. Three weeks. Every day, together.",
-    images: ["/mountain-hero.png"],
+    images: ["/og-image.png"],
   },
 };
 
