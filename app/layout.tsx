@@ -62,6 +62,9 @@ export default function RootLayout({
       dir="ltr"
       className={`${outfit.variable} ${inter.variable} ${spaceMono.variable}`}
     >
+      <head>
+        <link rel="preload" as="image" href="/mountain-hero.webp" type="image/webp" />
+      </head>
       <body className="min-h-screen">{children}</body>
     </html>
   );

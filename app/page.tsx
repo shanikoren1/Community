@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import dynamic from "next/dynamic";
 import {
   Camera, Timer, Users, ArrowRight, Headphones, Target,
@@ -29,22 +29,27 @@ export default function Home() {
   const [showJoin, setShowJoin] = useState(false);
   const open = () => setShowJoin(true);
 
+  // Allow a direct link: community.hastandart.com/#join opens the survey straight away.
+  useEffect(() => {
+    if (window.location.hash === "#join") setShowJoin(true);
+  }, []);
+
   return (
     <main style={{ backgroundColor: "#0C0C11" }}>
       {/* NAV */}
       <nav className="fixed top-0 inset-x-0 z-40 px-4 py-1.5 flex items-center justify-between"
         style={{ backgroundColor: "rgba(12,12,17,0.72)", backdropFilter: "blur(12px)", borderBottom: "1px solid rgba(255,255,255,0.06)" }}>
-        <img src="/logo.png" alt="Become" className="h-24 w-auto" />
+        <img src="/logo.webp" alt="Become" className="h-24 w-auto" />
         <button onClick={open}
           className="px-5 py-2 rounded-lg text-sm font-bold text-black transition-all hover:-translate-y-0.5"
           style={{ background: FLAME, fontFamily: "var(--font-inter)", boxShadow: "0 4px 18px rgba(255,106,26,0.35)" }}>
-          Join now
+          Quick habits survey
         </button>
       </nav>
 
       {/* HERO */}
       <section className="relative flex min-h-screen flex-col items-center justify-center px-6 text-center overflow-hidden">
-        <div className="absolute inset-0 slow-zoom" style={{ backgroundImage: "url('/mountain-hero.png')", backgroundSize: "cover", backgroundPosition: "center" }} />
+        <div className="absolute inset-0 slow-zoom" style={{ backgroundImage: "url('/mountain-hero.webp')", backgroundSize: "cover", backgroundPosition: "center" }} />
         <div className="absolute inset-0" style={{ background: "linear-gradient(180deg, rgba(12,12,17,0.55) 0%, rgba(12,12,17,0.35) 45%, rgba(12,12,17,0.95) 100%)" }} />
 
         <div className="relative z-10 max-w-3xl mx-auto">
@@ -179,7 +184,7 @@ export default function Home() {
       {/* JOURNEY — streak card (the version Shani preferred) */}
       <section className="py-20 px-6" style={{ backgroundColor: "#0C0C11" }}>
         <div className="max-w-3xl mx-auto rounded-3xl overflow-hidden" style={{ border: "1px solid rgba(255,255,255,0.07)" }}>
-          <div className="relative px-7 pt-8 pb-7" style={{ backgroundImage: "linear-gradient(180deg, rgba(12,12,17,0.5), #15151D), url('/mountain-hero.png')", backgroundSize: "cover", backgroundPosition: "center" }}>
+          <div className="relative px-7 pt-8 pb-7" style={{ backgroundImage: "linear-gradient(180deg, rgba(12,12,17,0.5), #15151D), url('/mountain-hero.webp')", backgroundSize: "cover", backgroundPosition: "center" }}>
             <span className="mono-label" style={{ color: "#FFB347" }}>Your journey</span>
             <h2 className="font-black text-white mt-2" style={{ fontFamily: "var(--font-outfit)", fontSize: "clamp(26px, 5vw, 40px)" }}>Watch yourself climb.</h2>
           </div>
