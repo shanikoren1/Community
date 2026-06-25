@@ -390,12 +390,18 @@ export default function JoinFlow({ onClose, initialStep, initialFocus, initialFi
               )}
             </ActionStep>
 
-            <ActionStep n={2} title="Join Become on playclub" sub="Download the app — your group lives there.">
+            <ActionStep n={2} title="Join Become on playclub" sub="This is where the community lives. Events, wins, meetups — your people are here.">
               <a href={PLAYCLUB_URL} target="_blank" rel="noopener noreferrer"
-                className="inline-flex items-center justify-center gap-2 w-full py-3.5 rounded-xl font-bold text-black transition-all hover:-translate-y-0.5"
-                style={{ background: FLAME, fontFamily: "var(--font-inter)", fontSize: 15 }}>
-                <Smartphone size={17} /> Open playclub
+                className="group relative overflow-hidden inline-flex items-center justify-center gap-2.5 w-full py-4 rounded-2xl font-bold text-black transition-all duration-300 hover:-translate-y-1"
+                style={{ background: "linear-gradient(135deg, #FF6A1A 0%, #FFB347 60%, #FFD580 100%)", fontFamily: "var(--font-inter)", fontSize: 16, boxShadow: "0 12px 40px rgba(255,106,26,0.5), 0 0 0 1px rgba(255,179,71,0.3)" }}>
+                <span className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300" style={{ background: "linear-gradient(135deg, #FF8A1F 0%, #FFCA6B 100%)" }} />
+                <Smartphone size={18} className="relative z-10" />
+                <span className="relative z-10">Open playclub</span>
+                <ArrowRight size={16} className="relative z-10 transition-transform duration-300 group-hover:translate-x-1" />
               </a>
+              <p className="text-xs mt-2.5 text-center" style={{ color: "#6B6B78", fontFamily: "var(--font-inter)" }}>
+                Free download on iOS and Android
+              </p>
             </ActionStep>
 
             <ActionStep n={3} title="Put it in your calendar" sub="3 weeks of reminders — set it once, show up every day." last>
