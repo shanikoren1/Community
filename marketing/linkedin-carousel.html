@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Become — LinkedIn carousel</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700;800;900&family=Inter:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --bg:#0C0C11; --bg2:#111119; --card:#17171F; --card2:#1C1C26;
+    --flame:linear-gradient(135deg,#FF6A1A 0%,#FFB347 100%);
+    --orange:#FF8A1F; --amber:#FFB347; --flame-start:#FF6A1A;
+    --white:#FFFFFF; --muted:#9A9AA8; --subtle:#6B6B78;
+    --border:rgba(255,255,255,0.08);
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html,body{background:#08080c;}
+  body{
+    font-family:'Inter',sans-serif;
+    display:flex;flex-direction:column;align-items:center;
+    gap:28px;padding:40px 0;
+  }
+
+  /* Each slide = one 4:5 page (1080 x 1350) */
+  .slide{
+    position:relative;
+    width:1080px;height:1350px;
+    background:var(--bg);
+    color:var(--white);
+    overflow:hidden;
+    display:flex;flex-direction:column;
+    padding:96px 88px;
+  }
+  /* warm radial glow behind every slide */
+  .slide::before{
+    content:"";position:absolute;inset:0;
+    background:radial-gradient(ellipse 75% 55% at 50% 32%, rgba(255,106,26,0.16), transparent 70%);
+    pointer-events:none;
+  }
+  .slide > *{position:relative;z-index:1;}
+
+  /* grain */
+  .slide::after{
+    content:"";position:absolute;inset:0;z-index:0;opacity:0.05;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    pointer-events:none;
+  }
+
+  .mono{
+    font-family:'Space Mono',monospace;text-transform:uppercase;
+    letter-spacing:0.32em;font-size:18px;color:var(--orange);font-weight:700;
+  }
+  .mono-dim{color:var(--subtle);}
+  h1,h2,h3{font-family:'Outfit',sans-serif;line-height:1.02;letter-spacing:-0.035em;}
+  .flame-text{
+    background:var(--flame);-webkit-background-clip:text;background-clip:text;
+    -webkit-text-fill-color:transparent;
+  }
+  .muted{color:var(--muted);}
+  .subtle{color:var(--subtle);}
+
+  /* top brand row */
+  .brandrow{display:flex;align-items:center;justify-content:space-between;}
+  .logo{height:78px;width:auto;}
+  .pagepill{
+    font-family:'Space Mono',monospace;font-size:16px;letter-spacing:0.18em;
+    color:var(--subtle);border:1px solid var(--border);border-radius:999px;
+    padding:8px 18px;
+  }
+  .spacer{flex:1;}
+
+  /* progress dots */
+  .dots{display:flex;gap:10px;margin-top:8px;}
+  .dot{width:26px;height:5px;border-radius:999px;background:rgba(255,255,255,0.12);}
+  .dot.on{background:var(--flame);}
+
+  .footline{
+    display:flex;align-items:center;justify-content:space-between;
+    font-family:'Space Mono',monospace;font-size:16px;letter-spacing:0.14em;
+    color:var(--subtle);
+  }
+
+  /* ---- slide 1 cover ---- */
+  .cover h1{font-size:128px;font-weight:900;}
+  .cover .sub{font-size:30px;color:var(--muted);margin-top:32px;max-width:660px;line-height:1.4;}
+  .wordmark{
+    font-family:'Outfit',sans-serif;font-weight:900;letter-spacing:-0.04em;
+    font-size:88px;line-height:1;
+  }
+
+  /* big statement slides */
+  .statement h2{font-size:96px;font-weight:800;}
+  .statement .lead{font-size:26px;color:var(--muted);margin-top:40px;max-width:720px;line-height:1.5;}
+
+  .kicker{font-size:78px;font-weight:800;}
+
+  /* loop steps */
+  .steps{display:flex;flex-direction:column;gap:26px;margin-top:8px;}
+  .step{
+    display:flex;align-items:center;gap:30px;
+    background:var(--card);border:1px solid var(--border);border-radius:28px;
+    padding:34px 38px;
+  }
+  .stepnum{
+    flex:none;width:74px;height:74px;border-radius:20px;background:var(--flame);
+    display:flex;align-items:center;justify-content:center;
+    font-family:'Outfit';font-weight:900;font-size:36px;color:#0C0C11;
+  }
+  .step h3{font-size:40px;font-weight:700;}
+  .step p{font-size:21px;color:var(--muted);margin-top:6px;line-height:1.4;}
+
+  /* sprint stat */
+  .stats{display:flex;gap:26px;margin-top:8px;}
+  .stat{
+    flex:1;background:var(--card);border:1px solid var(--border);border-radius:28px;
+    padding:48px 34px;text-align:center;
+  }
+  .stat .big{font-family:'Outfit';font-weight:900;font-size:108px;line-height:1;}
+  .stat .lbl{font-family:'Space Mono';text-transform:uppercase;letter-spacing:0.2em;
+    font-size:18px;color:var(--muted);margin-top:18px;}
+
+  /* CTA */
+  .ctabtn{
+    display:inline-flex;align-items:center;gap:16px;align-self:flex-start;
+    background:var(--flame);color:#0C0C11;font-family:'Outfit';font-weight:800;
+    font-size:38px;padding:30px 52px;border-radius:24px;
+    box-shadow:0 24px 70px rgba(255,106,26,0.4);
+  }
+  .url{font-family:'Space Mono';font-size:26px;color:var(--amber);margin-top:34px;letter-spacing:0.04em;}
+
+  @media print{
+    @page{size:1080px 1350px;margin:0;}
+    body{gap:0;padding:0;background:#0C0C11;}
+    .slide{page-break-after:always;box-shadow:none;}
+  }
+</style>
+</head>
+<body>
+
+<!-- 1 — COVER -->
+<section class="slide cover">
+  <div class="brandrow">
+    <img class="logo" src="../public/logo.png" alt="Become" />
+    <span class="pagepill">01 / 07</span>
+  </div>
+  <div class="spacer"></div>
+  <p class="mono">A Hastandart community</p>
+  <h1 style="margin-top:26px;">The best<br/>time is <span class="flame-text">now.</span></h1>
+  <p class="sub">Be a builder of your own life. A community that turns small habits into the person you are becoming.</p>
+  <div class="spacer"></div>
+  <div class="dots">
+    <span class="dot on"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span>
+  </div>
+</section>
+
+<!-- 2 — SYSTEMS -->
+<section class="slide statement">
+  <div class="brandrow"><p class="mono mono-dim">The idea</p><span class="pagepill">02 / 07</span></div>
+  <div class="spacer"></div>
+  <h2>You don't rise<br/>to your goals.</h2>
+  <h2 class="flame-text" style="margin-top:14px;">You fall to<br/>your systems.</h2>
+  <p class="lead">So we build you one. Two habits, a time, a place. The system carries you on the days motivation does not show up.</p>
+  <div class="spacer"></div>
+  <div class="footline"><span>BECOME</span><span>Atomic Habits, in practice</span></div>
+</section>
+
+<!-- 3 — IDENTITY -->
+<section class="slide statement">
+  <div class="brandrow"><p class="mono mono-dim">Identity</p><span class="pagepill">03 / 07</span></div>
+  <div class="spacer"></div>
+  <h2>You become<br/>your <span class="flame-text">habits.</span></h2>
+  <p class="lead">Every action is a vote for the person you want to be. You are not trying to read a book. You are becoming a reader. You are not running once. You are becoming a runner.</p>
+  <div class="spacer"></div>
+  <div class="footline"><span>BECOME</span><span>Every action is a vote</span></div>
+</section>
+
+<!-- 4 — THE DAILY LOOP -->
+<section class="slide">
+  <div class="brandrow"><p class="mono mono-dim">The daily loop</p><span class="pagepill">04 / 07</span></div>
+  <h2 class="kicker" style="margin-top:46px;">Show up.<br/>Every single day.</h2>
+  <div class="steps" style="margin-top:48px;">
+    <div class="step"><div class="stepnum">1</div><div><h3>Show up</h3><p>Your calendar says it is time, so you start.</p></div></div>
+    <div class="step"><div class="stepnum">2</div><div><h3>Prepare your space</h3><p>Everything you need in front of you. No excuses left.</p></div></div>
+    <div class="step"><div class="stepnum">3</div><div><h3>Focus</h3><p>Start the timer. 20, 45 or 60 minutes of just you and the work.</p></div></div>
+    <div class="step"><div class="stepnum">4</div><div><h3>Get cheered on</h3><p>Share your win with the group and feel the cheers come back.</p></div></div>
+  </div>
+</section>
+
+<!-- 5 — SPRINT -->
+<section class="slide">
+  <div class="brandrow"><p class="mono mono-dim">The sprint</p><span class="pagepill">05 / 07</span></div>
+  <div class="spacer"></div>
+  <h2 class="kicker">Two habits.<br/>Three weeks.<br/><span class="flame-text">One sprint.</span></h2>
+  <div class="stats" style="margin-top:56px;">
+    <div class="stat"><div class="big flame-text">2</div><div class="lbl">Focus habits</div></div>
+    <div class="stat"><div class="big flame-text">3</div><div class="lbl">Weeks</div></div>
+    <div class="stat"><div class="big flame-text">1</div><div class="lbl">You, becoming</div></div>
+  </div>
+  <p class="lead" style="font-size:24px;margin-top:48px;">Small enough to keep on a hard day. Long enough to change who you are.</p>
+  <div class="spacer"></div>
+  <div class="footline"><span>BECOME</span><span>Systems beat goals</span></div>
+</section>
+
+<!-- 6 — COMMUNITY -->
+<section class="slide statement">
+  <div class="brandrow"><p class="mono mono-dim">Community</p><span class="pagepill">06 / 07</span></div>
+  <div class="spacer"></div>
+  <h2>You're not<br/>alone.</h2>
+  <p class="lead">We do this together on playclub. The group plans events, meets up, and shows up for each other. Your consistency becomes contagious, and so does theirs.</p>
+  <div class="spacer"></div>
+  <div class="footline"><span>BECOME</span><span>Home base: playclub</span></div>
+</section>
+
+<!-- 7 — CTA -->
+<section class="slide">
+  <div class="brandrow">
+    <img class="logo" src="../public/logo.png" alt="Become" />
+    <span class="pagepill">07 / 07</span>
+  </div>
+  <div class="spacer"></div>
+  <p class="mono">Your turn</p>
+  <h2 class="kicker" style="margin-top:24px;">Become the person<br/>you keep<br/>promising <span class="flame-text">yourself.</span></h2>
+  <div class="ctabtn" style="margin-top:54px;">Start now →</div>
+  <p class="url">community.hastandart.com/#join</p>
+  <div class="spacer"></div>
+  <div class="footline"><span>Shani Koren · Hastandart</span><span>2026</span></div>
+</section>
+
+</body>
+</html>
