@@ -154,31 +154,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* WHATSAPP — community group */}
-      <section className="py-14 px-6" style={{ backgroundColor: "#0C0C11" }}>
-        <div className="max-w-3xl mx-auto rounded-3xl p-7 sm:p-9 flex flex-col sm:flex-row items-center gap-6" style={{ background: "#0D1F17", border: "1px solid rgba(37,211,102,0.3)", boxShadow: "0 0 50px rgba(37,211,102,0.08)" }}>
-          <div className="w-14 h-14 rounded-2xl flex items-center justify-center flex-shrink-0" style={{ background: "linear-gradient(135deg, #25D366 0%, #128C7E 100%)" }}>
-            <MessageCircle size={26} color="#fff" />
-          </div>
-          <div className="flex-1 text-center sm:text-left">
-            <p className="mono-label mb-1" style={{ color: "#25D366" }}>WhatsApp group</p>
-            <h3 className="font-black text-white mb-1.5" style={{ fontFamily: "var(--font-outfit)", fontSize: "clamp(20px, 4vw, 28px)" }}>
-              The daily check-in lives here.
-            </h3>
-            <p className="text-sm" style={{ color: "#9A9AA8", fontFamily: "var(--font-inter)" }}>
-              Show up, share your win, get cheered on. Every day.
-            </p>
-          </div>
-          {WHATSAPP_URL && (
-            <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer"
-              className="flex-shrink-0 inline-flex items-center gap-2 px-7 py-3.5 rounded-xl font-bold text-white transition-all hover:-translate-y-0.5"
-              style={{ background: "linear-gradient(135deg, #25D366 0%, #128C7E 100%)", fontFamily: "var(--font-inter)", fontSize: 15, boxShadow: "0 8px 30px rgba(37,211,102,0.35)" }}>
-              <MessageCircle size={17} /> Join group
-            </a>
-          )}
-        </div>
-      </section>
-
       {/* PLAYCLUB — with QR code */}
       <section className="py-20 px-6" style={{ backgroundColor: "#111119" }}>
         <div className="max-w-3xl mx-auto rounded-3xl p-8 sm:p-10" style={{ background: "#15151D", border: "1px solid rgba(255,138,31,0.3)", boxShadow: "0 0 60px rgba(255,106,26,0.12)" }}>
@@ -209,6 +184,32 @@ export default function Home() {
               <p className="text-xs text-center" style={{ color: "#6B6B78", fontFamily: "var(--font-inter)" }}>Scan to join on mobile</p>
             </div>
           </div>
+        </div>
+      </section>
+
+      {/* WHATSAPP */}
+      <section className="py-14 px-6" style={{ backgroundColor: "#0C0C11" }}>
+        <div className="max-w-3xl mx-auto rounded-3xl p-7 sm:p-9 flex flex-col sm:flex-row items-center gap-6"
+          style={{ background: "rgba(255,106,26,0.06)", border: "1px solid rgba(255,138,31,0.3)", boxShadow: "0 0 50px rgba(255,106,26,0.08)" }}>
+          <div className="w-14 h-14 rounded-2xl flex items-center justify-center flex-shrink-0" style={{ background: FLAME }}>
+            <MessageCircle size={26} color="#0C0C11" />
+          </div>
+          <div className="flex-1 text-center sm:text-left">
+            <p className="mono-label mb-1" style={{ color: "#FF8A1F" }}>WhatsApp group</p>
+            <h3 className="font-black text-white mb-1.5" style={{ fontFamily: "var(--font-outfit)", fontSize: "clamp(20px, 4vw, 28px)" }}>
+              The daily check-in lives here.
+            </h3>
+            <p className="text-sm" style={{ color: "#9A9AA8", fontFamily: "var(--font-inter)" }}>
+              Show up, share your win, get cheered on. Every day.
+            </p>
+          </div>
+          {WHATSAPP_URL && (
+            <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer"
+              className="flex-shrink-0 inline-flex items-center gap-2 px-7 py-3.5 rounded-xl font-bold text-black transition-all hover:-translate-y-0.5"
+              style={{ background: FLAME, fontFamily: "var(--font-inter)", fontSize: 15, boxShadow: "0 8px 30px rgba(255,106,26,0.35)" }}>
+              <MessageCircle size={17} /> Join group
+            </a>
+          )}
         </div>
       </section>
 

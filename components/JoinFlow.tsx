@@ -247,7 +247,7 @@ export default function JoinFlow({ onClose, initialStep, initialFocus, initialFi
         {/* 3 — BRIDGE: first step + schedule */}
         {step === "bridge" && (
           <div className="float-up">
-            <Question title="הנה הצעד הראשון שלך" sub="מבוסס על Atomic Habits — הגדרות מדויקות שעובדות. ערוך/י לפי מה שנוח לך." />
+            <Question title="Your first step" sub="Based on the habits you chose, here is a science-backed first step for each one. Edit to fit your schedule." />
             <div className="flex flex-col gap-5">
               {focus.map((f, idx) => {
                 const g = optionFor(f.goalId);
@@ -269,7 +269,7 @@ export default function JoinFlow({ onClose, initialStep, initialFocus, initialFi
                       {fs?.firstStepHe && (
                         <div className="mb-4 p-3 rounded-xl" style={{ background: "rgba(255,106,26,0.08)", border: "1px solid rgba(255,138,31,0.2)" }}>
                           <p className="text-sm" style={{ color: "#FFB347", fontFamily: "var(--font-inter)", lineHeight: 1.6, direction: "rtl", textAlign: "right" }}>
-                            💡 {fs.firstStepHe}
+                            {fs.firstStepHe}
                           </p>
                         </div>
                       )}

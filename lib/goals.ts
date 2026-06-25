@@ -53,13 +53,13 @@ export function goalById(id: string): GoalOption | undefined {
 }
 
 export const WEEKDAYS = [
-  { id: "MO", label: "Mon" },
-  { id: "TU", label: "Tue" },
-  { id: "WE", label: "Wed" },
-  { id: "TH", label: "Thu" },
-  { id: "FR", label: "Fri" },
-  { id: "SA", label: "Sat" },
-  { id: "SU", label: "Sun" },
+  { id: "SU", label: "ראשון" },
+  { id: "MO", label: "שני" },
+  { id: "TU", label: "שלישי" },
+  { id: "WE", label: "רביעי" },
+  { id: "TH", label: "חמישי" },
+  { id: "FR", label: "שישי" },
+  { id: "SA", label: "שבת" },
 ] as const;
 
 export type WeekdayId = (typeof WEEKDAYS)[number]["id"];
@@ -134,7 +134,7 @@ export const FIRST_STEPS: Record<string, FirstStep> = {
     defaultTime: "07:00",
     morningTime: "07:00",
     eveningTime: "21:00",
-    firstStepHe: "שב/י בשקט 2 דקות מיד עם הקימה — ושוב בלילה לפני השינה.",
+    firstStepHe: "שב/י בשקט 2 דקות מיד עם הקימה. ושוב בלילה לפני השינה.",
   },
   water: {
     duration: 5,
@@ -185,7 +185,7 @@ export const FIRST_STEPS: Record<string, FirstStep> = {
     defaultTime: "17:00",
     morningTime: "08:00",
     eveningTime: "17:00",
-    firstStepHe: "כתוב/י פסקה אחת על כל נושא — בלי לערוך.",
+    firstStepHe: "כתוב/י פסקה אחת על כל נושא, בלי לערוך.",
   },
   podcast: {
     duration: 60,
