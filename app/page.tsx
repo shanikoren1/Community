@@ -85,7 +85,7 @@ export default function Home() {
           </h1>
 
           <p className="text-lg md:text-xl mx-auto mb-9" style={{ color: "#D4D4DC", fontFamily: "var(--font-inter)", maxWidth: 520, textShadow: "0 2px 20px rgba(0,0,0,0.6)" }}>
-            You get to decide who you become. Pick two habits, show up for them every day, and do it with people who actually have your back.
+            You get to decide who you become. Pick habits, show up for them, and build your connection, accomplishing your shared goals.
           </p>
 
           <button onClick={open}
@@ -113,7 +113,7 @@ export default function Home() {
                 <span className="text-white">start with play.</span>
               </h2>
               <p className="text-base leading-relaxed mb-7 mx-auto sm:mx-0" style={{ color: "#C4C4CC", fontFamily: "var(--font-inter)", maxWidth: 420 }}>
-                Playclub is where the Become community lives, we meet, play, share our wins and pull each other forward. This is your room. Come join us.
+                Playclub is where the Become community lives, we meet, play, share our wins and pull each other forward. Become is one of the exclusive communities inside the platform. Come join us.
               </p>
               <a href={PLAYCLUB_URL} target="_blank" rel="noopener noreferrer"
                 className="playclub-cta inline-flex items-center gap-2.5 px-9 py-4 rounded-xl font-bold text-black transition-transform duration-300 hover:-translate-y-1"
