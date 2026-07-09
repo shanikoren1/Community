@@ -98,10 +98,46 @@ export default function Home() {
         </div>
       </section>
 
+      {/* PLAYCLUB — the main call to action, right after the opening */}
+      <section className="pt-16 pb-6 px-6" style={{ backgroundColor: "#0C0C11" }}>
+        <div className="max-w-3xl mx-auto rounded-3xl p-8 sm:p-11 relative overflow-hidden"
+          style={{ background: "linear-gradient(160deg, #1A1620 0%, #15151D 100%)", border: "1px solid rgba(255,138,31,0.35)", boxShadow: "0 0 80px rgba(255,106,26,0.16)" }}>
+          <div className="flex flex-col sm:flex-row items-center gap-8">
+            <div className="flex-1 text-center sm:text-left">
+              <span className="mono-label inline-block mb-4 px-3 py-1 rounded-full"
+                style={{ border: "1px solid rgba(255,179,71,0.4)", color: "#FFB347", backgroundColor: "rgba(255,106,26,0.08)" }}>
+                Join us on playclub
+              </span>
+              <h2 className="font-black mb-4" style={{ fontFamily: "var(--font-outfit)", fontSize: "clamp(28px, 5.5vw, 46px)", lineHeight: 1.08, letterSpacing: "-0.03em" }}>
+                <span className="text-sunset">The best connections</span><br />
+                <span className="text-white">start with play.</span>
+              </h2>
+              <p className="text-base leading-relaxed mb-7 mx-auto sm:mx-0" style={{ color: "#C4C4CC", fontFamily: "var(--font-inter)", maxWidth: 420 }}>
+                Playclub is where the Become community lives, we meet, play, share our wins and pull each other forward. This is your room. Come join us.
+              </p>
+              <a href={PLAYCLUB_URL} target="_blank" rel="noopener noreferrer"
+                className="playclub-cta inline-flex items-center gap-2.5 px-9 py-4 rounded-xl font-bold text-black transition-transform duration-300 hover:-translate-y-1"
+                style={{ background: FLAME, fontFamily: "var(--font-inter)", fontSize: "1.1rem" }}>
+                <Users size={20} /> Join Become on playclub
+                <ArrowRight size={18} />
+              </a>
+              <p className="mono-label mt-4" style={{ color: "#6B6B78" }}>Free to join. Your people are already inside.</p>
+            </div>
+            {/* QR code — desktop only */}
+            <div className="hidden sm:flex flex-col items-center gap-3 flex-shrink-0">
+              <div className="p-3 rounded-2xl" style={{ background: "#0C0C11", border: "1px solid rgba(255,138,31,0.25)" }}>
+                <QRCodeSVG value={PLAYCLUB_URL} size={140} bgColor="#0C0C11" fgColor="#FF8A1F" level="M" />
+              </div>
+              <p className="text-xs text-center" style={{ color: "#6B6B78", fontFamily: "var(--font-inter)" }}>Scan to join on your phone</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* ONE-SENTENCE INTRO */}
-      <section className="pt-14 pb-10 px-6" style={{ backgroundColor: "#0C0C11" }}>
+      <section className="pt-10 pb-10 px-6" style={{ backgroundColor: "#0C0C11" }}>
         <div className="max-w-2xl mx-auto text-center">
-          <p className="mono-label mb-4" style={{ color: "#FF8A1F" }}>The idea</p>
+          <p className="mono-label mb-4" style={{ color: "#FF8A1F" }}>The idea behind it</p>
           <h2 className="font-black text-white" style={{ fontFamily: "var(--font-outfit)", fontSize: "clamp(26px, 5vw, 44px)", lineHeight: 1.15, letterSpacing: "-0.03em" }}>
             After analyzing the book <span className="text-sunset">Atomic Habits</span>, we build a system that actually works.
           </h2>
@@ -150,39 +186,6 @@ export default function Home() {
                 </div>
               );
             })}
-          </div>
-        </div>
-      </section>
-
-      {/* PLAYCLUB — with QR code */}
-      <section className="py-20 px-6" style={{ backgroundColor: "#111119" }}>
-        <div className="max-w-3xl mx-auto rounded-3xl p-8 sm:p-10" style={{ background: "#15151D", border: "1px solid rgba(255,138,31,0.3)", boxShadow: "0 0 60px rgba(255,106,26,0.12)" }}>
-          <div className="flex flex-col sm:flex-row items-center gap-8">
-            <div className="flex-1 text-center sm:text-left">
-              <div className="mx-auto sm:mx-0 mb-5 w-14 h-14 rounded-2xl flex items-center justify-center" style={{ background: FLAME }}>
-                <Users size={24} color="#0C0C11" />
-              </div>
-              <p className="mono-label mb-3" style={{ color: "#FF8A1F" }}>Where it all happens</p>
-              <h2 className="font-black text-white mb-4" style={{ fontFamily: "var(--font-outfit)", fontSize: "clamp(24px, 4vw, 38px)", letterSpacing: "-0.03em" }}>
-                We do this together on playclub.
-              </h2>
-              <p className="text-base leading-relaxed mb-6" style={{ color: "#C4C4CC", fontFamily: "var(--font-inter)", maxWidth: 380 }}>
-                Events, meetups, wins, support. The Become community lives here.
-              </p>
-              <a href={PLAYCLUB_URL} target="_blank" rel="noopener noreferrer"
-                className="inline-flex items-center gap-2.5 px-8 py-4 rounded-xl font-bold text-black transition-all duration-300 hover:-translate-y-1"
-                style={{ background: FLAME, fontFamily: "var(--font-inter)", fontSize: "1rem", boxShadow: "0 10px 40px rgba(255,106,26,0.45)" }}>
-                <Users size={19} /> Join the Become group
-                <ArrowRight size={17} />
-              </a>
-            </div>
-            {/* QR code — desktop only */}
-            <div className="hidden sm:flex flex-col items-center gap-3 flex-shrink-0">
-              <div className="p-3 rounded-2xl" style={{ background: "#1C1C24", border: "1px solid rgba(255,138,31,0.2)" }}>
-                <QRCodeSVG value={PLAYCLUB_URL} size={130} bgColor="#1C1C24" fgColor="#FF8A1F" level="M" />
-              </div>
-              <p className="text-xs text-center" style={{ color: "#6B6B78", fontFamily: "var(--font-inter)" }}>Scan to join on mobile</p>
-            </div>
           </div>
         </div>
       </section>

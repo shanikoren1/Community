@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Check, ArrowRight, ArrowLeft, X, CalendarPlus, MessageCircle, Smartphone, Plus, Star, Sun, Moon } from "lucide-react";
+import { Check, ArrowRight, ArrowLeft, X, CalendarPlus, MessageCircle, Smartphone, Plus, Star, Sun, Moon, ChevronRight, Download } from "lucide-react";
 import { GOAL_OPTIONS, WEEKDAYS, FIRST_STEPS, goalById, type FocusGoal, type WeekdayId } from "../lib/goals";
 import { googleCalendarUrl, downloadIcsAll, goalTitle } from "../lib/calendar";
 import { PLAYCLUB_URL, WHATSAPP_URL } from "../lib/config";

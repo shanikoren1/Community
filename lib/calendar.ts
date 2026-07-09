@@ -145,6 +145,13 @@ export function downloadIcsAll(goals: FocusGoal[], base = new Date()): void {
   URL.revokeObjectURL(url);
 }
 
+/** Open Google Calendar for every habit (one tab per habit). */
+export function openGoogleAll(goals: FocusGoal[], base = new Date()): void {
+  goals.forEach((g) => {
+    window.open(googleCalendarUrl(g, base), "_blank", "noopener,noreferrer");
+  });
+}
+
 /** Trigger a browser download of the .ics for a goal. */
 export function downloadIcs(goal: FocusGoal, base = new Date()): void {
   const blob = new Blob([icsContent(goal, base)], { type: "text/calendar;charset=utf-8" });
