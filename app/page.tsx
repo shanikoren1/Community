@@ -85,7 +85,7 @@ export default function Home() {
           </h1>
 
           <p className="text-lg md:text-xl mx-auto mb-9" style={{ color: "#D4D4DC", fontFamily: "var(--font-inter)", maxWidth: 520, textShadow: "0 2px 20px rgba(0,0,0,0.6)" }}>
-            You get to decide who you become. Pick habits, show up for them, and you are welcome to build your connections, accomplishing your shared goals.
+            You decide who you become. Choose your habits, show up for them, build your network naturally, and achieve your shared goals.
           </p>
 
           <button onClick={open}
