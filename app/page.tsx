@@ -88,12 +88,19 @@ export default function Home() {
             You decide who you become. Choose your habits, show up for them, build your network naturally, and achieve your shared goals.
           </p>
 
-          <button onClick={open}
-            className="group inline-flex items-center gap-2.5 px-9 py-4 rounded-xl font-bold text-black transition-all duration-300 hover:-translate-y-1"
-            style={{ background: FLAME, fontFamily: "var(--font-inter)", fontSize: "1.1rem", boxShadow: "0 10px 40px rgba(255,106,26,0.45)" }}>
-            <Flame size={20} /> Start now
-            <ArrowRight size={18} className="transition-transform group-hover:translate-x-1" />
-          </button>
+          <div className="flex flex-col items-center gap-3">
+            <button onClick={open}
+              className="group inline-flex items-center gap-2.5 px-9 py-4 rounded-xl font-bold text-black transition-all duration-300 hover:-translate-y-1"
+              style={{ background: FLAME, fontFamily: "var(--font-inter)", fontSize: "1.1rem", boxShadow: "0 10px 40px rgba(255,106,26,0.45)" }}>
+              <Flame size={20} /> Quick survey
+              <ArrowRight size={18} className="transition-transform group-hover:translate-x-1" />
+            </button>
+            <a href={PLAYCLUB_URL} target="_blank" rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 px-8 py-3.5 rounded-xl font-bold transition-all duration-300 hover:-translate-y-0.5"
+              style={{ border: "1.5px solid rgba(255,138,31,0.6)", color: "#FF8A1F", fontFamily: "var(--font-inter)", fontSize: "1rem" }}>
+              <Users size={18} /> Apply to join us
+            </a>
+          </div>
           <p className="mono-label mt-4" style={{ color: "rgba(255,255,255,0.45)" }}>Free. Takes two minutes.</p>
         </div>
       </section>
