@@ -6,10 +6,8 @@ import {
   Camera, Timer, Users, ArrowRight, Headphones, Target,
   Fingerprint, Layers, Flame, Mic, MessageCircle,
 } from "lucide-react";
-import { SITE, PLAYCLUB_URL, WHATSAPP_URL, AUDIOBOOK_URL, PODCAST_URL } from "../lib/config";
+import { SITE, WHATSAPP_URL, AUDIOBOOK_URL, PODCAST_URL } from "../lib/config";
 import type { FocusGoal } from "../lib/goals";
-
-const QRCodeSVG = dynamic(() => import("qrcode.react").then(m => m.QRCodeSVG), { ssr: false });
 
 const HUB_KEY = "become_member";
 
@@ -27,7 +25,7 @@ const LOOP = [
 const TRUTHS = [
   { icon: Fingerprint, tag: "Identity", title: "You become your habits", text: "Every action is a vote for the person you want to be." },
   { icon: Layers, tag: "Systems", title: "Systems beat goals", text: "You don't rise to your goals, you fall to your systems. So we build you one: two habits, a time, a place." },
-  { icon: Users, tag: "Community", title: "You're not alone", text: "We do this together. Our home base is playclub, where the community plans events, meets up, and supports each other." },
+  { icon: Users, tag: "Community", title: "You're not alone", text: "We do this together. Every day we check in, share the win, and cheer each other on." },
 ];
 
 export default function Home() {
@@ -92,52 +90,11 @@ export default function Home() {
             <button onClick={open}
               className="group inline-flex items-center gap-2.5 px-9 py-4 rounded-xl font-bold text-black transition-all duration-300 hover:-translate-y-1"
               style={{ background: FLAME, fontFamily: "var(--font-inter)", fontSize: "1.1rem", boxShadow: "0 10px 40px rgba(255,106,26,0.45)" }}>
-              <Flame size={20} /> Quick survey
+              <Flame size={20} /> Start your 3-week sprint
               <ArrowRight size={18} className="transition-transform group-hover:translate-x-1" />
             </button>
-            <a href={PLAYCLUB_URL} target="_blank" rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-8 py-3.5 rounded-xl font-bold transition-all duration-300 hover:-translate-y-0.5"
-              style={{ border: "1.5px solid rgba(255,138,31,0.6)", color: "#FF8A1F", fontFamily: "var(--font-inter)", fontSize: "1rem" }}>
-              <Users size={18} /> Apply to join us
-            </a>
           </div>
           <p className="mono-label mt-4" style={{ color: "rgba(255,255,255,0.45)" }}>Free. Takes two minutes.</p>
-        </div>
-      </section>
-
-      {/* PLAYCLUB — the main call to action, right after the opening */}
-      <section className="pt-16 pb-6 px-6" style={{ backgroundColor: "#0C0C11" }}>
-        <div className="max-w-3xl mx-auto rounded-3xl p-8 sm:p-11 relative overflow-hidden"
-          style={{ background: "linear-gradient(160deg, #1A1620 0%, #15151D 100%)", border: "1px solid rgba(255,138,31,0.35)", boxShadow: "0 0 80px rgba(255,106,26,0.16)" }}>
-          <div className="flex flex-col sm:flex-row items-center gap-8">
-            <div className="flex-1 text-center sm:text-left">
-              <span className="mono-label inline-block mb-4 px-3 py-1 rounded-full"
-                style={{ border: "1px solid rgba(255,179,71,0.4)", color: "#FFB347", backgroundColor: "rgba(255,106,26,0.08)" }}>
-                Join us on playclub
-              </span>
-              <h2 className="font-black mb-4" style={{ fontFamily: "var(--font-outfit)", fontSize: "clamp(28px, 5.5vw, 46px)", lineHeight: 1.08, letterSpacing: "-0.03em" }}>
-                <span className="text-sunset">The best connections</span><br />
-                <span className="text-white">start with play.</span>
-              </h2>
-              <p className="text-base leading-relaxed mb-7 mx-auto sm:mx-0" style={{ color: "#C4C4CC", fontFamily: "var(--font-inter)", maxWidth: 420 }}>
-                Playclub is where the Become community lives, we meet, play, connect and push each other forward. Become is one of the exclusive communities inside the platform. Come join us.
-              </p>
-              <a href={PLAYCLUB_URL} target="_blank" rel="noopener noreferrer"
-                className="playclub-cta inline-flex items-center gap-2.5 px-9 py-4 rounded-xl font-bold text-black transition-transform duration-300 hover:-translate-y-1"
-                style={{ background: FLAME, fontFamily: "var(--font-inter)", fontSize: "1.1rem" }}>
-                <Users size={20} /> Join Become on playclub
-                <ArrowRight size={18} />
-              </a>
-              <p className="mono-label mt-4" style={{ color: "#6B6B78" }}>Free to join. Your people are already inside.</p>
-            </div>
-            {/* QR code — desktop only */}
-            <div className="hidden sm:flex flex-col items-center gap-3 flex-shrink-0">
-              <div className="p-3 rounded-2xl" style={{ background: "#0C0C11", border: "1px solid rgba(255,138,31,0.25)" }}>
-                <QRCodeSVG value={PLAYCLUB_URL} size={140} bgColor="#0C0C11" fgColor="#FF8A1F" level="M" />
-              </div>
-              <p className="text-xs text-center" style={{ color: "#6B6B78", fontFamily: "var(--font-inter)" }}>Scan to join on your phone</p>
-            </div>
-          </div>
         </div>
       </section>
 

@@ -1,10 +1,10 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Check, ArrowRight, ArrowLeft, X, CalendarPlus, MessageCircle, Smartphone, Plus, Star, Sun, Moon, ChevronRight, Download } from "lucide-react";
+import { Check, ArrowRight, ArrowLeft, X, CalendarPlus, MessageCircle, Plus, Star, Sun, Moon } from "lucide-react";
 import { GOAL_OPTIONS, WEEKDAYS, FIRST_STEPS, goalById, type FocusGoal, type WeekdayId } from "../lib/goals";
 import { googleCalendarUrl, downloadIcsAll, goalTitle } from "../lib/calendar";
-import { PLAYCLUB_URL, WHATSAPP_URL } from "../lib/config";
+import { WHATSAPP_URL } from "../lib/config";
 
 interface Props {
   onClose: () => void;
@@ -16,20 +16,30 @@ interface Props {
 const FLAME = "linear-gradient(135deg, #FF6A1A 0%, #FFB347 100%)";
 const FLAME_BAR = "linear-gradient(90deg, #FF6A1A 0%, #FFB347 100%)";
 
-type Step = "longterm" | "shortterm" | "bridge" | "contact" | "done";
-const PROGRESS_STEPS: Step[] = ["longterm", "shortterm", "bridge", "contact"];
+// Essentialism, McKeown: Explore (brainstorm wide) → Score (the 90% rule) →
+// Choose (eliminate the trivial many, commit to the vital few) → Execute (bridge + schedule).
+type Step = "explore" | "score" | "choose" | "bridge" | "contact" | "done";
+const PROGRESS_STEPS: Step[] = ["explore", "score", "choose", "bridge", "contact"];
+
+// 90% Rule made tappable: if it isn't a clear yes, it's a clear no.
+const SCORE_TIERS = [
+  { v: 1, label: "Not now" },
+  { v: 2, label: "Maybe" },
+  { v: 3, label: "Essential" },
+] as const;
 
 interface CustomGoal { id: string; label: string; }
 
 const HUB_KEY = "become_member";
 
 export default function JoinFlow({ onClose, initialStep, initialFocus, initialFirstName }: Props) {
-  const [step, setStep] = useState<Step>(initialStep ?? "longterm");
-  const [longTerm, setLongTerm] = useState<string[]>([]);
+  const [step, setStep] = useState<Step>(initialStep ?? "explore");
+  const [explored, setExplored] = useState<string[]>([]);
   const [customGoals, setCustomGoals] = useState<CustomGoal[]>([]);
   const [adding, setAdding] = useState(false);
   const [draft, setDraft] = useState("");
-  const [focusIds, setFocusIds] = useState<string[]>([]);
+  const [scores, setScores] = useState<Record<string, number>>({});
+  const [vitalFew, setVitalFew] = useState<string[]>([]);
   const [focus, setFocus] = useState<FocusGoal[]>(initialFocus ?? []);
   const [timePrefs, setTimePrefs] = useState<Record<string, "morning" | "evening">>({});
   const [firstName, setFirstName] = useState(initialFirstName ?? "");
@@ -54,24 +64,17 @@ export default function JoinFlow({ onClose, initialStep, initialFocus, initialFi
     return { id, label: c?.label || "My habit", identity: "chose their own path", icon: Star };
   }
 
-  function toggleLongTerm(id: string) {
-    setLongTerm((p) => (p.includes(id) ? p.filter((x) => x !== id) : [...p, id]));
+  function toggleExplore(id: string) {
+    setExplored((p) => (p.includes(id) ? p.filter((x) => x !== id) : [...p, id]));
   }
   function addCustom() {
     const label = draft.trim();
     if (!label) return;
     const id = `custom-${Date.now()}`;
     setCustomGoals((p) => [...p, { id, label }]);
-    setLongTerm((p) => [...p, id]);
+    setExplored((p) => [...p, id]);
     setDraft("");
     setAdding(false);
-  }
-  function toggleFocus(id: string) {
-    setFocusIds((p) => {
-      if (p.includes(id)) return p.filter((x) => x !== id);
-      if (p.length >= 2) return p;
-      return [...p, id];
-    });
   }
 
   function buildFocusFromIds(ids: string[]): FocusGoal[] {
@@ -91,28 +94,46 @@ export default function JoinFlow({ onClose, initialStep, initialFocus, initialFi
 
   function goToBridge(ids: string[]) {
     const built = buildFocusFromIds(ids);
-    setFocusIds(ids);
+    setVitalFew(ids);
     setFocus(built);
     setTimePrefs({});
     setStep("bridge");
   }
 
-  function onLongtermNext() {
-    if (longTerm.length === 2) {
-      goToBridge(longTerm);
-    } else if (longTerm.length > 0) {
-      setStep("shortterm");
-    } else {
+  // Rank the explored goals by score (then by the order they were chosen) — the vital few rise.
+  function rankedByScore(ids: string[]): string[] {
+    return [...ids].sort((a, b) => (scores[b] ?? 2) - (scores[a] ?? 2) || ids.indexOf(a) - ids.indexOf(b));
+  }
+
+  function onExploreNext() {
+    if (explored.length === 0) {
       goToBridge(GOAL_OPTIONS.slice(0, 2).map((g) => g.id));
+    } else if (explored.length <= 2) {
+      // Nothing to eliminate — straight to commit.
+      setVitalFew(explored);
+      setStep("choose");
+    } else {
+      setStep("score");
     }
   }
 
-  function onShorttermNext() {
-    if (focusIds.length > 0) {
-      goToBridge(focusIds.length === 2 ? focusIds : [...focusIds, ...GOAL_OPTIONS.filter(g => !focusIds.includes(g.id)).map(g => g.id)].slice(0, 2));
-    } else {
-      goToBridge(longTerm.slice(0, 2).length === 2 ? longTerm.slice(0, 2) : GOAL_OPTIONS.slice(0, 2).map(g => g.id));
-    }
+  function onScoreNext() {
+    // Default the vital few to the two highest-rated, let the choose step confirm.
+    setVitalFew(rankedByScore(explored).slice(0, 2));
+    setStep("choose");
+  }
+
+  function toggleVital(id: string) {
+    setVitalFew((p) => {
+      if (p.includes(id)) return p.filter((x) => x !== id);
+      if (p.length >= 2) return p;
+      return [...p, id];
+    });
+  }
+
+  function onChooseNext() {
+    const ids = vitalFew.length ? vitalFew : rankedByScore(explored).slice(0, 2);
+    goToBridge(ids.length ? ids : GOAL_OPTIONS.slice(0, 2).map((g) => g.id));
   }
 
   function applyTimePref(goalId: string, pref: "morning" | "evening") {
@@ -148,7 +169,7 @@ export default function JoinFlow({ onClose, initialStep, initialFocus, initialFi
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
             firstName, email,
-            longTerm: longTerm.map((id) => optionFor(id).label),
+            longTerm: explored.map((id) => optionFor(id).label),
             focus: focus.map((f) => ({ title: goalTitle(f), minutes: f.minutes, days: f.days, time: f.time, tiny: f.tiny })),
           }),
         });
@@ -166,7 +187,7 @@ export default function JoinFlow({ onClose, initialStep, initialFocus, initialFi
 
   const progressStep = PROGRESS_STEPS.indexOf(step);
   const pct = step === "done" ? 100 : Math.round(((progressStep + 1) / PROGRESS_STEPS.length) * 100);
-  const shortList = longTerm.length ? longTerm : GOAL_OPTIONS.map((g) => g.id);
+  const notNow = explored.filter((id) => !vitalFew.includes(id));
 
   return (
     <div className="fixed inset-0 z-50 overflow-y-auto overscroll-contain" style={{ backgroundColor: "#0C0C11", WebkitOverflowScrolling: "touch" }}>
@@ -194,13 +215,13 @@ export default function JoinFlow({ onClose, initialStep, initialFocus, initialFi
           </div>
         )}
 
-        {/* 1 — LONG-TERM */}
-        {step === "longterm" && (
+        {/* 1 — EXPLORE: brainstorm wide */}
+        {step === "explore" && (
           <div className="float-up">
-            <Question title="What do you want to accomplish?" sub="Pick everything you want. No limit — dream wide." />
+            <Question title="What do you want to become?" sub="Brainstorm wide. Pick everything that pulls at you — don't filter yet. We narrow down next." />
             <div className="grid grid-cols-2 gap-3">
-              {GOAL_OPTIONS.map((g) => <GoalCard key={g.id} g={g} active={longTerm.includes(g.id)} onClick={() => toggleLongTerm(g.id)} />)}
-              {customGoals.map((c) => <GoalCard key={c.id} g={optionFor(c.id)} active={longTerm.includes(c.id)} onClick={() => toggleLongTerm(c.id)} />)}
+              {GOAL_OPTIONS.map((g) => <GoalCard key={g.id} g={g} active={explored.includes(g.id)} onClick={() => toggleExplore(g.id)} />)}
+              {customGoals.map((c) => <GoalCard key={c.id} g={optionFor(c.id)} active={explored.includes(c.id)} onClick={() => toggleExplore(c.id)} />)}
               <button onClick={() => setAdding(true)}
                 className="flex flex-col items-start gap-3 p-4 rounded-2xl text-left transition-all"
                 style={{ border: "1.5px dashed rgba(255,138,31,0.5)", background: "transparent", minHeight: 92 }}>
@@ -221,33 +242,102 @@ export default function JoinFlow({ onClose, initialStep, initialFocus, initialFi
                 </button>
               </div>
             )}
-            <Nav onNext={onLongtermNext} nextLabel={longTerm.length === 2 ? `Continue (${longTerm.length} ✓)` : longTerm.length > 0 ? `Continue (${longTerm.length})` : "Continue"} onSkip={() => goToBridge(GOAL_OPTIONS.slice(0, 2).map(g => g.id))} />
+            <Nav onNext={onExploreNext} nextLabel={explored.length > 0 ? `Continue (${explored.length})` : "Continue"} onSkip={() => goToBridge(GOAL_OPTIONS.slice(0, 2).map(g => g.id))} />
           </div>
         )}
 
-        {/* 2 — SHORT-TERM */}
-        {step === "shortterm" && (
+        {/* 2 — SCORE: the 90% rule */}
+        {step === "score" && (
           <div className="float-up">
-            <Question title="Pick your two focus goals." sub="Just two for the next 3 weeks. Two is enough to change everything." />
-            <div className="grid grid-cols-2 gap-3">
-              {shortList.map((id) => {
+            <Question title="Now, what truly matters?" sub="Rate each one honestly. The 90% rule: if it isn't a clear yes, it's a clear no." />
+            <div className="flex flex-col gap-2.5">
+              {explored.map((id) => {
                 const g = optionFor(id);
-                const active = focusIds.includes(id);
-                const dimmed = !active && focusIds.length >= 2;
-                return <GoalCard key={id} g={g} active={active} dimmed={dimmed} onClick={() => toggleFocus(id)} badge={active} />;
+                const Icon = g.icon;
+                const cur = scores[id] ?? 2;
+                return (
+                  <div key={id} className="rounded-2xl p-3.5" style={{ background: "#15151D", border: "1px solid rgba(255,255,255,0.08)" }}>
+                    <div className="flex items-center gap-3 mb-3">
+                      <div className="w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0" style={{ background: "rgba(255,106,26,0.12)" }}>
+                        <Icon size={16} color="#FF8A1F" />
+                      </div>
+                      <span className="text-sm font-semibold text-white" style={{ fontFamily: "var(--font-inter)" }}>{g.label}</span>
+                    </div>
+                    <div className="flex gap-2">
+                      {SCORE_TIERS.map((t) => {
+                        const on = cur === t.v;
+                        return (
+                          <button key={t.v} onClick={() => setScores((p) => ({ ...p, [id]: t.v }))}
+                            className="flex-1 py-2 rounded-lg text-xs font-bold transition-all"
+                            style={{ background: on ? FLAME : "rgba(255,255,255,0.05)", color: on ? "#0C0C11" : "#9A9AA8", border: on ? "none" : "1px solid rgba(255,255,255,0.1)", fontFamily: "var(--font-inter)" }}>
+                            {t.label}
+                          </button>
+                        );
+                      })}
+                    </div>
+                  </div>
+                );
               })}
             </div>
-            <p className="mt-5 text-center font-bold mono-label" style={{ color: focusIds.length === 2 ? "#FF8A1F" : "#6B6B78" }}>
-              {focusIds.length} of 2 picked
-            </p>
-            <Nav onBack={() => setStep("longterm")} onNext={onShorttermNext} nextLabel="Set my schedule" onSkip={() => goToBridge(longTerm.slice(0, 2).length >= 2 ? longTerm.slice(0, 2) : GOAL_OPTIONS.slice(0, 2).map(g => g.id))} />
+            <Nav onBack={() => setStep("explore")} onNext={onScoreNext} nextLabel="See my vital few" onSkip={onScoreNext} skipLabel="Skip rating →" />
           </div>
         )}
 
-        {/* 3 — BRIDGE: first step + schedule */}
+        {/* 3 — CHOOSE: eliminate the trivial many, commit to the vital few */}
+        {step === "choose" && (
+          <div className="float-up">
+            <Question title="Your vital few." sub="Less, but better. Keep the two that matter most for the next 3 weeks — and let the rest go, for now. That's the discipline." />
+
+            <p className="mono-label mb-3" style={{ color: "#FF8A1F" }}>Commit to these ({vitalFew.length} of 2)</p>
+            <div className="grid grid-cols-2 gap-3 mb-6">
+              {vitalFew.map((id) => {
+                const g = optionFor(id);
+                return <GoalCard key={id} g={g} active onClick={() => toggleVital(id)} badge />;
+              })}
+              {vitalFew.length === 0 && (
+                <p className="col-span-2 text-sm py-6 text-center rounded-2xl" style={{ color: "#6B6B78", border: "1px dashed rgba(255,255,255,0.12)", fontFamily: "var(--font-inter)" }}>
+                  Tap below to choose up to two.
+                </p>
+              )}
+            </div>
+
+            {notNow.length > 0 && (
+              <>
+                <p className="mono-label mb-3" style={{ color: "#6B6B78" }}>Not now — and that&apos;s the point</p>
+                <div className="grid grid-cols-2 gap-3">
+                  {notNow.map((id) => {
+                    const g = optionFor(id);
+                    const Icon = g.icon;
+                    const full = vitalFew.length >= 2;
+                    return (
+                      <button key={id} onClick={() => toggleVital(id)} disabled={full}
+                        className="flex items-center gap-2.5 p-3 rounded-2xl text-left transition-all disabled:cursor-not-allowed"
+                        style={{ border: "1.5px solid rgba(255,255,255,0.06)", background: "transparent", opacity: full ? 0.3 : 0.55 }}>
+                        <div className="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0" style={{ background: "rgba(255,255,255,0.05)" }}>
+                          <Icon size={15} color="#9A9AA8" />
+                        </div>
+                        <span className="text-xs font-semibold" style={{ color: "#9A9AA8", fontFamily: "var(--font-inter)", textDecoration: "line-through", textDecorationColor: "rgba(255,255,255,0.25)" }}>{g.label}</span>
+                      </button>
+                    );
+                  })}
+                </div>
+              </>
+            )}
+
+            <Nav
+              onBack={() => setStep(explored.length > 2 ? "score" : "explore")}
+              onNext={onChooseNext}
+              nextLabel="Set my first step"
+              onSkip={onChooseNext}
+              skipLabel="Skip →"
+            />
+          </div>
+        )}
+
+        {/* 4 — BRIDGE / EXECUTE: first step + schedule */}
         {step === "bridge" && (
           <div className="float-up">
-            <Question title="Your first step" sub="Based on the habits you chose, here is a science-backed first step for each one. Edit to fit your schedule." />
+            <Question title="Your first step" sub="Make it effortless. Here is a science-backed first step for each habit — a time and a place. Edit to fit your life." />
             <div className="flex flex-col gap-5">
               {focus.map((f, idx) => {
                 const g = optionFor(f.goalId);
@@ -335,11 +425,11 @@ export default function JoinFlow({ onClose, initialStep, initialFocus, initialFi
                 );
               })}
             </div>
-            <Nav onBack={() => setStep(longTerm.length === 2 ? "longterm" : "shortterm")} onNext={skipToContact} nextLabel="שמור ביומן ✓" onSkip={skipToContact} skipLabel="Skip schedule" />
+            <Nav onBack={() => setStep("choose")} onNext={skipToContact} nextLabel="שמור ביומן ✓" onSkip={skipToContact} skipLabel="Skip schedule" />
           </div>
         )}
 
-        {/* 4 — CONTACT */}
+        {/* 5 — CONTACT */}
         {step === "contact" && (
           <div className="float-up">
             <Question title="Almost in." sub="Your name and email so the community can welcome you. You can skip this too." />
@@ -372,16 +462,16 @@ export default function JoinFlow({ onClose, initialStep, initialFocus, initialFi
                 {firstName ? `Welcome, ${firstName}!` : "Welcome!"}
               </h2>
               <p className="text-base leading-relaxed mx-auto" style={{ color: "#9A9AA8", fontFamily: "var(--font-inter)", maxWidth: 360 }}>
-                You are in. Three quick things to lock it in.
+                You are in. Two quick things to lock it in.
               </p>
             </div>
 
-            <ActionStep n={1} title="Join the WhatsApp group" sub="The people who push each other forward every day.">
+            <ActionStep n={1} title="Join the WhatsApp group" sub="This is where the community lives. Show up, share your win, get cheered on — every day.">
               {WHATSAPP_URL ? (
                 <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center gap-2 w-full py-3.5 rounded-xl font-bold text-black transition-all hover:-translate-y-0.5"
-                  style={{ background: "linear-gradient(135deg, #25D366 0%, #128C7E 100%)", fontFamily: "var(--font-inter)", fontSize: 15 }}>
-                  <MessageCircle size={17} /> Open WhatsApp group
+                  className="inline-flex items-center justify-center gap-2 w-full py-4 rounded-xl font-bold text-black transition-all hover:-translate-y-0.5"
+                  style={{ background: FLAME, fontFamily: "var(--font-inter)", fontSize: 15, boxShadow: "0 10px 40px rgba(255,106,26,0.35)" }}>
+                  <MessageCircle size={17} /> Open the WhatsApp group
                 </a>
               ) : (
                 <p className="text-sm text-center py-3 rounded-xl" style={{ color: "#6B6B78", background: "#101017", border: "1px dashed rgba(255,255,255,0.12)", fontFamily: "var(--font-inter)" }}>
@@ -390,34 +480,20 @@ export default function JoinFlow({ onClose, initialStep, initialFocus, initialFi
               )}
             </ActionStep>
 
-            <ActionStep n={2} title="Join Become on playclub" sub="This is where the community lives. Events, wins, meetups — your people are here.">
-              <a href={PLAYCLUB_URL} target="_blank" rel="noopener noreferrer"
-                className="group relative overflow-hidden inline-flex items-center justify-center gap-2.5 w-full py-4 rounded-2xl font-bold text-black transition-all duration-300 hover:-translate-y-1"
-                style={{ background: "linear-gradient(135deg, #FF6A1A 0%, #FFB347 60%, #FFD580 100%)", fontFamily: "var(--font-inter)", fontSize: 16, boxShadow: "0 12px 40px rgba(255,106,26,0.5), 0 0 0 1px rgba(255,179,71,0.3)" }}>
-                <span className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300" style={{ background: "linear-gradient(135deg, #FF8A1F 0%, #FFCA6B 100%)" }} />
-                <Smartphone size={18} className="relative z-10" />
-                <span className="relative z-10">Open playclub</span>
-                <ArrowRight size={16} className="relative z-10 transition-transform duration-300 group-hover:translate-x-1" />
-              </a>
-              <p className="text-xs mt-2.5 text-center" style={{ color: "#6B6B78", fontFamily: "var(--font-inter)" }}>
-                Free download on iOS and Android
-              </p>
-            </ActionStep>
-
-            <ActionStep n={3} title="Put it in your calendar" sub="3 weeks of reminders — set it once, show up every day." last>
+            <ActionStep n={2} title="Put it in your calendar" sub="3 weeks of reminders — set it once, show up every day." last>
               {focus.length > 0 ? (
                 <>
                   <button onClick={() => downloadIcsAll(focus)}
                     className="inline-flex items-center justify-center gap-2 w-full py-3.5 rounded-xl font-bold text-black transition-all hover:-translate-y-0.5"
                     style={{ background: FLAME, fontFamily: "var(--font-inter)", fontSize: 15 }}>
-                    <CalendarPlus size={17} /> Add both to my calendar
+                    <CalendarPlus size={17} /> Add my vital few to the calendar
                   </button>
                   <p className="text-xs mt-3 text-center" style={{ color: "#6B6B78", fontFamily: "var(--font-inter)" }}>
                     Google Calendar:{" "}
                     {focus.map((f, i) => (
                       <span key={f.goalId}>
                         <a href={googleCalendarUrl(f)} target="_blank" rel="noopener noreferrer" style={{ color: "#FF8A1F", textDecoration: "underline" }}>{goalTitle(f)}</a>
-                        {i === 0 && " · "}
+                        {i === 0 && focus.length > 1 && " · "}
                       </span>
                     ))}
                   </p>

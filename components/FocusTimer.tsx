@@ -1,8 +1,8 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
-import { Play, Pause, RotateCcw, Camera, MessageCircle, Check } from "lucide-react";
-import { WHATSAPP_URL, PLAYCLUB_URL } from "../lib/config";
+import { Play, Pause, RotateCcw, MessageCircle, Check } from "lucide-react";
+import { WHATSAPP_URL } from "../lib/config";
 
 const FLAME = "linear-gradient(135deg, #FF6A1A 0%, #FFB347 100%)";
 const DURATIONS = [20, 45, 60];
@@ -132,12 +132,9 @@ function RewardScreen({ goalLabel, minutes, onAgain }: { goalLabel: string; minu
         Another vote for who you&apos;re becoming. Now share it so your people can cheer you on.
       </p>
 
-      <a href={WHATSAPP_URL || PLAYCLUB_URL} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 px-8 py-4 rounded-xl font-bold text-black transition-all hover:-translate-y-0.5 mb-3"
+      <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 px-8 py-4 rounded-xl font-bold text-black transition-all hover:-translate-y-0.5 mb-6"
         style={{ background: FLAME, fontFamily: "var(--font-inter)", fontSize: 16, boxShadow: "0 10px 40px rgba(255,106,26,0.4)" }}>
-        <MessageCircle size={18} /> Open the group
-      </a>
-      <a href={PLAYCLUB_URL} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 text-sm font-semibold mb-6" style={{ color: "#FF8A1F", fontFamily: "var(--font-inter)" }}>
-        <Camera size={14} /> Open playclub
+        <MessageCircle size={18} /> Share it with the group
       </a>
       <button onClick={onAgain} className="inline-flex items-center gap-2 text-sm" style={{ color: "#6B6B78", fontFamily: "var(--font-inter)" }}>
         <RotateCcw size={14} /> Another session

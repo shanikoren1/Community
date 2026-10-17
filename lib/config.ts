@@ -13,16 +13,13 @@ export const SITE = {
 };
 
 /**
- * The three "get in" actions after the survey.
+ * The "get in" action after the survey — the Become community lives here.
  *
  * WHATSAPP_URL: the community WhatsApp group invite link.
  *   TODO(Shani): paste your WhatsApp group link (looks like https://chat.whatsapp.com/XXXX).
  *   Until set, the WhatsApp action is hidden so nothing links to a dead URL.
- *
- * PLAYCLUB_URL: the dedicated playclub group invite.
  */
 export const WHATSAPP_URL = "https://chat.whatsapp.com/Ksu4PL1OZCB9vFou2TzqyZ?mode=gi_t";
-export const PLAYCLUB_URL = "https://www.playclub.ai/invite?code=FC9A8D";
 
 /**
  * Atomic Habits on Spotify. Podcast (the show) comes first, audiobook second.
