@@ -1,7 +1,6 @@
-import Landing from "../../components/landing/Landing";
-import { STYLE_TOKENS } from "../../components/landing/styles";
+import HabitsLanding from "../../components/habits/HabitsLanding";
 
-// Habits pillar — the existing Essentialist habit sprint (survey + community + calendar).
+// Habits pillar — the original Become, built on Atomic Habits (no Playclub, no Essentialism).
 export default function Habits() {
-  return <Landing t={STYLE_TOKENS.cinematic} />;
+  return <HabitsLanding />;
 }
