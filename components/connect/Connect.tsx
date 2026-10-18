@@ -125,7 +125,7 @@ export default function Connect() {
                     className="flex-1 rounded-xl px-4 py-3 outline-none"
                     style={{ border: "1.5px solid rgba(255,255,255,0.1)", background: CARD, color: "#fff", fontFamily: "var(--font-inter)", fontSize: 16 }} />
                   {names.length > 2 && (
-                    <button onClick={() => removeName(i)} className="w-9 h-9 flex items-center justify-center rounded-lg" style={{ color: "#6B6B78" }} aria-label="Remove">
+                    <button onClick={() => removeName(i)} className="w-9 h-9 flex items-center justify-center rounded-lg" style={{ color: "#8E8E9E" }} aria-label="Remove">
                       <X size={16} />
                     </button>
                   )}
@@ -141,7 +141,7 @@ export default function Connect() {
               style={{ background: GRAD, color: "#0C0C11", fontFamily: "var(--font-inter)", fontSize: 16, boxShadow: "0 10px 40px rgba(255,111,145,0.3)" }}>
               Start the questions <ArrowRight size={18} />
             </button>
-            <p className="mono-label mt-3 text-center" style={{ color: "#6B6B78" }}>Two people or more. No sign up.</p>
+            <p className="mono-label mt-3 text-center" style={{ color: "#8E8E9E" }}>Two people or more. No sign up.</p>
           </div>
         )}
 
@@ -152,12 +152,12 @@ export default function Connect() {
             <div className="mb-7">
               <div className="flex items-center justify-between mb-2.5">
                 <span className="mono-label" style={{ color: CORAL }}>{layer.title}</span>
-                <span className="mono-label" style={{ color: "#6B6B78" }}>Round {round + 1}</span>
+                <span className="mono-label" style={{ color: "#8E8E9E" }}>Round {round + 1}</span>
               </div>
               <div className="h-1.5 rounded-full" style={{ background: "rgba(255,255,255,0.08)" }}>
                 <div className="h-full rounded-full" style={{ width: `${warmth}%`, background: GRAD, transition: "width 0.6s ease" }} />
               </div>
-              <p className="text-xs mt-2" style={{ color: "#6B6B78", fontFamily: "var(--font-inter)" }}>{layer.subtitle}</p>
+              <p className="text-xs mt-2" style={{ color: "#8E8E9E", fontFamily: "var(--font-inter)" }}>{layer.subtitle}</p>
             </div>
 
             {/* question card */}
@@ -193,7 +193,7 @@ export default function Connect() {
               style={{ background: GRAD, color: "#0C0C11", fontFamily: "var(--font-inter)", fontSize: 16, boxShadow: "0 10px 40px rgba(255,111,145,0.3)" }}>
               <Check size={18} /> Done, next person
             </button>
-            <button onClick={() => setPhase("done")} className="mt-3 w-full text-sm text-center" style={{ color: "#6B6B78", fontFamily: "var(--font-inter)" }}>
+            <button onClick={() => setPhase("done")} className="mt-3 w-full text-sm text-center" style={{ color: "#8E8E9E", fontFamily: "var(--font-inter)" }}>
               We are warmed up, finish
             </button>
           </div>
@@ -225,7 +225,7 @@ export default function Connect() {
                 <MessageCircle size={16} /> Join the {SITE.name} community
               </a>
             )}
-            <a href="/" className="mt-5 inline-block text-sm font-semibold" style={{ color: "#6B6B78", fontFamily: "var(--font-inter)" }}>
+            <a href="/" className="mt-5 inline-block text-sm font-semibold" style={{ color: "#8E8E9E", fontFamily: "var(--font-inter)" }}>
               Back to the three paths
             </a>
           </div>

@@ -147,7 +147,7 @@ export default function Hub() {
           fontFamily: "var(--font-outfit)", fontSize: "clamp(44px, 12vw, 96px)", lineHeight: 0.9, letterSpacing: "-0.04em",
           background: "linear-gradient(135deg, #FF6A1A 0%, #FFB347 100%)", WebkitBackgroundClip: "text", backgroundClip: "text", WebkitTextFillColor: "transparent",
         }}>{SITE.name}</p>
-        <p className="text-xs" style={{ color: "#4B4B57", fontFamily: "var(--font-inter)" }}>
+        <p className="text-xs" style={{ color: "#7A7A88", fontFamily: "var(--font-inter)" }}>
           Created by Shani Koren. A {SITE.parentBrand} project. 2026.
         </p>
       </footer>

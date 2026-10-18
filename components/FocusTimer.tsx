@@ -58,7 +58,7 @@ export default function FocusTimer({ goalLabel }: Props) {
         </svg>
         <div className="absolute inset-0 flex flex-col items-center justify-center">
           <span className="font-black text-white" style={{ fontFamily: "var(--font-outfit)", fontSize: 56, letterSpacing: "-0.03em" }}>{mm}:{ss}</span>
-          <span className="mono-label mt-1" style={{ color: "#6B6B78" }}>{phase === "setup" ? "ready" : phase === "paused" ? "paused" : "stay focused"}</span>
+          <span className="mono-label mt-1" style={{ color: "#8E8E9E" }}>{phase === "setup" ? "ready" : phase === "paused" ? "paused" : "stay focused"}</span>
         </div>
       </div>
 
@@ -91,7 +91,7 @@ export default function FocusTimer({ goalLabel }: Props) {
           </button>
         )}
         {phase !== "setup" && (
-          <button onClick={reset} className="inline-flex items-center gap-2 px-5 py-3.5 rounded-xl font-semibold transition-all" style={{ color: "#6B6B78", fontFamily: "var(--font-inter)" }}>
+          <button onClick={reset} className="inline-flex items-center gap-2 px-5 py-3.5 rounded-xl font-semibold transition-all" style={{ color: "#8E8E9E", fontFamily: "var(--font-inter)" }}>
             <RotateCcw size={16} /> Reset
           </button>
         )}
@@ -136,7 +136,7 @@ function RewardScreen({ goalLabel, minutes, onAgain }: { goalLabel: string; minu
         style={{ background: FLAME, fontFamily: "var(--font-inter)", fontSize: 16, boxShadow: "0 10px 40px rgba(255,106,26,0.4)" }}>
         <MessageCircle size={18} /> Share it with the group
       </a>
-      <button onClick={onAgain} className="inline-flex items-center gap-2 text-sm" style={{ color: "#6B6B78", fontFamily: "var(--font-inter)" }}>
+      <button onClick={onAgain} className="inline-flex items-center gap-2 text-sm" style={{ color: "#8E8E9E", fontFamily: "var(--font-inter)" }}>
         <RotateCcw size={14} /> Another session
       </button>
     </div>

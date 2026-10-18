@@ -123,7 +123,7 @@ export default function HabitsLanding() {
               return (
                 <div key={s.title} className="rounded-2xl p-5" style={{ background: "#17171F", border: "1px solid rgba(255,255,255,0.07)" }}>
                   <div className="w-11 h-11 rounded-xl flex items-center justify-center mb-4" style={{ background: "rgba(255,106,26,0.12)", border: "1px solid rgba(255,138,31,0.25)" }}><Icon size={20} color="#FF8A1F" /></div>
-                  <span className="mono-label block mb-1.5" style={{ color: "#6B6B78" }}>Step {i + 1}</span>
+                  <span className="mono-label block mb-1.5" style={{ color: "#8E8E9E" }}>Step {i + 1}</span>
                   <h3 className="font-bold text-white mb-1.5" style={{ fontFamily: "var(--font-outfit)", fontSize: 18 }}>{s.title}</h3>
                   <p className="text-sm leading-relaxed" style={{ color: "#9A9AA8", fontFamily: "var(--font-inter)" }}>{s.text}</p>
                 </div>
@@ -213,7 +213,7 @@ export default function HabitsLanding() {
           </div>
           <div className="px-7 py-7" style={{ background: "#15151D" }}>
             <div className="mb-2">
-              <span className="mono-label block mb-2" style={{ color: "#6B6B78" }}>Current streak</span>
+              <span className="mono-label block mb-2" style={{ color: "#8E8E9E" }}>Current streak</span>
               <span className="font-black text-white inline-flex items-center" style={{ fontFamily: "var(--font-outfit)", fontSize: "clamp(40px, 11vw, 60px)", lineHeight: 1 }}>
                 <Flame size={42} className="mr-2.5" color="#FF8A1F" />23 days
               </span>
@@ -231,7 +231,7 @@ export default function HabitsLanding() {
         <div className="flex items-center justify-center gap-6 mb-4 text-sm" style={{ color: "#9A9AA8", fontFamily: "var(--font-inter)" }}>
           <span>Privacy</span><span>Terms</span><span>Support</span>
         </div>
-        <p className="text-xs" style={{ color: "#4B4B57", fontFamily: "var(--font-inter)" }}>
+        <p className="text-xs" style={{ color: "#7A7A88", fontFamily: "var(--font-inter)" }}>
           Created by Shani Koren. A {SITE.parentBrand} community. 2026.
         </p>
       </footer>

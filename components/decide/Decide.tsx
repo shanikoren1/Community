@@ -69,7 +69,7 @@ export default function Decide() {
           <div className="mb-8">
             <div className="flex items-center justify-between mb-2.5">
               <span className="mono-label" style={{ color: AMBER }}>Step {idx + 1} of {STEPS.length}</span>
-              <span className="mono-label" style={{ color: "#6B6B78" }}>{pct}%</span>
+              <span className="mono-label" style={{ color: "#8E8E9E" }}>{pct}%</span>
             </div>
             <div className="h-1.5 rounded-full" style={{ background: "rgba(255,255,255,0.08)" }}>
               <div className="h-full rounded-full" style={{ width: `${pct}%`, background: GRAD, transition: "width 0.4s ease" }} />
@@ -132,7 +132,7 @@ export default function Decide() {
                     placeholder={`Option ${String.fromCharCode(65 + i)}`}
                     className="flex-1 rounded-xl px-4 py-3 outline-none" style={input} />
                   {options.length > 2 && (
-                    <button onClick={() => setOptions((p) => p.filter((_, j) => j !== i))} className="w-9 h-9 flex items-center justify-center rounded-lg" style={{ color: "#6B6B78" }} aria-label="Remove"><X size={16} /></button>
+                    <button onClick={() => setOptions((p) => p.filter((_, j) => j !== i))} className="w-9 h-9 flex items-center justify-center rounded-lg" style={{ color: "#8E8E9E" }} aria-label="Remove"><X size={16} /></button>
                   )}
                 </div>
               ))}
@@ -162,7 +162,7 @@ export default function Decide() {
                       <div key={ci}>
                         <div className="flex items-center justify-between mb-1.5">
                           <span className="text-sm" style={{ color: "#C4C4CC", fontFamily: "var(--font-inter)" }}>{c}</span>
-                          <span className="mono-label" style={{ color: (matrix[oi]?.[ci] ?? 0) >= CLEAR_YES ? AMBER : "#6B6B78" }}>{matrix[oi]?.[ci] ?? 0}</span>
+                          <span className="mono-label" style={{ color: (matrix[oi]?.[ci] ?? 0) >= CLEAR_YES ? AMBER : "#8E8E9E" }}>{matrix[oi]?.[ci] ?? 0}</span>
                         </div>
                         <input type="range" min={0} max={100} step={5} value={matrix[oi]?.[ci] ?? 70}
                           onChange={(e) => setScore(oi, ci, Number(e.target.value))}
@@ -209,7 +209,7 @@ export default function Decide() {
               </>
             )}
 
-            <p className="mono-label mt-2 mb-7" style={{ color: "#6B6B78" }}>{ESSENTIALIST_NOTES.less}</p>
+            <p className="mono-label mt-2 mb-7" style={{ color: "#8E8E9E" }}>{ESSENTIALIST_NOTES.less}</p>
 
             {/* ranked list */}
             <div className="flex flex-col gap-2 text-left mb-8">
@@ -218,7 +218,7 @@ export default function Decide() {
                   <span className="font-semibold text-sm" style={{ color: r.passes ? "#fff" : "#9A9AA8", fontFamily: "var(--font-inter)" }}>
                     {r.passes && <Check size={14} className="inline mr-1.5" color={AMBER} />}{r.name}
                   </span>
-                  <span className="mono-label" style={{ color: r.passes ? AMBER : "#6B6B78" }}>
+                  <span className="mono-label" style={{ color: r.passes ? AMBER : "#8E8E9E" }}>
                     avg {r.avg} · low {r.min}
                   </span>
                 </div>
@@ -233,7 +233,7 @@ export default function Decide() {
                 <MessageCircle size={16} /> Join the {SITE.name} community
               </a>
             )}
-            <a href="/" className="mt-5 inline-block text-sm font-semibold" style={{ color: "#6B6B78", fontFamily: "var(--font-inter)" }}>Back to the three paths</a>
+            <a href="/" className="mt-5 inline-block text-sm font-semibold" style={{ color: "#8E8E9E", fontFamily: "var(--font-inter)" }}>Back to the three paths</a>
           </div>
         )}
       </div>

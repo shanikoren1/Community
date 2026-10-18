@@ -186,7 +186,7 @@ export default function JoinFlow({ onClose, initialStep, initialFocus, initialFi
           <div className="mb-8">
             <div className="flex items-center justify-between mb-2.5">
               <span className="mono-label" style={{ color: "#FF8A1F" }}>Step {progressStep + 1} of {PROGRESS_STEPS.length}</span>
-              <span className="mono-label" style={{ color: "#6B6B78" }}>{pct}% done</span>
+              <span className="mono-label" style={{ color: "#8E8E9E" }}>{pct}% done</span>
             </div>
             <div className="h-1.5 rounded-full" style={{ background: "rgba(255,255,255,0.08)" }}>
               <div className="h-full rounded-full" style={{ width: `${pct}%`, background: FLAME_BAR, transition: "width 0.4s ease" }} />
@@ -237,7 +237,7 @@ export default function JoinFlow({ onClose, initialStep, initialFocus, initialFi
                 return <GoalCard key={id} g={g} active={active} dimmed={dimmed} onClick={() => toggleFocus(id)} badge={active} />;
               })}
             </div>
-            <p className="mt-5 text-center font-bold mono-label" style={{ color: focusIds.length === 2 ? "#FF8A1F" : "#6B6B78" }}>
+            <p className="mt-5 text-center font-bold mono-label" style={{ color: focusIds.length === 2 ? "#FF8A1F" : "#8E8E9E" }}>
               {focusIds.length} of 2 picked
             </p>
             <Nav onBack={() => setStep("longterm")} onNext={onShorttermNext} nextLabel="Set my schedule" onSkip={() => goToBridge(longTerm.slice(0, 2).length >= 2 ? longTerm.slice(0, 2) : GOAL_OPTIONS.slice(0, 2).map(g => g.id))} />
@@ -384,7 +384,7 @@ export default function JoinFlow({ onClose, initialStep, initialFocus, initialFi
                   <MessageCircle size={17} /> Open WhatsApp group
                 </a>
               ) : (
-                <p className="text-sm text-center py-3 rounded-xl" style={{ color: "#6B6B78", background: "#101017", border: "1px dashed rgba(255,255,255,0.12)", fontFamily: "var(--font-inter)" }}>
+                <p className="text-sm text-center py-3 rounded-xl" style={{ color: "#8E8E9E", background: "#101017", border: "1px dashed rgba(255,255,255,0.12)", fontFamily: "var(--font-inter)" }}>
                   WhatsApp link coming soon
                 </p>
               )}
@@ -398,7 +398,7 @@ export default function JoinFlow({ onClose, initialStep, initialFocus, initialFi
                     style={{ background: FLAME, fontFamily: "var(--font-inter)", fontSize: 15 }}>
                     <CalendarPlus size={17} /> Add both to my calendar
                   </button>
-                  <p className="text-xs mt-3 text-center" style={{ color: "#6B6B78", fontFamily: "var(--font-inter)" }}>
+                  <p className="text-xs mt-3 text-center" style={{ color: "#8E8E9E", fontFamily: "var(--font-inter)" }}>
                     Google Calendar:{" "}
                     {focus.map((f, i) => (
                       <span key={f.goalId}>
@@ -409,7 +409,7 @@ export default function JoinFlow({ onClose, initialStep, initialFocus, initialFi
                   </p>
                 </>
               ) : (
-                <p className="text-sm py-3 text-center rounded-xl" style={{ color: "#6B6B78", background: "#101017", border: "1px dashed rgba(255,255,255,0.12)", fontFamily: "var(--font-inter)" }}>
+                <p className="text-sm py-3 text-center rounded-xl" style={{ color: "#8E8E9E", background: "#101017", border: "1px dashed rgba(255,255,255,0.12)", fontFamily: "var(--font-inter)" }}>
                   Set your schedule above to turn on calendar export.
                 </p>
               )}
@@ -504,7 +504,7 @@ function Nav({ onBack, onNext, nextLabel, onSkip, skipLabel }: {
         )}
       </div>
       {onSkip && (
-        <button onClick={onSkip} className="mt-3 w-full text-sm text-center" style={{ color: "#6B6B78", fontFamily: "var(--font-inter)" }}>
+        <button onClick={onSkip} className="mt-3 w-full text-sm text-center" style={{ color: "#8E8E9E", fontFamily: "var(--font-inter)" }}>
           {skipLabel ?? "Skip this step →"}
         </button>
       )}

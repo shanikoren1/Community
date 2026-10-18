@@ -15,7 +15,7 @@ export default function CheckinPage() {
   return (
     <main className="min-h-screen flex flex-col items-center px-6 py-10" style={{ backgroundColor: "#0C0C11" }}>
       <div className="w-full max-w-md">
-        <Link href="/" className="inline-flex items-center gap-2 mb-8 transition-opacity hover:opacity-70" style={{ color: "#6B6B78", fontFamily: "var(--font-inter)" }}>
+        <Link href="/" className="inline-flex items-center gap-2 mb-8 transition-opacity hover:opacity-70" style={{ color: "#8E8E9E", fontFamily: "var(--font-inter)" }}>
           <ArrowLeft size={15} />
           <img src="/logo.png" alt="Become" width={24} height={24} className="rounded-md" />
           <span className="text-sm font-semibold text-white">Become</span>
