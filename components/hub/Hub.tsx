@@ -56,15 +56,12 @@ export default function Hub() {
             Become · a platform by Shani Koren
           </span>
 
-          <h1 className="font-black mb-8" style={{ fontFamily: "var(--font-outfit)", fontSize: "clamp(30px, 6.2vw, 60px)", lineHeight: 1.12, letterSpacing: "-0.03em" }}>
-            I analyzed the knowledge and made a system out of it. I found three areas in our lives where the right questions and the right method can genuinely help:
+          <h1 className="font-black" style={{ fontFamily: "var(--font-outfit)", fontSize: "clamp(32px, 6.4vw, 62px)", lineHeight: 1.12, letterSpacing: "-0.03em" }}>
+            I turned research into simple methods for the three things that shape a life:
             {" "}<span style={{ color: CORAL }}>how we communicate</span>,{" "}
             <span style={{ color: ORANGE }}>how we build habits</span>, and{" "}
             <span style={{ color: AMBER }}>how we make decisions</span>.
           </h1>
-          <p className="text-lg mx-auto" style={{ color: "#C4C4CC", fontFamily: "var(--font-inter)", maxWidth: 480 }}>
-            You are welcome to try them and bring them into your own life. Free, and made with care.
-          </p>
           <p className="mono-label mt-8" style={{ color: "rgba(255,255,255,0.45)" }}>Pick a path below</p>
         </div>
       </section>
