@@ -13,6 +13,7 @@ const DOORS = [
     grad: "linear-gradient(135deg, #FF6F91 0%, #FFB347 100%)",
     icon: Users,
     line: "Turn any gathering into a real conversation.",
+    desc: "A question game for any group, on one phone.",
     enter: "Start the questions",
   },
   {
@@ -22,6 +23,7 @@ const DOORS = [
     grad: "linear-gradient(135deg, #FF6A1A 0%, #FFB347 100%)",
     icon: Flame,
     line: "Become the person you are deciding to be.",
+    desc: "A 3-week sprint for two habits that matter.",
     enter: "Begin your sprint",
   },
   {
@@ -31,6 +33,7 @@ const DOORS = [
     grad: "linear-gradient(135deg, #FFB347 0%, #FFD98C 100%)",
     icon: Compass,
     line: "Make the hard choice with a clear head.",
+    desc: "A simple way to weigh a real decision.",
     enter: "Think it through",
   },
 ];
@@ -38,17 +41,22 @@ const DOORS = [
 export default function Hub() {
   return (
     <main style={{ backgroundColor: "#0C0C11", color: "#fff" }}>
+      {/* skip link for keyboard + screen-reader users */}
+      <a href="#paths" className="sr-only focus:not-sr-only" style={{ position: "absolute", zIndex: 60, top: 8, left: 8, background: "#FFB347", color: "#0C0C11", padding: "8px 14px", borderRadius: 8, fontWeight: 700, fontFamily: "var(--font-inter)" }}>
+        Skip to the three paths
+      </a>
+
       {/* NAV */}
       <nav className="fixed top-0 inset-x-0 z-40 px-4 py-1.5 flex items-center justify-between"
         style={{ backgroundColor: "rgba(12,12,17,0.72)", backdropFilter: "blur(12px)", borderBottom: "1px solid rgba(255,255,255,0.06)" }}>
-        <img src="/logo.webp" alt="Become" className="h-24 w-auto" />
+        <a href="/" aria-label="Become home"><img src="/logo.webp" alt="Become" className="h-24 w-auto" /></a>
         <span className="mono-label" style={{ color: "#9A9AA8" }}>by Shani Koren</span>
       </nav>
 
       {/* HERO — mission in Shani's own voice */}
       <section className="relative flex min-h-screen flex-col items-center justify-center px-6 text-center overflow-hidden">
-        <div className="absolute inset-0 slow-zoom" style={{ backgroundImage: "url('/mountain-hero.webp')", backgroundSize: "cover", backgroundPosition: "center", opacity: 0.5 }} />
-        <div className="absolute inset-0" style={{ background: "linear-gradient(180deg, rgba(12,12,17,0.72) 0%, rgba(12,12,17,0.82) 55%, #0C0C11 100%)" }} />
+        <div aria-hidden="true" className="absolute inset-0 slow-zoom" style={{ backgroundImage: "url('/mountain-hero.webp')", backgroundSize: "cover", backgroundPosition: "center", opacity: 0.5 }} />
+        <div aria-hidden="true" className="absolute inset-0" style={{ background: "linear-gradient(180deg, rgba(12,12,17,0.72) 0%, rgba(12,12,17,0.82) 55%, #0C0C11 100%)" }} />
 
         <div className="relative z-10 max-w-3xl mx-auto float-up">
           <span className="mono-label inline-block mb-7 px-3 py-1 rounded-full"
@@ -56,35 +64,42 @@ export default function Hub() {
             Become · a platform by Shani Koren
           </span>
 
-          <h1 className="font-black" style={{ fontFamily: "var(--font-outfit)", fontSize: "clamp(32px, 6.4vw, 62px)", lineHeight: 1.12, letterSpacing: "-0.03em" }}>
-            I turned research into simple methods for the three things that shape a life:
-            {" "}<span style={{ color: CORAL }}>how we communicate</span>,{" "}
-            <span style={{ color: ORANGE }}>how we build habits</span>, and{" "}
-            <span style={{ color: AMBER }}>how we make decisions</span>.
+          <h1 className="font-black" style={{ fontFamily: "var(--font-outfit)", fontSize: "clamp(32px, 6.4vw, 62px)", lineHeight: 1.14, letterSpacing: "-0.03em" }}>
+            I turned research into simple methods you can actually use.
+            <span className="block mt-4">
+              Three of them, for what shapes a life:{" "}
+              <span style={{ color: CORAL }}>how we communicate</span>,{" "}
+              <span style={{ color: ORANGE }}>how we build habits</span>, and{" "}
+              <span style={{ color: AMBER }}>how we make decisions</span>.
+            </span>
           </h1>
-          <p className="mono-label mt-8" style={{ color: "rgba(255,255,255,0.45)" }}>Pick a path below</p>
+          <p className="mono-label mt-8" style={{ color: "rgba(255,255,255,0.55)" }}>Pick a path below</p>
         </div>
       </section>
 
       {/* THREE DOORS */}
-      <section className="py-16 px-6" style={{ backgroundColor: "#0C0C11" }}>
+      <section id="paths" className="py-16 px-6" style={{ backgroundColor: "#0C0C11" }} aria-label="The three paths">
         <div className="max-w-5xl mx-auto grid md:grid-cols-3 gap-5">
           {DOORS.map((d) => {
             const Icon = d.icon;
             return (
               <a key={d.href} href={d.href}
+                aria-label={`${d.label}. ${d.line} ${d.desc}`}
                 className="group relative rounded-3xl p-7 flex flex-col transition-all duration-300 hover:-translate-y-1.5"
-                style={{ background: "linear-gradient(160deg, #17171F 0%, #121219 100%)", border: `1px solid ${d.accent}33`, boxShadow: `0 0 0 rgba(0,0,0,0)` }}>
-                <div className="w-14 h-14 rounded-2xl flex items-center justify-center mb-6" style={{ background: d.grad, boxShadow: `0 10px 30px ${d.accent}40` }}>
+                style={{ background: "linear-gradient(160deg, #17171F 0%, #121219 100%)", border: `1px solid ${d.accent}33` }}>
+                <div aria-hidden="true" className="w-14 h-14 rounded-2xl flex items-center justify-center mb-6" style={{ background: d.grad, boxShadow: `0 10px 30px ${d.accent}40` }}>
                   <Icon size={26} color="#0C0C11" />
                 </div>
                 <span className="mono-label mb-2" style={{ color: d.accent }}>{d.label}</span>
-                <h2 className="font-black mb-6 flex-1" style={{ fontFamily: "var(--font-outfit)", fontSize: 24, lineHeight: 1.12, letterSpacing: "-0.02em", color: "#fff" }}>
+                <h2 className="font-black mb-2.5" style={{ fontFamily: "var(--font-outfit)", fontSize: 24, lineHeight: 1.12, letterSpacing: "-0.02em", color: "#fff" }}>
                   {d.line}
                 </h2>
+                <p className="text-sm leading-relaxed mb-6 flex-1" style={{ color: "#A6A6B2", fontFamily: "var(--font-inter)" }}>
+                  {d.desc}
+                </p>
                 <span className="inline-flex items-center gap-2 font-semibold" style={{ color: d.accent, fontFamily: "var(--font-inter)", fontSize: 15 }}>
                   {d.enter}
-                  <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" />
+                  <ArrowRight size={16} aria-hidden="true" className="transition-transform group-hover:translate-x-1" />
                 </span>
               </a>
             );

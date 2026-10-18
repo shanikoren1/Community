@@ -54,7 +54,7 @@ export default function Decide() {
 
   return (
     <main className="min-h-screen" style={{ backgroundColor: BG, color: "#fff" }}>
-      <div className="pointer-events-none fixed inset-0 z-0" style={{ background: `radial-gradient(60% 50% at 50% 0%, ${AMBER}12 0%, transparent 70%)` }} />
+      <div aria-hidden="true" className="pointer-events-none fixed inset-0 z-0" style={{ background: `radial-gradient(60% 50% at 50% 0%, ${AMBER}12 0%, transparent 70%)` }} />
 
       <nav className="relative z-10 px-5 py-4 flex items-center justify-between" style={{ borderBottom: "1px solid rgba(255,255,255,0.06)" }}>
         <a href="/" className="flex items-center gap-2.5">
@@ -166,6 +166,8 @@ export default function Decide() {
                         </div>
                         <input type="range" min={0} max={100} step={5} value={matrix[oi]?.[ci] ?? 70}
                           onChange={(e) => setScore(oi, ci, Number(e.target.value))}
+                          aria-label={`${opt}: how well does it meet "${c}"?`}
+                          aria-valuetext={`${matrix[oi]?.[ci] ?? 70} out of 100`}
                           className="w-full decide-range" style={{ accentColor: AMBER }} />
                       </div>
                     ))}

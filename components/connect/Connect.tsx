@@ -88,7 +88,7 @@ export default function Connect() {
   return (
     <main className="min-h-screen" style={{ backgroundColor: BG, color: "#fff" }}>
       {/* soft atmospheric glow */}
-      <div className="pointer-events-none fixed inset-0 z-0" style={{ background: `radial-gradient(60% 50% at 50% 0%, ${CORAL}14 0%, transparent 70%)` }} />
+      <div aria-hidden="true" className="pointer-events-none fixed inset-0 z-0" style={{ background: `radial-gradient(60% 50% at 50% 0%, ${CORAL}14 0%, transparent 70%)` }} />
 
       {/* header */}
       <nav className="relative z-10 px-5 py-4 flex items-center justify-between" style={{ borderBottom: "1px solid rgba(255,255,255,0.06)" }}>
@@ -117,9 +117,10 @@ export default function Connect() {
             <div className="flex flex-col gap-2.5 mb-4">
               {names.map((n, i) => (
                 <div key={i} className="flex items-center gap-2">
-                  <div className="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0" style={{ background: "rgba(255,111,145,0.12)", color: CORAL, fontFamily: "var(--font-inter)", fontWeight: 700, fontSize: 13 }}>{i + 1}</div>
+                  <div aria-hidden="true" className="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0" style={{ background: "rgba(255,111,145,0.12)", color: CORAL, fontFamily: "var(--font-inter)", fontWeight: 700, fontSize: 13 }}>{i + 1}</div>
                   <input value={n} onChange={(e) => setName(i, e.target.value)}
                     onKeyDown={(e) => { if (e.key === "Enter" && i === names.length - 1 && n.trim()) addName(); }}
+                    aria-label={`Participant name ${i + 1}`}
                     placeholder={`Name ${i + 1}`} autoCapitalize="words"
                     className="flex-1 rounded-xl px-4 py-3 outline-none"
                     style={{ border: "1.5px solid rgba(255,255,255,0.1)", background: CARD, color: "#fff", fontFamily: "var(--font-inter)", fontSize: 16 }} />
@@ -169,13 +170,13 @@ export default function Connect() {
                       <span key={i} style={{ position: "absolute", left: `${(i / 22) * 100}%`, width: 8, height: 8, borderRadius: 2, background: ["#FF6F91", "#FFB347", "#FF8A1F", "#FFD98C"][i % 4], animation: `confetti-fall 1.3s ease-in ${(i % 6) * 0.1}s both` }} />
                     ))}
                   </div>
-                  <span className="rise-away absolute left-1/2 top-1/3 -translate-x-1/2 inline-flex items-center gap-1.5 font-bold" style={{ color: CORAL, fontFamily: "var(--font-outfit)", fontSize: 22 }}>
+                  <span aria-hidden="true" className="rise-away absolute left-1/2 top-1/3 -translate-x-1/2 inline-flex items-center gap-1.5 font-bold" style={{ color: CORAL, fontFamily: "var(--font-outfit)", fontSize: 22 }}>
                     <Heart size={20} fill={CORAL} /> warmer
                   </span>
                 </>
               )}
 
-              <div className={celebrating ? "opacity-30 transition-opacity" : "transition-opacity"}>
+              <div role="status" aria-live="polite" className={celebrating ? "opacity-30 transition-opacity" : "transition-opacity"}>
                 <p className="mono-label mb-5" style={{ color: CORAL }}>Over to</p>
                 <h2 className="font-black mb-6" style={{ fontFamily: "var(--font-outfit)", fontSize: "clamp(30px, 8vw, 52px)", lineHeight: 1, letterSpacing: "-0.03em", background: GRAD, WebkitBackgroundClip: "text", backgroundClip: "text", WebkitTextFillColor: "transparent" }}>
                   {current.person}
