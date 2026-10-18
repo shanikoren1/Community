@@ -119,3 +119,24 @@ h1, h2, h3, h4 {
   .cta-glow { animation: none; }
   .cta-glow::after { animation: none; display: none; }
 }
+
+/* Connect — card entrance + celebration */
+@keyframes lift-in {
+  from { opacity: 0; transform: translateY(18px) scale(0.98); }
+  to   { opacity: 1; transform: none; }
+}
+@keyframes rise-away {
+  0%   { opacity: 0; transform: translateY(0) scale(0.8); }
+  18%  { opacity: 1; }
+  100% { opacity: 0; transform: translateY(-70px) scale(1.15); }
+}
+@keyframes soft-pulse {
+  0%, 100% { transform: scale(1); }
+  50%      { transform: scale(1.04); }
+}
+.lift-in   { animation: lift-in 0.5s cubic-bezier(0.22, 1, 0.36, 1) both; }
+.rise-away { animation: rise-away 1s ease-out both; }
+.soft-pulse { animation: soft-pulse 2.4s ease-in-out infinite; }
+@media (prefers-reduced-motion: reduce) {
+  .lift-in, .rise-away, .soft-pulse { animation: none; }
+}

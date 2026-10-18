@@ -83,7 +83,7 @@ export default function Landing({ t }: { t: StyleToken }) {
           </h1>
 
           <p className="text-lg md:text-xl mx-auto mb-9" style={{ color: light ? t.textBody : "#D4D4DC", fontFamily: "var(--font-inter)", maxWidth: 540, textShadow: t.heroImage ? "0 2px 20px rgba(0,0,0,0.6)" : "none" }}>
-            So choose who. Pick the few that matter, show up for 3 weeks, and become them — with people who show up too.
+            So choose who. Pick the few that matter, show up for 3 weeks, and become them, with people who show up too.
           </p>
 
           <div className="flex flex-col items-center gap-3">
@@ -106,7 +106,7 @@ export default function Landing({ t }: { t: StyleToken }) {
             Less, <span style={{ fontStyle: "italic", color: t.accent }}>but better.</span>
           </h2>
           <p className="text-lg leading-relaxed mx-auto mb-10" style={{ color: t.textBody, fontFamily: "var(--font-inter)", maxWidth: 560 }}>
-            Most goals fail because we chase too many at once. So we do the opposite: brainstorm wide, then cut to the <strong style={{ color: t.text }}>vital few</strong>. Two habits. The disciplined pursuit of less — so the few you keep actually happen.
+            Most goals fail because we chase too many at once. So we do the opposite: brainstorm wide, then cut to the <strong style={{ color: t.text }}>vital few</strong>. Two habits. The disciplined pursuit of less, so the few you keep actually happen.
           </p>
           <div className="grid sm:grid-cols-3 gap-4 text-left">
             {[
@@ -135,7 +135,7 @@ export default function Landing({ t }: { t: StyleToken }) {
         <div className="max-w-2xl mx-auto text-center">
           <p className="mono-label mb-4" style={{ color: t.accent }}>The method behind it</p>
           <h2 className="font-black" style={{ color: t.text, fontFamily: "var(--font-outfit)", fontSize: "clamp(24px, 5vw, 40px)", lineHeight: 1.15, letterSpacing: "-0.03em" }}>
-            Built on <span style={{ color: t.accent }}>Atomic Habits</span> — a system that makes showing up the easy choice.
+            Built on <span style={{ color: t.accent }}>Atomic Habits</span>, a system that makes showing up the easy choice.
           </h2>
         </div>
       </section>
@@ -174,7 +174,7 @@ export default function Landing({ t }: { t: StyleToken }) {
             </div>
             <div className="px-7 py-6" style={{ background: t.card }}>
               <p className="text-sm" style={{ color: t.textBody, fontFamily: "var(--font-inter)" }}>
-                Every focus session and every cheer stacks up. Watch the streak climb — that number is who you&apos;re becoming.
+                Every focus session and every cheer stacks up. Watch the streak climb. That number is who you&apos;re becoming.
               </p>
             </div>
           </div>
@@ -215,7 +215,7 @@ export default function Landing({ t }: { t: StyleToken }) {
           <div className="flex-1 text-center sm:text-left">
             <p className="mono-label mb-1" style={{ color: t.accent }}>The community</p>
             <h3 className="font-black mb-1.5" style={{ color: t.text, fontFamily: "var(--font-outfit)", fontSize: "clamp(20px, 4vw, 28px)" }}>
-              This is where we show up — together.
+              This is where we show up, together.
             </h3>
             <p className="text-sm" style={{ color: t.textMuted, fontFamily: "var(--font-inter)" }}>
               The daily check-in lives in WhatsApp. Share your win, get cheered on, every day.

@@ -218,7 +218,7 @@ export default function JoinFlow({ onClose, initialStep, initialFocus, initialFi
         {/* 1 — EXPLORE: brainstorm wide */}
         {step === "explore" && (
           <div className="float-up">
-            <Question title="What do you want to become?" sub="Brainstorm wide. Pick everything that pulls at you — don't filter yet. We narrow down next." />
+            <Question title="Who do you want to become?" sub="Brainstorm wide. Pick every habit that pulls at you. We narrow to the vital few next." />
             <div className="grid grid-cols-2 gap-3">
               {GOAL_OPTIONS.map((g) => <GoalCard key={g.id} g={g} active={explored.includes(g.id)} onClick={() => toggleExplore(g.id)} />)}
               {customGoals.map((c) => <GoalCard key={c.id} g={optionFor(c.id)} active={explored.includes(c.id)} onClick={() => toggleExplore(c.id)} />)}
@@ -286,7 +286,7 @@ export default function JoinFlow({ onClose, initialStep, initialFocus, initialFi
         {/* 3 — CHOOSE: eliminate the trivial many, commit to the vital few */}
         {step === "choose" && (
           <div className="float-up">
-            <Question title="Your vital few." sub="Less, but better. Keep the two that matter most for the next 3 weeks — and let the rest go, for now. That's the discipline." />
+            <Question title="Your vital few." sub="Less, but better. Keep the two that matter most for the next 3 weeks, and let the rest go for now. That is the discipline." />
 
             <p className="mono-label mb-3" style={{ color: "#FF8A1F" }}>Commit to these ({vitalFew.length} of 2)</p>
             <div className="grid grid-cols-2 gap-3 mb-6">
@@ -303,7 +303,7 @@ export default function JoinFlow({ onClose, initialStep, initialFocus, initialFi
 
             {notNow.length > 0 && (
               <>
-                <p className="mono-label mb-3" style={{ color: "#6B6B78" }}>Not now — and that&apos;s the point</p>
+                <p className="mono-label mb-3" style={{ color: "#6B6B78" }}>Not now, and that&apos;s the point</p>
                 <div className="grid grid-cols-2 gap-3">
                   {notNow.map((id) => {
                     const g = optionFor(id);
@@ -337,7 +337,7 @@ export default function JoinFlow({ onClose, initialStep, initialFocus, initialFi
         {/* 4 — BRIDGE / EXECUTE: first step + schedule */}
         {step === "bridge" && (
           <div className="float-up">
-            <Question title="Your first step" sub="Make it effortless. Here is a science-backed first step for each habit — a time and a place. Edit to fit your life." />
+            <Question title="Your first step" sub="Make it effortless. Here is a science-backed first step for each habit, a time and a place. Edit to fit your life." />
             <div className="flex flex-col gap-5">
               {focus.map((f, idx) => {
                 const g = optionFor(f.goalId);
@@ -447,7 +447,7 @@ export default function JoinFlow({ onClose, initialStep, initialFocus, initialFi
               style={{ background: FLAME, fontFamily: "var(--font-inter)", fontSize: 16, boxShadow: "0 10px 40px rgba(255,106,26,0.35)" }}>
               {loading ? "Joining..." : "Join Become →"}
             </button>
-            <Nav onBack={() => setStep("bridge")} onNext={submit} nextLabel="" onSkip={() => { saveToHub(firstName || "there", focus); setStep("done"); }} skipLabel="Skip — just show me the links" />
+            <Nav onBack={() => setStep("bridge")} onNext={submit} nextLabel="" onSkip={() => { saveToHub(firstName || "there", focus); setStep("done"); }} skipLabel="Skip, just show me the links" />
           </div>
         )}
 
@@ -466,7 +466,7 @@ export default function JoinFlow({ onClose, initialStep, initialFocus, initialFi
               </p>
             </div>
 
-            <ActionStep n={1} title="Join the WhatsApp group" sub="This is where the community lives. Show up, share your win, get cheered on — every day.">
+            <ActionStep n={1} title="Join the WhatsApp group" sub="This is where the community lives. Show up, share your win, get cheered on, every day.">
               {WHATSAPP_URL ? (
                 <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer"
                   className="inline-flex items-center justify-center gap-2 w-full py-4 rounded-xl font-bold text-black transition-all hover:-translate-y-0.5"
@@ -480,7 +480,7 @@ export default function JoinFlow({ onClose, initialStep, initialFocus, initialFi
               )}
             </ActionStep>
 
-            <ActionStep n={2} title="Put it in your calendar" sub="3 weeks of reminders — set it once, show up every day." last>
+            <ActionStep n={2} title="Put it in your calendar" sub="3 weeks of reminders. Set it once, show up every day." last>
               {focus.length > 0 ? (
                 <>
                   <button onClick={() => downloadIcsAll(focus)}
@@ -500,7 +500,7 @@ export default function JoinFlow({ onClose, initialStep, initialFocus, initialFi
                 </>
               ) : (
                 <p className="text-sm py-3 text-center rounded-xl" style={{ color: "#6B6B78", background: "#101017", border: "1px dashed rgba(255,255,255,0.12)", fontFamily: "var(--font-inter)" }}>
-                  Set your schedule above to unlock calendar export.
+                  Set your schedule above to turn on calendar export.
                 </p>
               )}
             </ActionStep>

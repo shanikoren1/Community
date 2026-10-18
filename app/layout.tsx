@@ -23,15 +23,16 @@ const spaceMono = Space_Mono({
 
 const BASE_URL = "https://community.hastandart.com";
 
+const PLATFORM_DESC =
+  "Research on how people think and act, turned into simple methods you can use. Three paths: how we communicate, how we build habits, and how we make decisions. By Shani Koren.";
+
 export const metadata: Metadata = {
-  title: `${SITE.name}. ${SITE.tagline}`,
-  description:
-    "Become the person who lives your goals. A community built on Atomic Habits: choose your identity, pick two habits, and show up every day, together.",
+  title: `${SITE.name} · Connect, Habits, Decide`,
+  description: PLATFORM_DESC,
   metadataBase: new URL(BASE_URL),
   openGraph: {
-    title: `Become. ${SITE.tagline}`,
-    description:
-      "A community for people who want to stop 'trying' and just start being. Two habits. Three weeks. Every day, together.",
+    title: "Become · a platform by Shani Koren",
+    description: PLATFORM_DESC,
     url: BASE_URL,
     siteName: "Become",
     images: [
@@ -39,16 +40,15 @@ export const metadata: Metadata = {
         url: "/og-image.jpg",
         width: 1200,
         height: 630,
-        alt: "Become — The best time is now.",
+        alt: "Become, a platform by Shani Koren.",
       },
     ],
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: `Become. ${SITE.tagline}`,
-    description:
-      "A community for people who want to stop 'trying' and just start being. Two habits. Three weeks. Every day, together.",
+    title: "Become · a platform by Shani Koren",
+    description: PLATFORM_DESC,
     images: ["/og-image.jpg"],
   },
 };
