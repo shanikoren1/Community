@@ -67,8 +67,7 @@ export default function Hub() {
           <h1 className="font-black" style={{ fontFamily: "var(--font-outfit)", fontSize: "clamp(32px, 6.4vw, 62px)", lineHeight: 1.14, letterSpacing: "-0.03em" }}>
             I turned research into simple methods you can actually use.
             <span className="block mt-4">
-              Three of them, for what shapes a life:{" "}
-              <span style={{ color: CORAL }}>how we communicate</span>,{" "}
+              <span style={{ color: CORAL }}>How we communicate</span>,{" "}
               <span style={{ color: ORANGE }}>how we build habits</span>, and{" "}
               <span style={{ color: AMBER }}>how we make decisions</span>.
             </span>
