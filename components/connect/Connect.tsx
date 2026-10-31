@@ -1,9 +1,10 @@
 "use client";
 
 import { useState, useEffect, useCallback } from "react";
-import { Plus, X, ArrowRight, Check, Users, Heart, RotateCcw, MessageCircle } from "lucide-react";
+import { Plus, X, ArrowRight, Check, Users, Heart, RotateCcw } from "lucide-react";
 import { CONNECT_LAYERS } from "../../lib/connectQuestions";
-import { SITE, WHATSAPP_URL } from "../../lib/config";
+import { WHATSAPP_URL } from "../../lib/config";
+import Confetti from "../Confetti";
 
 type Phase = "setup" | "play" | "done";
 
@@ -104,12 +105,11 @@ export default function Connect() {
         {phase === "setup" && (
           <div className="lift-in">
             <div className="mb-8">
-              <span className="mono-label" style={{ color: CORAL }}>A question game</span>
-              <h1 className="font-black mt-2 mb-3" style={{ fontFamily: "var(--font-outfit)", fontSize: "clamp(34px, 8vw, 56px)", lineHeight: 1.02, letterSpacing: "-0.03em" }}>
-                Turn the room into a real conversation.
+              <h1 className="font-black mt-2 mb-2" style={{ fontFamily: "var(--font-outfit)", fontSize: "clamp(34px, 8vw, 56px)", lineHeight: 1.02, letterSpacing: "-0.03em" }}>
+                A fun game.
               </h1>
-              <p className="text-base leading-relaxed" style={{ color: "#C4C4CC", fontFamily: "var(--font-inter)" }}>
-                Add everyone who is here. One phone, passed around. It asks a different person a warm question each turn, and the questions open up as you go. Answer out loud, tap done, keep going.
+              <p className="text-base" style={{ color: "#C4C4CC", fontFamily: "var(--font-inter)" }}>
+                Fill in your names and let&apos;s start. Make your connection deeper.
               </p>
             </div>
 
@@ -202,31 +202,45 @@ export default function Connect() {
         {/* DONE */}
         {phase === "done" && (
           <div className="lift-in pt-6 text-center">
+            <Confetti active type="coral" />
             <div className="mx-auto mb-6 w-20 h-20 rounded-full flex items-center justify-center soft-pulse" style={{ background: GRAD, boxShadow: "0 12px 50px rgba(255,111,145,0.4)" }}>
               <Users size={36} color="#0C0C11" />
             </div>
-            <h2 className="font-black mb-3" style={{ fontFamily: "var(--font-outfit)", fontSize: "clamp(28px, 7vw, 42px)", lineHeight: 1.05, letterSpacing: "-0.03em" }}>
-              You just built something real.
+            <h2 className="font-black mb-3" style={{ fontFamily: "var(--font-outfit)", fontSize: "clamp(30px, 7vw, 44px)", lineHeight: 1.05, letterSpacing: "-0.03em" }}>
+              You connected.
             </h2>
-            <p className="text-base leading-relaxed mx-auto mb-9" style={{ color: "#C4C4CC", fontFamily: "var(--font-inter)", maxWidth: 380 }}>
-              The best connections start with a real question. Keep them going whenever you are together.
+            <p className="text-base leading-relaxed mx-auto mb-7" style={{ color: "#C4C4CC", fontFamily: "var(--font-inter)", maxWidth: 380 }}>
+              Great conversations build real trust.
             </p>
 
+            {/* Prominent next-survey CTA */}
+            <div className="w-full rounded-2xl overflow-hidden mb-3" style={{ border: "1.5px solid rgba(255,106,26,0.4)", background: "rgba(255,106,26,0.07)" }}>
+              <div className="px-5 pt-5 pb-4 text-left">
+                <p className="mono-label mb-1" style={{ color: "#FF8A1F" }}>You&apos;re on a roll →</p>
+                <h3 className="font-black text-white mb-1.5" style={{ fontFamily: "var(--font-outfit)", fontSize: "clamp(18px, 4vw, 24px)", lineHeight: 1.1 }}>Build two habits that actually stick.</h3>
+                <p className="text-sm mb-4" style={{ color: "#9A9AA8", fontFamily: "var(--font-inter)" }}>Based on Atomic Habits. 3 weeks. Your pace.</p>
+                <a href="/habits"
+                  className="inline-flex items-center justify-center gap-2 w-full py-4 rounded-xl font-bold transition-all hover:-translate-y-0.5"
+                  style={{ background: "linear-gradient(135deg, #FF6A1A 0%, #FFB347 100%)", color: "#0C0C11", fontFamily: "var(--font-inter)", fontSize: 16, boxShadow: "0 12px 40px rgba(255,106,26,0.45)" }}>
+                  Build your habits now <ArrowRight size={18} />
+                </a>
+              </div>
+            </div>
+
             <button onClick={playAgain}
-              className="w-full inline-flex items-center justify-center gap-2 py-4 rounded-xl font-bold transition-all hover:-translate-y-0.5"
-              style={{ background: GRAD, color: "#0C0C11", fontFamily: "var(--font-inter)", fontSize: 16 }}>
+              className="w-full inline-flex items-center justify-center gap-2 py-3.5 rounded-xl font-semibold transition-all hover:-translate-y-0.5"
+              style={{ border: `1.5px solid ${CORAL}66`, color: CORAL, fontFamily: "var(--font-inter)", fontSize: 15 }}>
               <RotateCcw size={17} /> Play again
             </button>
-
             {WHATSAPP_URL && (
               <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer"
-                className="mt-3 w-full inline-flex items-center justify-center gap-2 py-3.5 rounded-xl font-semibold transition-all hover:-translate-y-0.5"
-                style={{ border: `1.5px solid ${CORAL}66`, color: CORAL, fontFamily: "var(--font-inter)", fontSize: 15 }}>
-                <MessageCircle size={16} /> Join the {SITE.name} community
+                className="mt-3 w-full inline-flex items-center justify-center gap-2 py-3 rounded-xl font-medium transition-all hover:-translate-y-0.5"
+                style={{ color: "#8E8E9E", fontFamily: "var(--font-inter)", fontSize: 14 }}>
+                Join the community on WhatsApp
               </a>
             )}
-            <a href="/" className="mt-5 inline-block text-sm font-semibold" style={{ color: "#8E8E9E", fontFamily: "var(--font-inter)" }}>
-              Back to the three paths
+            <a href="/" className="mt-4 inline-block text-sm font-semibold" style={{ color: "#6B6B78", fontFamily: "var(--font-inter)" }}>
+              Back to home
             </a>
           </div>
         )}

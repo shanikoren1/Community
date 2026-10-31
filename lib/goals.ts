@@ -1,14 +1,8 @@
 import {
   Languages,
-  Music,
   Dumbbell,
-  HeartPulse,
-  Activity,
   Brain,
   BookOpen,
-  Footprints,
-  Headphones,
-  Flame,
   PenLine,
   Sparkles,
   Apple,
@@ -30,22 +24,16 @@ export interface GoalOption {
 export const GOAL_OPTIONS: GoalOption[] = [
   { id: "workout", label: "Work out", identity: "trains their body", icon: Dumbbell },
   { id: "running", label: "Running", identity: "runs", icon: Zap },
-  { id: "walking", label: "Walking", identity: "walks daily", icon: Footprints },
-  { id: "gym", label: "Gym", identity: "shows up at the gym", icon: Activity },
   { id: "reading", label: "Read books", identity: "reads every day", icon: BookOpen },
   { id: "meditate", label: "Meditate", identity: "sits with a calm mind", icon: Brain },
   { id: "water", label: "Drink water", identity: "stays hydrated", icon: Droplet },
   { id: "eat", label: "Eat healthy", identity: "fuels their body well", icon: Apple },
   { id: "sleep", label: "Better sleep", identity: "protects their sleep", icon: Moon },
-  { id: "yoga", label: "Yoga", identity: "moves with intention", icon: HeartPulse },
   { id: "journal", label: "Journaling", identity: "reflects every day", icon: NotebookPen },
   { id: "writing", label: "Writing", identity: "writes their thoughts", icon: PenLine },
-  { id: "podcast", label: "Listen to podcasts", identity: "keeps learning", icon: Headphones },
   { id: "savings", label: "Save money", identity: "is smart with money", icon: PiggyBank },
   { id: "language", label: "Learn a language", identity: "speaks a new language", icon: Languages },
-  { id: "instrument", label: "Play an instrument", identity: "makes music", icon: Music },
   { id: "ai", label: "Create with AI", identity: "builds with AI", icon: Sparkles },
-  { id: "sauna", label: "Sauna", identity: "recovers on purpose", icon: Flame },
 ];
 
 export function goalById(id: string): GoalOption | undefined {
@@ -79,7 +67,7 @@ export interface FirstStep {
   defaultTime: string;
   morningTime: string;
   eveningTime: string;
-  firstStepHe: string;
+  firstStep: string;
   isReminder?: boolean;
   askTimePreference?: boolean;
 }
@@ -91,7 +79,7 @@ export const FIRST_STEPS: Record<string, FirstStep> = {
     defaultTime: "09:00",
     morningTime: "07:00",
     eveningTime: "20:00",
-    firstStepHe: "לבש/י בגדי ספורט ברגע שאת/ה קם/קמה. זה הצעד היחיד שנדרש ממך.",
+    firstStep: "Put on your workout clothes the moment you wake up. That's the only step required.",
     askTimePreference: true,
   },
   running: {
@@ -100,7 +88,7 @@ export const FIRST_STEPS: Record<string, FirstStep> = {
     defaultTime: "07:00",
     morningTime: "07:00",
     eveningTime: "20:00",
-    firstStepHe: "שרוך/י נעליים וצא/צאי החוצה. רוץ/י 10 דקות בלבד.",
+    firstStep: "Lace up your shoes and step outside. Run for just 10 minutes.",
     askTimePreference: true,
   },
   walking: {
@@ -109,7 +97,7 @@ export const FIRST_STEPS: Record<string, FirstStep> = {
     defaultTime: "08:00",
     morningTime: "08:00",
     eveningTime: "19:00",
-    firstStepHe: "לך/י סביב הבניין מיד אחרי הארוחה הראשונה.",
+    firstStep: "Walk around the block right after your first meal.",
   },
   gym: {
     duration: 60,
@@ -117,7 +105,7 @@ export const FIRST_STEPS: Record<string, FirstStep> = {
     defaultTime: "09:00",
     morningTime: "07:00",
     eveningTime: "20:00",
-    firstStepHe: "נסע/סעי לחדר הכושר. מספיק סט אחד.",
+    firstStep: "Show up at the gym. One set is enough.",
     askTimePreference: true,
   },
   reading: {
@@ -126,7 +114,7 @@ export const FIRST_STEPS: Record<string, FirstStep> = {
     defaultTime: "22:00",
     morningTime: "07:30",
     eveningTime: "22:00",
-    firstStepHe: "קרא/י עמוד אחד לפני שמכבים אור.",
+    firstStep: "Read one page before turning off the light.",
   },
   meditate: {
     duration: 10,
@@ -134,7 +122,7 @@ export const FIRST_STEPS: Record<string, FirstStep> = {
     defaultTime: "07:00",
     morningTime: "07:00",
     eveningTime: "21:00",
-    firstStepHe: "שב/י בשקט 2 דקות מיד עם הקימה. ושוב בלילה לפני השינה.",
+    firstStep: "Sit in silence for 2 minutes right after waking up. Repeat at night before sleep.",
   },
   water: {
     duration: 5,
@@ -142,7 +130,7 @@ export const FIRST_STEPS: Record<string, FirstStep> = {
     defaultTime: "09:00",
     morningTime: "09:00",
     eveningTime: "09:00",
-    firstStepHe: "מלא/י בקבוק 1 ליטר לפני שיוצאים מהמטבח בבוקר. המטרה: 2 ליטר ביום.",
+    firstStep: "Fill a 1-liter bottle before leaving the kitchen in the morning. Goal: 2 liters a day.",
     isReminder: true,
   },
   eat: {
@@ -151,7 +139,7 @@ export const FIRST_STEPS: Record<string, FirstStep> = {
     defaultTime: "18:00",
     morningTime: "08:00",
     eveningTime: "18:00",
-    firstStepHe: "הכן/הכיני פריט בריא אחד לארוחת הבוקר של מחר, הערב.",
+    firstStep: "Tonight, prep one healthy item for tomorrow's breakfast.",
     isReminder: true,
   },
   sleep: {
@@ -160,7 +148,7 @@ export const FIRST_STEPS: Record<string, FirstStep> = {
     defaultTime: "23:00",
     morningTime: "23:00",
     eveningTime: "23:00",
-    firstStepHe: "הגדר/י אזעקת טלפון 30 דקות לפני שעת השינה שבחרת.",
+    firstStep: "Set a phone alarm 30 minutes before your chosen bedtime.",
     isReminder: true,
   },
   yoga: {
@@ -169,7 +157,7 @@ export const FIRST_STEPS: Record<string, FirstStep> = {
     defaultTime: "07:30",
     morningTime: "07:30",
     eveningTime: "19:00",
-    firstStepHe: "פתח/י מחצלת ועשה/י 5 דקות מתיחות.",
+    firstStep: "Unroll your mat and do 5 minutes of stretching.",
   },
   journal: {
     duration: 10,
@@ -177,7 +165,7 @@ export const FIRST_STEPS: Record<string, FirstStep> = {
     defaultTime: "21:00",
     morningTime: "07:30",
     eveningTime: "21:00",
-    firstStepHe: "כתוב/י 5 דברים שאת/ה מודה עליהם.",
+    firstStep: "Write 5 things you're grateful for.",
   },
   writing: {
     duration: 25,
@@ -185,7 +173,7 @@ export const FIRST_STEPS: Record<string, FirstStep> = {
     defaultTime: "17:00",
     morningTime: "08:00",
     eveningTime: "17:00",
-    firstStepHe: "כתוב/י פסקה אחת על כל נושא, בלי לערוך.",
+    firstStep: "Write one paragraph on any topic. No editing.",
   },
   podcast: {
     duration: 60,
@@ -193,7 +181,7 @@ export const FIRST_STEPS: Record<string, FirstStep> = {
     defaultTime: "08:30",
     morningTime: "08:30",
     eveningTime: "19:00",
-    firstStepHe: "בחר/י פרק אחד ותאזין/י בנסיעה הבאה. רוצה המלצות? בדוק/י את הקבוצה בפלייקלאב.",
+    firstStep: "Pick one episode and listen on your next commute.",
   },
   savings: {
     duration: 10,
@@ -201,7 +189,7 @@ export const FIRST_STEPS: Record<string, FirstStep> = {
     defaultTime: "10:00",
     morningTime: "10:00",
     eveningTime: "10:00",
-    firstStepHe: "הגדר/י העברה אוטומטית של ₪50 לחיסכון.",
+    firstStep: "Set up an automatic transfer of $50 to savings.",
     isReminder: true,
   },
   language: {
@@ -210,7 +198,7 @@ export const FIRST_STEPS: Record<string, FirstStep> = {
     defaultTime: "13:00",
     morningTime: "08:00",
     eveningTime: "13:00",
-    firstStepHe: "עשה/י שיעור Duolingo אחד או למד/י 5 מילים חדשות.",
+    firstStep: "Do one Duolingo lesson or learn 5 new words.",
   },
   instrument: {
     duration: 20,
@@ -218,7 +206,7 @@ export const FIRST_STEPS: Record<string, FirstStep> = {
     defaultTime: "17:00",
     morningTime: "08:00",
     eveningTime: "17:00",
-    firstStepHe: "שב/י עם הכלי ונגן/י שיר אחד או כמה.",
+    firstStep: "Pick up your instrument and play one song.",
   },
   ai: {
     duration: 30,
@@ -226,7 +214,7 @@ export const FIRST_STEPS: Record<string, FirstStep> = {
     defaultTime: "16:00",
     morningTime: "09:00",
     eveningTime: "16:00",
-    firstStepHe: "פתח/י כלי ובנה/י פרויקט קטן בתוך 20 דקות.",
+    firstStep: "Open an AI tool and build something small in 20 minutes.",
   },
   sauna: {
     duration: 15,
@@ -234,6 +222,6 @@ export const FIRST_STEPS: Record<string, FirstStep> = {
     defaultTime: "19:00",
     morningTime: "08:00",
     eveningTime: "19:00",
-    firstStepHe: "קבע/י את הסאונה הבאה עכשיו בלוח הזמנים.",
+    firstStep: "Schedule your next sauna session right now.",
   },
 };

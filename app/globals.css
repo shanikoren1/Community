@@ -158,8 +158,92 @@ h1, h2, h3, h4 {
   white-space: nowrap;
   border: 0;
 }
+/* Full-page confetti particles */
+@keyframes confetti-particle-fall {
+  0%   { transform: translateY(-10px) rotate(0deg); opacity: 1; }
+  85%  { opacity: 0.9; }
+  100% { transform: translateY(108vh) rotate(540deg); opacity: 0; }
+}
+.confetti-particle { animation: confetti-particle-fall linear both; }
+@media (prefers-reduced-motion: reduce) {
+  .confetti-particle { animation: none !important; opacity: 0; }
+}
+
+/* Hero tap-link pill — tappable CTA phrases */
+@keyframes stagger-in {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: none; }
+}
+.stagger-1 { animation: stagger-in 0.55s ease-out 0.15s both; }
+.stagger-2 { animation: stagger-in 0.55s ease-out 0.30s both; }
+.stagger-3 { animation: stagger-in 0.55s ease-out 0.45s both; }
+
+.hero-tap-link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 16px 22px;
+  min-height: 56px; /* iOS tap target */
+  border-radius: 18px;
+  border: 1px solid;
+  transition: background 0.2s, transform 0.2s;
+  font-family: var(--font-outfit);
+  font-weight: 900;
+  letter-spacing: -0.03em;
+  font-size: clamp(20px, 4vw, 32px);
+  line-height: 1.1;
+  text-decoration: none;
+  width: 100%;
+}
+.hero-tap-link:hover {
+  background: rgba(255,255,255,0.04);
+  transform: translateX(4px);
+}
+
+/* Hero text slides in from the left */
+@keyframes slide-from-left {
+  from { opacity: 0; transform: translateX(-44px); }
+  to   { opacity: 1; transform: none; }
+}
+.slide-from-left { animation: slide-from-left 0.8s cubic-bezier(0.22, 1, 0.36, 1) both; }
+
+/* Ambient floating particles in hero */
+@keyframes ambient-drift {
+  0%   { transform: translateY(0) scale(1); opacity: 0; }
+  8%   { opacity: 0.9; }
+  92%  { opacity: 0.4; }
+  100% { transform: translateY(-110vh) scale(0.5); opacity: 0; }
+}
+.ambient-particle { animation: ambient-drift linear infinite; }
+
+/* Pulsing gradient orb */
+@keyframes orb-shift {
+  0%, 100% { transform: scale(1) translate(0, 0); }
+  33%      { transform: scale(1.14) translate(2%, -4%); }
+  66%      { transform: scale(0.92) translate(-2%, 3%); }
+}
+.orb-animate { animation: orb-shift ease-in-out infinite; }
+
+/* Door card scroll reveal */
+.card-reveal {
+  opacity: 0;
+  transform: translateY(36px);
+  transition: opacity 0.65s cubic-bezier(0.22, 1, 0.36, 1), transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.card-reveal.in-view  { opacity: 1; transform: none; }
+.card-delay-1 { transition-delay: 0.05s; }
+.card-delay-2 { transition-delay: 0.20s; }
+.card-delay-3 { transition-delay: 0.35s; }
+
 /* Honor reduced-motion for the remaining decorative animations */
 @media (prefers-reduced-motion: reduce) {
   .slow-zoom, .float-up, .reward-pop { animation: none !important; }
+  .stagger-1, .stagger-2, .stagger-3 { animation: none !important; opacity: 1; transform: none !important; }
+  .hero-tap-link:hover { transform: none; }
+  .slide-from-left { animation: none !important; opacity: 1 !important; transform: none !important; }
+  .ambient-particle { animation: none !important; opacity: 0 !important; }
+  .orb-animate { animation: none !important; }
+  .card-reveal { opacity: 1 !important; transform: none !important; transition: none !important; }
   html { scroll-behavior: auto; }
 }
